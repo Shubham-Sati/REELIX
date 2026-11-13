@@ -12,12 +12,31 @@
     "bin": "{aveRoot}/Build/_tools/envs/tts/bin/mlx_audio.tts.generate",
     "model": "mlx-community/Kokoro-82M-bf16",
     "voices": {
-      "narrator-male": "bm_george", "narrator-female": "bf_emma",
-      "man-1": "am_michael", "man-2": "am_adam", "man-3": "bm_lewis",
-      "woman-1": "af_heart", "woman-2": "af_bella"
+      "narrator-male": "bm_george",
+      "narrator-female": "bf_emma",
+      "man-1": "am_michael",
+      "man-2": "am_adam",
+      "man-3": "bm_lewis",
+      "woman-1": "af_heart",
+      "woman-2": "af_bella"
     }
   },
-  "captions": { "engine": "whisper.cpp large-v3-turbo", "bin": "whisper-cli", "model": "~/.cache/whisper/ggml-large-v3-turbo-q5_0.bin" },
-  "music": { "engine": "ACE-Step 1.5 (Apache-2.0)", "dir": "{aveRoot}/Build/_tools/ace-step", "api": "http://127.0.0.1:8001" },
-  "notUsed": { "flux-kontext-q4": "non-commercial licence", "edge-tts": "no commercial licence" }
+  "captions": {
+    "engine": "whisper.cpp large-v3-turbo",
+    "bin": "whisper-cli",
+    "model": "~/.cache/whisper/ggml-large-v3-turbo-q5_0.bin"
+  },
+  "music": {
+    "engine": "ACE-Step 1.5 (Apache-2.0)",
+    "dir": "{aveRoot}/Build/_tools/ace-step",
+    "api": "http://127.0.0.1:8001"
+  },
+  "notUsed": {
+    "flux-kontext-q4": "non-commercial licence",
+    "edge-tts": "no commercial licence"
+  },
+  "cutout": {
+    "bin": "{aveRoot}/Build/_tools/bin/cutout",
+    "about": "Apple Vision subject cut-out for 2.5D parallax"
+  }
 }

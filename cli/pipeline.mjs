@@ -7,6 +7,7 @@ import { spawn } from "node:child_process";
 import pc from "picocolors";
 import { ROOT, J, readJson, findClaude, fmtDur } from "./common.mjs";
 import { panel, draw } from "./ui.mjs";
+import { tidyMemory } from "./memory.mjs";
 
 const VD = path.resolve(process.argv[2] || "");
 if (!fs.existsSync(path.join(VD, "brief.json"))) { console.error("usage: node cli/pipeline.mjs <video-folder with brief.json>"); process.exit(1); }
@@ -44,7 +45,7 @@ const prompt = (s) => {
   return `${s.imagePrompt}${chars ? `. ${chars}` : ""}. ${S.styleLine}`;
 };
 
-const STEPS = ["Research & script", "Storyboard & pictures", "Voice, captions & music", "Animate, render & check", "Thumbnail & upload text"];
+const STEPS = ["Research & script", "Storyboard & pictures", "Voice, captions & music", "Animate, render & review", "Thumbnail, upload text & memory"];
 const items = [
   { id: "script", step: 0, label: "Research facts + write script", est: 240, out: "script.json",
     run: () => agent("script-writer", `Video folder: ${rel(VD)}. Read brief.json there and write research.md and script.json as your instructions say.`, "1-script.log") },
@@ -71,22 +72,47 @@ const items = [
         await sh(PY, [T("image.py"), prompt({ scene: r.scene, k: r.shot, ...shot }), shotFile({ scene: r.scene, k: r.shot }), String(B.imageW), String(B.imageH), String(shot.seed)], "4-image-check.log");
       }
     } },
+  { id: "layers", step: 1, label: "Cut out 2.5D layers (Apple Vision)", est: 15, out: null,
+    run: async (it) => {
+      const par = shots().filter((s) => s.engine === "parallax");
+      for (const [i, s] of par.entries()) {
+        it.detail = `layer ${i + 1} of ${par.length}`; const fg = shotFile(s).replace(".png", "_fg.png");
+        try { await sh("bash", [T("cutout.sh"), shotFile(s), fg], "4b-layers.log"); } catch { /* no subject found: scene falls back to a plain picture */ }
+      }
+    } },
   { id: "voice", step: 2, label: "Voiceover (Kokoro)", est: 90, out: "assets/voice.wav",
     run: (it) => sh(PY, [T("voice.py"), VD], "5-voice.log", (l) => { const m = /^line (\d+)\/(\d+)/.exec(l); if (m) { it.frac = m[1] / m[2]; it.detail = l; } }) },
   { id: "captions", step: 2, label: "Word-by-word captions (whisper)", est: 30, out: "assets/captions.json",
     run: () => sh(PY, [T("captions.py"), VD], "6-captions.log") },
   { id: "music", step: 2, label: "Background music (ACE-Step)", est: 180, out: "assets/music.wav", optional: true,
     run: () => sh(PY, [T("music.py"), VD, sb().musicPrompt, String(Math.ceil(readJson(V("assets", "lines.json")).durationSec + 1.5))], "7-music.log") },
+  { id: "sfx", step: 2, label: "Sound effects on the hits", est: 90, out: "assets/sfx.json", optional: true,
+    run: () => agent("sound-designer", `Video folder: ${rel(VD)}. Write assets/sfx.json.`, "7b-sfx.log") },
+  { id: "build3d", step: 3, label: "Code 3D / motion scenes", est: 300, out: null,
+    run: async (it) => {
+      const cs = shots().filter((s) => s.engine === "custom" && !fs.existsSync(V("project", "custom", `S${s.scene}_${s.k}.tsx`)));
+      if (!cs.length) return;
+      it.detail = `${cs.length} scene(s)`;
+      await agent("animator", `Video folder: ${rel(VD)}. Build job: write the custom scenes for these shots: ${cs.map((s) => `S${s.scene}_${s.k}`).join(", ")}.`, "8b-build3d.log");
+    } },
   { id: "timeline", step: 3, label: "Build timeline", est: 5, out: "project/timeline.json", run: () => buildTimeline() },
   { id: "render", step: 3, label: "Render video (Remotion)", est: 150, out: "final.mp4",
     run: (it) => sh("bash", [T("render.sh"), VD], "9-render.log", (l) => { const m = /(\d+)\/(\d+)/.exec(l); if (m) it.frac = m[1] / m[2]; }) },
-  { id: "review", step: 3, label: "Watch it back, fix problems", est: 180, out: "review.md",
-    run: () => agent("animator", `Video folder: ${rel(VD)}. Do your self-check on final.mp4 and write review.md.`, "10-review.log") },
+  { id: "review", step: 3, label: "Fresh-eyes review (P0/P1/P2)", est: 240, out: "review.json",
+    run: () => agent("reviewer", `Video folder: ${rel(VD)}. Review final.mp4 and write review.json.`, "10-review.log") },
+  { id: "fix", step: 3, label: "Fix P0/P1 and re-render", est: 300, out: "review.md",
+    run: async (it) => {
+      const fx = (readJson(V("review.json"))?.fixes || []).filter((f) => f.rank === "P0" || f.rank === "P1");
+      it.detail = `${fx.length} fix(es)`;
+      await agent("animator", `Video folder: ${rel(VD)}. ${fx.length ? "Fix job: fix the P0 and P1 items in review.json, re-render, then do your self-check" : "Self-check job only (reviewer found no P0/P1)"}, and write review.md.`, "10b-fix.log");
+    } },
   { id: "thumb", step: 4, label: "Thumbnail + YouTube text", est: 150, out: "thumbnail.png",
     run: async () => {
       if (!fs.existsSync(V("thumbnail.json"))) await agent("thumbnail-designer", `Video folder: ${rel(VD)}. Write thumbnail.json and youtube.md.`, "11-thumbnail.log");
       await sh(PY, [T("thumbnail.py"), VD], "11-thumbnail.log");
     } },
+  { id: "memory", step: 4, label: "Agents save lessons to memory", est: 120, out: "lessons.md", optional: true,
+    run: () => agent("producer", `Video folder: ${rel(VD)}. Memory job: read image-review.json, review.json, review.md and the logs, then add 1-3 specific new lessons to each relevant .claude/agent-memory/<agent>/MEMORY.md (no duplicates; follow the 'Memory growth' rule in CLAUDE.md: if a MEMORY.md nears 60 lines or one topic has 5+ lessons, move them into a topic file in that folder and leave a one-line pointer in MEMORY.md), and write lessons.md listing what you added.`, "12-memory.log").then(() => { const lines = []; tidyMemory((l) => lines.push(l)); fs.appendFileSync(path.join(LOG, "12-memory.log"), "\n" + lines.join("\n") + "\n"); }) },
 ].map((x) => ({ ...x, state: "waiting", frac: 0 }));
 
 /** Scene timing comes from the voice: a scene starts with its first line; shots split the scene evenly. */
@@ -98,9 +124,19 @@ function buildTimeline() {
   const scenes = [];
   S.scenes.forEach((sc, i) => {
     const a = starts[i], b = i + 1 < starts.length ? starts[i + 1] : total, d = (b - a) / sc.shots.length;
-    sc.shots.forEach((sh, k) => scenes.push({ image: `images/s${sc.id}_${k}.png`, start: +(a + k * d).toFixed(3), duration: +d.toFixed(3), motion: sh.motion || "zoom-in", ...(k === 0 && sc.label ? { label: sc.label } : {}) }));
+    sc.shots.forEach((sh, k) => {
+      const fg = `images/s${sc.id}_${k}_fg.png`, eng = sh.engine || "image";
+      const custom = eng === "custom" && fs.existsSync(V("project", "custom", `S${sc.id}_${k}.tsx`));
+      const engine = eng === "parallax" ? (fs.existsSync(V("assets", fg)) ? "parallax" : "image") : eng === "custom" ? (custom ? "custom" : "image") : eng;
+      scenes.push({ image: `images/s${sc.id}_${k}.png`, start: +(a + k * d).toFixed(3), duration: +d.toFixed(3), motion: sh.motion || "zoom-in", engine,
+        ...(engine === "parallax" ? { fg } : {}), ...(engine === "kinetic" ? { text: sh.text || sc.label || "", sub: sh.sub || "" } : {}),
+        ...(engine === "custom" ? { component: `S${sc.id}_${k}` } : {}), ...(k === 0 && sc.label ? { label: sc.label } : {}) });
+    });
   });
-  const tl = { width: B.width, height: B.height, fps: B.fps, title: B.title, accent: S.accent || "#FFB703", scenes, voice: "voice.wav",
+  const lib = readJson(J("library", "sfx", "index.json"), []); fs.mkdirSync(V("assets", "sfx"), { recursive: true });
+  const sfx = (readJson(V("assets", "sfx.json"), []) || []).map((x) => { const e = lib.find((l) => l.id === x.id); if (!e) return null;
+    fs.copyFileSync(J("library", e.file), V("assets", e.file)); return { file: e.file, start: Math.max(0, +x.start), volume: x.volume ?? 0.4 }; }).filter(Boolean);
+  const tl = { font: S.font || "Montserrat", sfx, width: B.width, height: B.height, fps: B.fps, title: B.title, accent: S.accent || "#FFB703", scenes, voice: "voice.wav",
     music: fs.existsSync(V("assets", "music.wav")) ? "music.wav" : null, musicVolume: 0.18, captions: cap, durationSec: +total.toFixed(2) };
   fs.writeFileSync(V("project", "timeline.json"), JSON.stringify(tl, null, 1));
 }

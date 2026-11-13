@@ -27,6 +27,7 @@ echo "3/4  Installing Node packages"
 (cd "$ROOT/cli" && npm install --no-audit --no-fund --silent)
 (cd "$ROOT/templates/remotion" && npm install --no-audit --no-fund --silent)
 chmod +x "$ROOT/bin/reelix" "$ROOT"/tools/*.py "$ROOT"/tools/*.sh
+"$ROOT/tools/make_sfx.sh" >/dev/null && ok "sound-effect library (library/sfx)"
 mkdir -p "$ROOT/videos" "$HOME/.local/bin"
 ln -sf "$ROOT/bin/reelix" "$HOME/.local/bin/reelix"
 case ":$PATH:" in *":$HOME/.local/bin:"*) ;; *)

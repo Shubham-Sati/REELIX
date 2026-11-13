@@ -2,14 +2,26 @@
   "name": "reelix-remotion",
   "private": true,
   "description": "Shared Remotion engine. Every video renders through this with its own timeline.json and assets folder.",
-  "scripts": { "studio": "remotion studio", "render": "remotion render" },
+  "scripts": {
+    "studio": "remotion studio",
+    "render": "remotion render"
+  },
   "dependencies": {
+    "@react-three/drei": "^10.7.6",
+    "@react-three/fiber": "^9.3.0",
     "@remotion/cli": "4.0.380",
-    "@remotion/google-fonts": "4.0.380",
+    "@remotion/google-fonts": "^4.0.380",
+    "@remotion/three": "^4.0.380",
     "@remotion/transitions": "4.0.380",
+    "@types/three": "^0.178.0",
+    "gsap": "^3.13.0",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "remotion": "4.0.380"
+    "remotion": "4.0.380",
+    "three": "^0.178.0"
   },
-  "devDependencies": { "typescript": "5.9.3", "@types/react": "19.1.0" }
+  "devDependencies": {
+    "@types/react": "19.1.0",
+    "typescript": "5.9.3"
+  }
 }
