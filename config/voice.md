@@ -3,3 +3,5 @@
 - Warm, confident storyteller. Short sentences written for the ear.
 - Never invents numbers, dates or quotes; facts must be in research.md with a source.
 - No "hey guys", no channel intro, no "like and subscribe" stacks; one short call to action at most.
+- Niche (edit freely): surprising true stories from history, science and inventions.
+- Niche search words (used by `reelix viral-ideas` when no topic is given, comma separated): history mysteries, science facts, inventions
