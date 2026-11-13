@@ -11,3 +11,16 @@
 | youtube-clipper | github.com/nexu-io/open-design (skills) | see repo | animator (cut shorts) |
 | remotion-markup, remotion-best-practices | github.com/remotion-dev/skills (official) | see repo | animator |
 | video | github.com/nexus-jpf/note-companion (.agents/skills/video) | see repo | producer, animator |
+
+## Added 2026-11-13 (improvement round), copied unmodified
+| Skill | Source (commit) | Licence | Used by |
+|---|---|---|---|
+| threejs-fundamentals, -lighting, -materials, -animation, -geometry, -loaders, -react-three-fiber | github.com/cloudai-x/threejs-skills (0e18186) | MIT | animator (3D scenes) |
+| gsap-core, gsap-timeline, gsap-plugins, gsap-react, gsap-utils | github.com/greensock/gsap-skills (aed9cfd), official GreenSock | MIT | animator (kinetic scenes) |
+| video-content-strategist | github.com/alirezarezvani/claude-skills (08cd8a9), marketing-skill; top YouTube skill on skillsmp.com (29.7k stars) | MIT | script-writer |
+
+## Added 2026-11-14 (viral ideas), copied unmodified
+| Skill | Source (commit) | Licence | Used by |
+|---|---|---|---|
+| youtube-shorts, youtube-long-form, trend-jacking, idea-generation-and-ideation, viral-reverse-engineering, hook-writer | github.com/social-media-skills/skills (f28cef2), found on skillsmp.com | MIT | idea-scout (`reelix viral-ideas`) |
+Note: these skills mention WoopSocial (their publishing app) and brand-profile/voice skills; REELIX ignores the publishing parts and uses config/voice.md as the brand profile.

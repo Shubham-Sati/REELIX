@@ -1,14 +1,18 @@
 import { AbsoluteFill, Audio, Img, Sequence, interpolate, spring, staticFile, useCurrentFrame, useVideoConfig, Easing } from "remotion";
-import { loadFont } from "@remotion/google-fonts/Montserrat";
 import { Motion, Scene, Timeline, Word } from "./types";
+import { loadFontFamily } from "./fonts";
+import { Kinetic } from "./Kinetic";
+import { Parallax } from "./Parallax";
+import { custom } from "./custom";
 
-const { fontFamily } = loadFont("normal", { weights: ["800", "900"], subsets: ["latin"] });
+let fontFamily = loadFontFamily("Montserrat");
 const FADE = 0.45; // seconds of cross-fade between scenes
 
 /** One picture with a slow camera move (Ken Burns), fading in and out at its edges. */
-const SceneView: React.FC<{ s: Scene; fps: number; isFirst: boolean; isLast: boolean }> = ({ s, fps, isFirst, isLast }) => {
+const SceneView: React.FC<{ s: Scene; fps: number; isFirst: boolean; isLast: boolean; accent: string }> = ({ s, fps, isFirst, isLast, accent }) => {
   const f = useCurrentFrame();
   const total = Math.round((s.duration + FADE) * fps);
+  const C = s.engine === "custom" && s.component ? custom[s.component] : undefined;
   const p = interpolate(f, [0, total], [0, 1], { extrapolateRight: "clamp", easing: Easing.inOut(Easing.sin) });
   const moves: Record<Motion, [number, number, number]> = {
     "zoom-in": [1.05 + 0.15 * p, 0, 0], "zoom-out": [1.22 - 0.15 * p, 0, 0],
@@ -23,7 +27,10 @@ const SceneView: React.FC<{ s: Scene; fps: number; isFirst: boolean; isLast: boo
   );
   return (
     <AbsoluteFill style={{ opacity, overflow: "hidden" }}>
-      <Img src={staticFile(s.image)} style={{ width: "100%", height: "100%", objectFit: "cover", transform: `scale(${sc}) translate(${x}%, ${y}%)` }} />
+      {C ? <C {...(s.props || {})} accent={accent} font={fontFamily} duration={s.duration} image={s.image} />
+        : s.engine === "kinetic" ? <Kinetic s={s} accent={accent} font={fontFamily} />
+        : s.engine === "parallax" && s.fg ? <Parallax s={s} total={total} />
+        : <Img src={staticFile(s.image)} style={{ width: "100%", height: "100%", objectFit: "cover", transform: `scale(${sc}) translate(${x}%, ${y}%)` }} />}
     </AbsoluteFill>
   );
 };
@@ -56,7 +63,7 @@ const Captions: React.FC<{ words: Word[]; accent: string }> = ({ words, accent }
         const on = t >= w.start && t < w.end + 0.08;
         const k = spring({ frame: f - Math.round(w.start * fps), fps, config: { damping: 12, stiffness: 180 } });
         return <span key={i} style={{ fontFamily, fontWeight: 900, fontSize: 92, lineHeight: 1.15, color: on ? accent : "#fff",
-          transform: `scale(${on ? 1 + 0.08 * k : 1})`, transformOrigin: "center bottom", display: "inline-block",
+          transform: `scale(${on ? 1 + 0.03 * k : 1})`, transformOrigin: "center bottom", display: "inline-block",
           WebkitTextStroke: "10px #000", paintOrder: "stroke fill", textShadow: "0 8px 24px rgba(0,0,0,.6)" }}>{w.text.toUpperCase()}</span>;
       })}
     </div>
@@ -65,12 +72,13 @@ const Captions: React.FC<{ words: Word[]; accent: string }> = ({ words, accent }
 
 export const Main: React.FC<Timeline> = (t) => {
   const f = useCurrentFrame(); const { fps, durationInFrames } = useVideoConfig();
+  fontFamily = loadFontFamily(t.font);
   return (
     <AbsoluteFill style={{ background: "#000" }}>
       {t.scenes.map((s, i) => (
         <Sequence key={i} from={Math.round(s.start * fps)} durationInFrames={Math.round((s.duration + FADE) * fps)}>
-          <SceneView s={s} fps={fps} isFirst={i === 0} isLast={i === t.scenes.length - 1} />
-          {s.label ? <Label text={s.label} accent={t.accent} /> : null}
+          <SceneView s={s} fps={fps} accent={t.accent} isFirst={i === 0} isLast={i === t.scenes.length - 1} />
+          {s.label && s.engine !== "kinetic" ? <Label text={s.label} accent={t.accent} /> : null}
         </Sequence>
       ))}
       {/* cinematic vignette */}
@@ -78,6 +86,9 @@ export const Main: React.FC<Timeline> = (t) => {
       <Captions words={t.captions} accent={t.accent} />
       {/* progress bar */}
       <div style={{ position: "absolute", top: 0, left: 0, height: 10, width: `${(f / durationInFrames) * 100}%`, background: t.accent }} />
+      {(t.sfx || []).map((x, i) => (
+        <Sequence key={"sfx" + i} from={Math.max(0, Math.round(x.start * fps))}><Audio src={staticFile(x.file)} volume={x.volume ?? 0.5} /></Sequence>
+      ))}
       {t.voice ? <Audio src={staticFile(t.voice)} /> : null}
       {t.music ? <Audio src={staticFile(t.music)} volume={(fr) => interpolate(fr, [0, fps, durationInFrames - 2 * fps, durationInFrames], [0, t.musicVolume ?? 0.16, t.musicVolume ?? 0.16, 0], { extrapolateRight: "clamp" })} /> : null}
     </AbsoluteFill>

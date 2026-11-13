@@ -1,5 +1,12 @@
 #!/bin/bash
 # reelix launcher: works from any folder (follows the symlink setup.sh puts in your PATH).
+#   reelix <video-name>            make a video        reelix viral-ideas [n] [topic]   find ideas
+#   reelix list-ideas [n]          saved ideas without a video   reelix help   list every command
 SRC="$0"; while [ -L "$SRC" ]; do D="$(cd "$(dirname "$SRC")" && pwd)"; SRC="$(readlink "$SRC")"; case "$SRC" in /*) ;; *) SRC="$D/$SRC";; esac; done
 DIR="$(cd "$(dirname "$SRC")/.." && pwd)"
-exec node "$DIR/cli/reelix.mjs" "$@"
+case "$1" in
+  ""|help|--help|-h) exec node "$DIR/cli/help.mjs" ;;
+  viral-ideas|ideas) exec node "$DIR/cli/viral-ideas.mjs" "$@" ;;
+  list-ideas|saved-ideas) exec node "$DIR/cli/list-ideas.mjs" "$@" ;;
+  *) exec node "$DIR/cli/reelix.mjs" "$@" ;;
+esac

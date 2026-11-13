@@ -53,3 +53,9 @@ Thumbs.db
 .vscode/
 .idea/
 *.swp
+
+# ---- Per-video scene code, copied in by tools/render.sh at render time ----
+templates/remotion/src/custom/*
+
+# ---- Idea lists from reelix viral-ideas (personal, like videos) ----
+ideas/
