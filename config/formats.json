@@ -1,0 +1,9 @@
+{
+  "_about": "Presets picked by the two questions (format x style).",
+  "video": { "width": 1920, "height": 1080, "imageW": 1024, "imageH": 576, "fps": 30, "targetSec": [90, 240], "captions": "subtitles" },
+  "short": { "width": 1080, "height": 1920, "imageW": 576, "imageH": 1024, "fps": 30, "targetSec": [20, 45], "captions": "big-words" },
+  "styles": {
+    "explainer": { "label": "Explainer / Tutorial", "renderer": "remotion (diagram-style images, labels) ; manim/hyperframes when diagrams need exact shapes", "imageStyle": "clean flat vector illustration, simple shapes, labelled-diagram feel, soft palette" },
+    "animated":  { "label": "Animated / Motion Graphics", "renderer": "remotion", "imageStyle": "cinematic 2D animated film still, painterly, rich warm light, detailed background, no text" }
+  }
+}

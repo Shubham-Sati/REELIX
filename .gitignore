@@ -1,0 +1,55 @@
+# ---- Dependencies (run ./setup.sh to reinstall) ----
+node_modules/
+.npm/
+.pnpm-store/
+
+# ---- Made videos: big media, kept local only ----
+videos/*
+!videos/.gitkeep
+
+# ---- Render output and caches ----
+out/
+build/
+dist/
+.remotion/
+*.mp4
+*.mov
+*.webm
+*.wav
+*.mp3
+*.m4a
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+
+# ---- Models live in AI Video Editor, never here ----
+*.safetensors
+*.gguf
+*.ckpt
+*.pt
+*.bin
+!bin/
+
+# ---- Secrets and machine-local settings ----
+.env
+.env.*
+!.env.example
+.claude/settings.local.json
+.claude/agent-memory-local/
+*.local.json
+
+# ---- Logs ----
+logs/
+*.log
+npm-debug.log*
+
+# ---- OS / editor ----
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp

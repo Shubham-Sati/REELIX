@@ -1,0 +1,5 @@
+#!/bin/bash
+# reelix launcher: works from any folder (follows the symlink setup.sh puts in your PATH).
+SRC="$0"; while [ -L "$SRC" ]; do D="$(cd "$(dirname "$SRC")" && pwd)"; SRC="$(readlink "$SRC")"; case "$SRC" in /*) ;; *) SRC="$D/$SRC";; esac; done
+DIR="$(cd "$(dirname "$SRC")/.." && pwd)"
+exec node "$DIR/cli/reelix.mjs" "$@"
