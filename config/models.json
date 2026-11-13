@@ -1,15 +1,15 @@
 {
-  "_about": "Paths to the free local models. They live in the AI Video Editor folder and are only USED from there, never copied. Change aveRoot if that folder moves.",
-  "aveRoot": "/Users/shubhamsati/All Content/Claude/AI Video Editor",
+  "_about": "Where REELIX finds its free local models. scripts/setup.sh installs them under {models} (default ~/.reelix). A laptop can override any value in config/models.local.json (not in git), e.g. to use models that already live in another folder: scripts/setup.sh --use-existing <folder>.",
+  "models": "~/.reelix",
   "image": {
     "engine": "FLUX.1 schnell 4-bit (Apache-2.0, commercial OK)",
-    "bin": "{aveRoot}/Build/_tools/venv/bin/mflux-generate",
-    "model": "{aveRoot}/Build/_tools/models/flux1-schnell-4bit",
+    "bin": "{models}/venv-image/bin/mflux-generate",
+    "model": "{models}/flux1-schnell-4bit",
     "steps": 4
   },
   "voice": {
     "engine": "Kokoro-82M (Apache-2.0)",
-    "bin": "{aveRoot}/Build/_tools/envs/tts/bin/mlx_audio.tts.generate",
+    "bin": "{models}/venv-voice/bin/mlx_audio.tts.generate",
     "model": "mlx-community/Kokoro-82M-bf16",
     "voices": {
       "narrator-male": "bm_george",
@@ -28,7 +28,7 @@
   },
   "music": {
     "engine": "ACE-Step 1.5 (Apache-2.0)",
-    "dir": "{aveRoot}/Build/_tools/ace-step",
+    "dir": "{models}/ace-step",
     "api": "http://127.0.0.1:8001"
   },
   "notUsed": {
@@ -36,7 +36,7 @@
     "edge-tts": "no commercial licence"
   },
   "cutout": {
-    "bin": "{aveRoot}/Build/_tools/bin/cutout",
+    "bin": "{models}/bin/cutout",
     "about": "Apple Vision subject cut-out for 2.5D parallax"
   }
 }

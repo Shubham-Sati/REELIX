@@ -3,7 +3,7 @@
 Give it a name and one sentence; it makes the whole video, thumbnail and upload text with free local models.
 
 ```bash
-./setup.sh                 # once
+scripts/setup.sh           # once: installs tools + all models (see SETUP.md)
 reelix the-smoke-idea      # asks: what about? video or short? explainer or animated? -> runs everything
 ```
 Inside Claude Code: `/reelix the-smoke-idea`.
