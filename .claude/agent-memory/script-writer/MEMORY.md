@@ -3,5 +3,5 @@ Lessons from earlier videos. Add 1-3 short, specific lessons after each video; k
 
 - (the-smoke-idea, short) targetSec 30 gave a 33 s video at Kokoro pace (too long); video 2 overcorrected, see below.
 - A hook about a surprising character ("a sheep flew before any human") scored well; open on the strangest true fact.
-- (the-smoke-idea-2) 77 words gave 24.9 s of voice (~3.1 words/s incl. the male line), so for targetSec 30 aim at ~85-90 words, not the low end.
+- (the-smoke-idea-2) 77 words gave 24.9 s of voice (~3.1 words/s incl. the male line), so for targetSec 30 aim at ~85-90 words, not the low end. v4: 95 words gave 33.2 s (2.9 words/s with two male lines), too long; treat 90 as the hard cap.
 - A hook about method ("burned old shoes to reach the sky") scored 49/weak vs 55 for the strange-character hook; it lost on stakes. Say what the viewer gains or what was at risk.

@@ -3,9 +3,9 @@
 // Each stage writes one file; a stage whose file already exists is skipped, so a re-run continues where it stopped.
 import fs from "node:fs";
 import path from "node:path";
-import { spawn } from "node:child_process";
+import { spawn, spawnSync } from "node:child_process";
 import pc from "picocolors";
-import { ROOT, J, readJson, findClaude, fmtDur } from "./common.mjs";
+import { ROOT, J, readJson, findClaude, fmtDur, slug } from "./common.mjs";
 import { panel, draw } from "./ui.mjs";
 import { tidyMemory } from "./memory.mjs";
 
@@ -41,9 +41,53 @@ const shots = () => (readJson(V("storyboard.json"))?.scenes || []).flatMap((s) =
 const shotFile = (s) => V("assets", "images", `s${s.scene}_${s.k}.png`);
 const sb = () => readJson(V("storyboard.json"));
 const prompt = (s) => {
-  const S = sb(); const chars = Object.entries(S.characters || {}).filter(([n]) => s.imagePrompt.includes(n)).map(([n, d]) => `${n}: ${d}`).join("; ");
+  // each character in the shot gets its LOCKED look, word for word (cast list; older storyboards: name found in the prompt)
+  const S = sb(); const chars = Object.entries(S.characters || {}).filter(([n]) => (s.cast ? s.cast.includes(n) : s.imagePrompt.includes(n))).map(([n, d]) => `${n}: ${d}`).join("; ");
   return `${s.imagePrompt}${chars ? `. ${chars}` : ""}. ${S.styleLine}`;
 };
+
+/** Anchor shots from storyboard.json "anchors" (one per character; a shared shot is listed once). */
+function anchorShots() {
+  // "shot" should be the 0-based index (as in file names s<scene>_<shot>), but agents sometimes count from 1:
+  // use the given shot only if that character is in its cast; else the 1-based reading; else their first shot with a clear cast.
+  const S = sb() || {}; const m = new Map();
+  for (const [who, a] of Object.entries(S.anchors || {})) {
+    const sc = (S.scenes || []).find((x) => x.id === a.scene) || {}; const has = (i) => (sc.shots?.[i]?.cast || []).includes(who);
+    let scene = a.scene, k = has(a.shot) ? a.shot : has(a.shot - 1) ? a.shot - 1 : null;
+    if (k == null) for (const x of S.scenes || []) { const i = (x.shots || []).findIndex((h) => (h.cast || []).includes(who)); if (i >= 0) { scene = x.id; k = i; break; } }
+    const sh = (S.scenes || []).find((x) => x.id === scene)?.shots?.[k]; if (!sh) continue;
+    const key = `${scene}_${k}`; if (!m.has(key)) m.set(key, { scene, k, ...sh, who: [] }); m.get(key).who.push(who);
+    if (a.scene !== scene || a.shot !== k) { S.anchors[who] = { ...a, scene, shot: k }; fs.writeFileSync(V("storyboard.json"), JSON.stringify(S, null, 1)); }
+  }
+  return [...m.values()];
+}
+const drawShot = (s, i) => (fs.existsSync(shotFile(s)) ? Promise.resolve()
+  : sh(PY, [T("image.py"), prompt(s), shotFile(s), String(B.imageW), String(B.imageH), String(s.seed ?? 7 + i)], "3-images.log"));
+async function redraw(list, it, log) {
+  const S = sb();
+  for (const [i, r] of list.entries()) {
+    it.detail = `redrawing ${i + 1} of ${list.length}: ${r.reason || ""}`.slice(0, 70);
+    const shot = S.scenes.find((x) => x.id === r.scene)?.shots[r.shot]; if (!shot) continue;
+    shot.imagePrompt = r.imagePrompt || shot.imagePrompt; shot.seed = r.seed ?? (shot.seed || 7) + 100;
+    fs.writeFileSync(V("storyboard.json"), JSON.stringify(S, null, 1));
+    fs.rmSync(shotFile({ scene: r.scene, k: r.shot }).replace(".png", "_fg.png"), { force: true });   // its 2.5D layer is redone too
+    await sh(PY, [T("image.py"), prompt({ scene: r.scene, k: r.shot, ...shot }), shotFile({ scene: r.scene, k: r.shot }), String(B.imageW), String(B.imageH), String(shot.seed)], log);
+  }
+}
+/** Apple Vision face distance from every shot to its cast's references -> assets/face-check.json (advice for the checkers). */
+function faceCheck() {
+  const cast = readJson(V("characters", "cast.json"), {}) || {}; const res = {};
+  for (const [who, c] of Object.entries(cast)) {
+    if (!c?.ref || !fs.existsSync(V(c.ref))) continue;
+    const frames = shots().filter((s) => (s.cast || []).includes(who) && fs.existsSync(shotFile(s)));
+    if (!frames.length) continue;
+    const r = spawnSync("bash", [T("facematch.sh"), V(c.ref), ...frames.map(shotFile)], { encoding: "utf8" });
+    for (const l of (r.stdout || "").split("\n").filter((x) => x.startsWith("{"))) {
+      try { const d = JSON.parse(l); const f = path.basename(d.frame, ".png"); (res[f] ||= {})[who] = d.best ?? "no face found"; } catch {}
+    }
+  }
+  fs.writeFileSync(V("assets", "face-check.json"), JSON.stringify({ about: "Apple Vision face distance to each character's reference (smaller = more alike; <0.75 usually same, >0.95 usually different; confirm by eye)", frames: res }, null, 1));
+}
 
 const STEPS = ["Research & script", "Storyboard & pictures", "Voice, captions & music", "Animate, render & review", "Thumbnail, upload text & memory"];
 const items = [
@@ -51,25 +95,54 @@ const items = [
     run: () => agent("script-writer", `Video folder: ${rel(VD)}. Read brief.json there and write research.md and script.json as your instructions say.`, "1-script.log") },
   { id: "board", step: 1, label: "Storyboard (scenes, shots)", est: 120, out: "storyboard.json",
     run: () => agent("storyboard-artist", `Video folder: ${rel(VD)}. Write storyboard.json from brief.json and script.json.`, "2-storyboard.log") },
-  { id: "images", step: 1, label: "Draw pictures (FLUX)", est: 300, out: null,
+  { id: "anchors", step: 1, label: "Draw each character's anchor frame first", est: 240, out: null,
     run: async (it) => {
-      const all = shots(); it.est = Math.max(60, all.length * 75);
-      for (const [i, s] of all.entries()) {
-        it.detail = `picture ${i + 1} of ${all.length}`; it.frac = i / all.length;
-        if (!fs.existsSync(shotFile(s))) await sh(PY, [T("image.py"), prompt(s), shotFile(s), String(B.imageW), String(B.imageH), String(s.seed ?? 7 + i)], "3-images.log");
-      }
+      const as = anchorShots(); it.est = Math.max(30, as.length * 75);
+      for (const [i, s] of as.entries()) { it.detail = `${s.who.join(", ")} (frame s${s.scene}_${s.k})`; it.frac = i / as.length; await drawShot(s, i); }
     } },
-  { id: "check", step: 1, label: "Check pictures, redraw bad ones", est: 180, out: "image-review.json",
+  { id: "anchor-check", step: 1, label: "Check anchor frames", est: 120, out: "anchor-review.json",
     run: async (it) => {
-      await agent("visual-artist", `Video folder: ${rel(VD)}. Check the images and write image-review.json.`, "4-image-check.log");
-      const redo = readJson(V("image-review.json"))?.redo || [];
-      const S = sb();
-      for (const [i, r] of redo.entries()) {
-        it.detail = `redrawing ${i + 1} of ${redo.length}: ${r.reason || ""}`.slice(0, 70);
-        const shot = S.scenes.find((x) => x.id === r.scene)?.shots[r.shot]; if (!shot) continue;
-        shot.imagePrompt = r.imagePrompt || shot.imagePrompt; shot.seed = r.seed ?? (shot.seed || 7) + 100;
-        fs.writeFileSync(V("storyboard.json"), JSON.stringify(S, null, 1));
-        await sh(PY, [T("image.py"), prompt({ scene: r.scene, k: r.shot, ...shot }), shotFile({ scene: r.scene, k: r.shot }), String(B.imageW), String(B.imageH), String(shot.seed)], "4-image-check.log");
+      if (!anchorShots().length) return fs.writeFileSync(V("anchor-review.json"), JSON.stringify({ redo: [], notes: "no characters" }));
+      await agent("visual-artist", `Video folder: ${rel(VD)}. ANCHOR JOB: check the anchor frames and write anchor-review.json.`, "4a-anchors.log");
+      await redraw(readJson(V("anchor-review.json"))?.redo || [], it, "4a-anchors.log");
+    } },
+  { id: "cast", step: 1, label: "Cut out the characters (references)", est: 90, out: "characters/cast.json",
+    run: async (it) => {
+      const as = anchorShots(); fs.mkdirSync(V("characters"), { recursive: true });
+      if (!as.length) return fs.writeFileSync(V("characters", "cast.json"), "{}");
+      for (const s of as) {
+        const dir = V("characters", "_cuts", `s${s.scene}_${s.k}`); fs.rmSync(dir, { recursive: true, force: true }); fs.mkdirSync(dir, { recursive: true });
+        let out = ""; await sh("bash", [T("cutout.sh"), shotFile(s), "--each", dir], "4c-cast.log", (l) => { if (l.startsWith("{")) out = l; });
+        fs.writeFileSync(path.join(dir, "cuts.json"), out || "{}");
+      }
+      await agent("visual-artist", `Video folder: ${rel(VD)}. CAST JOB: pick each character's cut-out and write characters/cast.json.`, "4c-cast.log");
+      const cast = readJson(V("characters", "cast.json"), {}) || {};
+      for (const [who, c] of Object.entries(cast)) {
+        if (!c?.ref || !fs.existsSync(V(c.ref))) continue;
+        const dst = `characters/${slug(who)}.png`;
+        if (c.ref !== dst) { fs.copyFileSync(V(c.ref), V(dst)); c.ref = dst; }
+      }
+      fs.writeFileSync(V("characters", "cast.json"), JSON.stringify(cast, null, 1));
+    } },
+  { id: "images", step: 1, label: "Draw the other pictures (FLUX)", est: 300, out: null,
+    run: async (it) => {
+      const all = shots().filter((s) => !fs.existsSync(shotFile(s))); it.est = Math.max(30, all.length * 75);
+      for (const [i, s] of all.entries()) { it.detail = `picture ${i + 1} of ${all.length}`; it.frac = i / all.length; await drawShot(s, i); }
+    } },
+  { id: "check", step: 1, label: "Check pictures vs characters, redraw", est: 240, out: "image-review.json",
+    run: async (it) => {
+      it.detail = "face check"; faceCheck();
+      await agent("visual-artist", `Video folder: ${rel(VD)}. CHECK JOB: check all frames (use characters/ and assets/face-check.json) and write image-review.json.`, "4-image-check.log");
+      let redo = readJson(V("image-review.json"))?.redo || [];
+      // every redraw is checked again (a redraw can fail the same way); up to 3 rounds, then whatever is left goes to the reviewer
+      for (let round = 2; redo.length && round <= 4; round++) {
+        await redraw(redo, it, "4-image-check.log");
+        it.detail = `re-checking ${redo.length} redrawn frame(s), round ${round}`; faceCheck();
+        const list = redo.map((r) => `s${r.scene}_${r.shot}`).join(", ");
+        const file = `image-review-${round}.json`;
+        await agent("visual-artist", `Video folder: ${rel(VD)}. CHECK JOB, re-check only these redrawn frames: ${list}. Write ${file}.${round === 4 ? " This is the last round: only list a frame if it is clearly broken." : ""}`, "4-image-check.log");
+        redo = round < 4 ? readJson(V(file))?.redo || [] : [];
+        if (round === 4) { const left = readJson(V(file))?.redo || []; if (left.length) fs.writeFileSync(V("image-unresolved.json"), JSON.stringify(left, null, 1)); }
       }
     } },
   { id: "layers", step: 1, label: "Cut out 2.5D layers (Apple Vision)", est: 15, out: null,

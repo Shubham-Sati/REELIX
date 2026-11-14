@@ -56,12 +56,10 @@ if [ -n "$EXISTING" ]; then
 import json, sys; A = sys.argv[1] + "/Build/_tools"
 json.dump({"_about": "This laptop only: REELIX uses the models AI Video Editor already installed (scripts/setup.sh --use-existing).",
   "image": {"bin": A + "/venv/bin/mflux-generate", "model": A + "/models/flux1-schnell-4bit"},
-  "voice": {"bin": A + "/envs/tts/bin/mlx_audio.tts.generate"}, "music": {"dir": A + "/ace-step"}, "cutout": {"bin": A + "/bin/cutout"}},
+  "voice": {"bin": A + "/envs/tts/bin/mlx_audio.tts.generate"}, "music": {"dir": A + "/ace-step"}},
   open("config/models.local.json", "w"), indent=2)
 PY
   ok "config/models.local.json written (this laptop only, not in git)"
-  [ -x "$EXISTING/Build/_tools/bin/cutout" ] || { mkdir -p "$M/bin"; swiftc -O tools/cutout.swift -o "$M/bin/cutout" 2>&1 | grep -v warning || true
-    python3 -c "import json;p='config/models.local.json';c=json.load(open(p));c['cutout']['bin']='$M/bin/cutout';json.dump(c,open(p,'w'),indent=2)"; ok "cut-out tool built"; }
 else
   rm -f config/models.local.json
   [ "$M" = "$HOME/.reelix" ] || echo "{ \"models\": \"$M\" }" > config/models.local.json   # custom REELIX_MODELS folder

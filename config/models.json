@@ -37,6 +37,6 @@
   },
   "cutout": {
     "bin": "{models}/bin/cutout",
-    "about": "Apple Vision subject cut-out for 2.5D parallax"
+    "about": "REELIX's own Apple Vision cut-out (tools/cutout.swift), built by tools/cutout.sh on first use"
   }
 }

@@ -24,3 +24,10 @@
 |---|---|---|---|
 | youtube-shorts, youtube-long-form, trend-jacking, idea-generation-and-ideation, viral-reverse-engineering, hook-writer | github.com/social-media-skills/skills (f28cef2), found on skillsmp.com | MIT | idea-scout (`reelix viral-ideas`) |
 Note: these skills mention WoopSocial (their publishing app) and brand-profile/voice skills; REELIX ignores the publishing parts and uses config/voice.md as the brand profile.
+
+## Added 2026-11-14 (per-video characters), copied unmodified
+| Skill | Source (commit) | Licence | Used by |
+|---|---|---|---|
+| long-form-continuity-bible | github.com/nolanx-ai/nolanx.ai (595d863), found on skillsmp.com | MIT | storyboard-artist, visual-artist, reviewer |
+| scenario-consistency | github.com/scenario-labs/skills (94cab3f), found on skillsmp.com | MIT | storyboard-artist, visual-artist (method only: reference anchors, change one variable; its Scenario platform calls are not used) |
+Not used: MiniMax-AI 3d-animation-short-generator (no licence), Seedance/Higgsfield character skills (paid video services).
