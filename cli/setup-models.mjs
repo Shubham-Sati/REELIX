@@ -8,7 +8,7 @@ import pc from "picocolors"; import { ROOT, fmtDur } from "./common.mjs"; import
 const a = process.argv.slice(2);
 const M = (process.env.REELIX_MODELS || path.join(os.homedir(), ".reelix")).replace(/^~/, os.homedir());
 const HF = process.env.HF_HOME || path.join(os.homedir(), ".cache", "huggingface");
-const MUSIC = !a.includes("--no-music"); const ONLY = a.includes("--only") ? a[a.indexOf("--only") + 1].split(",") : null;
+const MUSIC = !a.includes("--no-music"), CARTOON = !a.includes("--no-cartoon"); const ONLY = a.includes("--only") ? a[a.indexOf("--only") + 1].split(",") : null;
 fs.mkdirSync(M, { recursive: true }); const LOG = path.join(M, "setup.log");
 const env = { ...process.env, HF_HUB_DISABLE_XET: "1", HF_HUB_DISABLE_PROGRESS_BARS: "1" };
 const GB = 1e9, exists = (p) => fs.existsSync(p);
@@ -37,6 +37,9 @@ const items = [
   { id: "flux", group: "Pictures", label: "FLUX.1 schnell 4-bit", repo: "dhairyashil/FLUX.1-schnell-mflux-4bit", total: 9.6 * GB, dir: path.join(M, "flux1-schnell-4bit"),
     done: () => exists(path.join(M, "flux1-schnell-4bit", ".reelix-ok")) || (du(path.join(M, "flux1-schnell-4bit")) > 9 * GB && !exists(path.join(M, "flux1-schnell-4bit", ".cache", "huggingface", "download"))),
     cmd: () => snap(path.join(vi, "bin", "python"), "dhairyashil/FLUX.1-schnell-mflux-4bit", path.join(M, "flux1-schnell-4bit")) },
+  ...(CARTOON ? [{ id: "klein", group: "Pictures", label: "FLUX.2 klein 4B (Cartoon look)", repo: "black-forest-labs/FLUX.2-klein-4B", total: 8 * GB, dir: path.join(M, "flux2-klein-4b"),
+    done: () => exists(path.join(M, "flux2-klein-4b", "transformer")) && !exists(path.join(M, "flux2-klein-4b", ".cache", "huggingface", "download")),
+    cmd: () => snap(path.join(vi, "bin", "python"), "black-forest-labs/FLUX.2-klein-4B", path.join(M, "flux2-klein-4b")) }] : []),
   { id: "voice-app", group: "Voice", label: "mlx-audio (runs Kokoro)", build: 300, done: () => exists(path.join(vv, "bin", "mlx_audio.tts.generate")),
     cmd: ["bash", ["-c", `[ -x "${vv}/bin/python" ] || uv venv -q --python 3.12 "${vv}"; uv pip install -q --python "${vv}/bin/python" --prerelease=allow mlx-audio "huggingface_hub>=1.0" soundfile "misaki[en]" "${SPACY}"`]] },
   { id: "kokoro", group: "Voice", label: "Kokoro-82M voice model", repo: "mlx-community/Kokoro-82M-bf16", total: 0.39 * GB, dir: path.join(HF, "hub", "models--mlx-community--Kokoro-82M-bf16"),

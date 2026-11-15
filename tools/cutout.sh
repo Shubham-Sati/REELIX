@@ -1,5 +1,8 @@
 #!/bin/bash
-# 2.5D layers: cut the main subject out of a picture with Apple Vision.
-#   tools/cutout.sh <in.png> <out.png>   -> transparent PNG, same size as the input so it lines up with its background
+# Apple Vision cut-outs (REELIX's own tool, built on this Mac on first use; no download).
+#   tools/cutout.sh <in.png> <out.png>      2.5D layer: main subject, same size as the input
+#   tools/cutout.sh <in.png> --each <dir>   one cropped PNG per person/animal (character references), JSON on stdout
 set -e; ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-exec "$(python3 "$ROOT/tools/common.py" cutout.bin)" "$1" "$2" --largest
+BIN="${REELIX_MODELS:-$HOME/.reelix}/bin/cutout"
+if [ ! -x "$BIN" ] || [ "$ROOT/tools/cutout.swift" -nt "$BIN" ]; then mkdir -p "$(dirname "$BIN")"; swiftc -O "$ROOT/tools/cutout.swift" -o "$BIN" 2>&1 | grep -v warning >&2 || true; fi
+if [ "$2" = "--each" ]; then exec "$BIN" "$1" --each "$3"; else exec "$BIN" "$1" "$2" --largest; fi

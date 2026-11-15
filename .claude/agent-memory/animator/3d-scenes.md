@@ -5,5 +5,6 @@
 - Camera: set it inside a useThree child component from props, not with useFrame.
 - Wrong-era FLUX images (e.g. modern basket balloon): the animator can't run FLUX redos, so replace the shot with a custom 3D scene instead of leaving it.
 - Layout: keep the subject below the scene-label band (top ~25%) and above the captions (y>1200); in S4_0 the label sat on the balloon and the caption hid the arrow.
+- Timing (v4 S4_1): the balloon started half below the frame and was only whole at ~31 s, after "their balloon rose" (29.1 s) was spoken, with captions across it. Make the hero whole in frame (upper-middle, above y≈1200) by the time its key word is spoken, and render one still at that time in the build job before the full render.
 - Contrast particles (cool blue) must stay fully outside the subject/envelope.
 - Look: flat-shaded 3D looked plain next to painted FLUX shots; use lit materials, warm rim light and some texture so the 3D shot matches the set.

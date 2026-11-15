@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Thumbnail = FLUX picture + big headline.  tools/thumbnail.py <video_dir>  (reads thumbnail.json, brief.json)"""
+"""Thumbnail = FLUX picture (2D looks) or a frame of the video (3D looks) + big headline.  tools/thumbnail.py <video_dir>  (reads thumbnail.json, brief.json)"""
 import json, os, subprocess, sys, textwrap
 from common import run
 vd = sys.argv[1]; T = json.load(open(os.path.join(vd, "thumbnail.json"))); B = json.load(open(os.path.join(vd, "brief.json")))
@@ -7,7 +7,11 @@ short = B["format"] == "short"
 w, h, W, H = (576, 1024, 1080, 1920) if short else (1024, 576, 1280, 720)
 raw = os.path.join(vd, "assets", "thumb_raw.png")
 here = os.path.dirname(os.path.abspath(__file__))
-subprocess.run([sys.executable, os.path.join(here, "image.py"), T["imagePrompt"], raw, str(w), str(h), str(T.get("seed", 5))], check=True)
+if B.get("pictures", True) is False or "frame" in T:
+    # 3D looks have no picture model: the thumbnail is a frame of the video itself (thumbnail.json "frame" = seconds)
+    subprocess.run(["bash", os.path.join(here, "still.sh"), vd, str(T.get("frame", 1.0)), raw], check=True)
+else:
+    subprocess.run([sys.executable, os.path.join(here, "image.py"), T["imagePrompt"], raw, str(w), str(h), str(T.get("seed", 5))], check=True)
 lines = textwrap.wrap(T["headline"].upper(), 12 if short else 16)
 size = 150 if short else 110
 font = "/System/Library/Fonts/Supplemental/Impact.ttf"

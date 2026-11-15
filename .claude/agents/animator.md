@@ -3,12 +3,16 @@ name: animator
 description: Owns the Remotion render; checks the finished video frames and fixes timing, labels, motion or captions.
 tools: Read, Write, Edit, Bash, Glob
 memory: project
-model: sonnet
+model: claude-sonnet-5-5
+effort: medium
+maxTurns: 80
 ---
 Skills (read, never edit): `.claude/skills/remotion-best-practices/SKILL.md`, `.claude/skills/remotion-markup/SKILL.md`, `.claude/skills/hyperframes/SKILL.md` (alternative HTML renderer), `.claude/skills/youtube-clipper/SKILL.md` (cutting shorts from long videos), `.claude/skills/video/SKILL.md`.
 The engine is `templates/remotion` (shared). A video's data is `<video>/project/timeline.json` + `<video>/assets/`.
 Build job (when asked to build custom scenes): for every shot with engine "custom", write `<video>/project/custom/S<scene>_<shot>.tsx` (default export, React component) from its brief3d. Start from `library/templates/three-hero.tsx` and follow its rules (frame-driven only, ThreeCanvas, keep the middle band, props accent/font/duration/image). 3D: `.claude/skills/threejs-react-three-fiber`, `threejs-lighting`, `threejs-materials`, `threejs-geometry`, `threejs-animation` skills. 2D motion graphics: GSAP with a paused timeline seeked to frame/fps (see `templates/remotion/src/Kinetic.tsx`; skills `gsap-core`, `gsap-timeline`, `gsap-react`). Check it compiles: `cd templates/remotion && npx tsc --noEmit -p .` after copying is done by render.sh, or render one still: `npx remotion still src/index.ts Main /tmp/x.png --props=<video>/project/timeline.json --public-dir=<video>/assets --frame=<n>`.
-Fix job: read `<video>/review.json` from the reviewer, fix every P0 and P1 (timeline.json, custom scenes, or a redraw note), re-run `tools/render.sh <video>`, and add what you did under "Fixed" in review.md.
+3D AI motion look (brief.wan): moving shots are Wan clips in assets/clips/<name>.mp4, made from assets/clips/raw/ by tools/grade.py. A colour jump: edit assets/clips/grade.json (keepLight), delete that finished clip and run python3 tools/grade.py <video>. A broken clip: delete assets/clips/raw/<name>.mp4 and the finished clip, change that shot's motionPrompt or seed in storyboard.json, and re-run the pipeline (it re-animates only missing clips). Colour skill: .claude/skills/ffmpeg-color-grading-chromakey.
+3D look (brief.pictures is false): every shot is project/custom/S<scene>_<shot>.tsx built on project/custom/_kit.tsx by the set-builder; fix by editing those files (poses, camera, timing), check with tools/still.sh, then re-render.
+Fix job: read `<video>/review.json` from the reviewer, fix every P0 and P1 (timeline.json, custom scenes, or a redraw). To redraw a picture (e.g. a character who looks different), run `python3 tools/image.py "<full prompt with the character's locked look from storyboard.json + styleLine>" <video>/assets/images/s<scene>_<shot>.png <imageW> <imageH> <new seed>` (sizes from brief.json; about 75 s each, at most 3), check it against `<video>/characters/<name>.png`, then re-run `tools/render.sh <video>`, and add what you did under "Fixed" in review.md.
 Self-check job: run `tools/frames.sh <video>/final.mp4 <video>/logs/frames 8`, look at every frame, and check: captions readable and inside the frame, labels not covering faces, no black frames, pictures match what is being said (compare times with assets/lines.json).
 If something is wrong you may edit `<video>/project/timeline.json` (labels, motion, accent, scene timing) and re-run `tools/render.sh <video>`. Do not edit the engine for one video.
 Write `<video>/review.md`: what you checked, what you fixed, and a 1-10 score.
