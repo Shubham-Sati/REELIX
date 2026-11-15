@@ -31,6 +31,21 @@
     "dir": "{models}/ace-step",
     "api": "http://127.0.0.1:8001"
   },
+  "videoWan": {
+    "engine": "Wan 2.2 TI2V-5B, FastWan DMD 3-step MLX (Apache-2.0, commercial OK); runs with mlx-video (MIT)",
+    "python": "{models}/venv-video/bin/python",
+    "model": "{models}/fastwan2.2-ti2v-5b-mlx",
+    "width": 480,
+    "height": 832,
+    "about": "3D AI motion look: animates each shot's picture (~2 min motion + ~10 min tiled decode per 3-4 s clip on a 16 GB Mac). Download: lBroth/FastWan2.2-TI2V-5B-MLX (24 GB)."
+  },
+  "upscale": {
+    "engine": "Real-ESRGAN ncnn-vulkan v0.2.5.0, model realesr-animevideov3 (BSD-3, commercial OK)",
+    "bin": "{models}/realesrgan/realesrgan-ncnn-vulkan",
+    "model": "realesr-animevideov3",
+    "scale": 3,
+    "about": "AI motion look: sharpens Wan clips (480x832) before they are scaled to full size, ~25 s per 3 s clip. Download: github.com/xinntao/Real-ESRGAN releases, realesrgan-ncnn-vulkan-20220424-macos.zip"
+  },
   "notUsed": {
     "flux-kontext-q4": "non-commercial licence",
     "edge-tts": "no commercial licence"
@@ -38,5 +53,12 @@
   "cutout": {
     "bin": "{models}/bin/cutout",
     "about": "REELIX's own Apple Vision cut-out (tools/cutout.swift), built by tools/cutout.sh on first use"
+  },
+  "imageKlein": {
+    "engine": "FLUX.2 klein 4B (Apache-2.0; the 9B is non-commercial, never use it)",
+    "bin": "{models}/venv-image/bin/mflux-generate-flux2",
+    "model": "{models}/flux2-klein-4b",
+    "steps": 4,
+    "quantize": 4
   }
 }

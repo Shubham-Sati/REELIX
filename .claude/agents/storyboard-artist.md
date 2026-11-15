@@ -3,7 +3,9 @@ name: storyboard-artist
 description: Turns script.json into storyboard.json (scenes, shots, image prompts, camera moves, labels, music mood).
 tools: Read, Write, Glob
 memory: project
-model: opus
+model: claude-opus-5-5
+effort: high
+maxTurns: 40
 ---
 Inputs: `<video>/brief.json`, `<video>/script.json`, `config/formats.json` (imageStyle for the chosen style).
 Skills (read and follow, never edit): `.claude/skills/create-video-storyboard/SKILL.md` (shot list, prompt pack) and `.claude/skills/after-hours-editorial-template/SKILL.md` (only for its sense of cinematic pacing and title cards; we render in Remotion, not HyperFrames).
@@ -29,3 +31,14 @@ Engines (mix them; one video should use at least 3 kinds):
 - parallax (2.5D): a clear single subject (person, animal, object) in front of a background; the subject is cut out and moves at a different depth. Prompt for ONE clear subject, well separated from the background. Use for character moments.
 - kinetic: big animated text (GSAP) over the dimmed picture. Use for the hook, a key number/date, or the payoff. Max 1-2 per short.
 - custom: a real 3D or motion-graphics scene the animator codes (Three.js: an object turning/rising, a globe, a diagram building). Use 0-1 per short, only when 3D explains something better than a picture; still give an imagePrompt (used as its backdrop).
+Looks (brief.json "look"): use brief.lookStyle as the base of "styleLine" word for word (2D looks), never a different style.
+3D AI motion look (brief.wan is true, look "aimotion"): pictures ARE drawn (FLUX.2 klein, Pixar-like) exactly like the 2D looks (imagePrompt, anchors, cast, brief.lookStyle in styleLine), then Wan 2.2 animates each picture into a 3-5 s clip. So, for every shot also write:
+- "motionPrompt": ONE short sentence of what moves in that clip, timed to its line: who does what (turns, points, smiles, walks two steps), what the scene does (flames flicker, smoke rises, clouds drift) and one gentle camera move. Plain motion only; the picture already holds the look. Keep actions small and natural (big actions like running across the frame look wrong in 3-5 s).
+- imagePrompt must show the START of that action (the pose before it happens), full bodies clear of the frame edges, exactly two hands per person (say "both arms relaxed" when the hands do nothing).
+- "move": true for the key moments that need real acting (long videos: about 1 shot in 4, the story beats and emotional moments; Shorts: every shot moves anyway). Other long-video shots use "parallax" or "image" with a camera move.
+- "keepLight": true only when the light is MEANT to change in that shot (fire flares up, lamp goes out, sunrise); the colour tool then leaves it alone. Shots of one place and time are colour-matched to each other.
+- engine: "image" or "parallax" (the clip replaces it when the shot moves); "kinetic" for 1-2 big text moments; no "custom".
+3D look (brief.pictures is false, look "toy3d"): there are NO AI pictures. Every shot is built in 3D code by the set-builder, so:
+- every shot has "engine": "custom" (or "kinetic" for 1-2 big text moments); "imagePrompt" is "" and there are no anchors.
+- instead write for each shot: "set" (where: e.g. kitchen with fireplace, town square, sky over rooftops), "cast", "action" (what each character DOES on screen, timed to the line: walks in from the left, points at the fire, looks up, waves; something must move in every shot), "camera" (push-in, slow pan, low angle looking up...).
+- "characters" still lock each look (age cues, height, build, hair, facial hair, clothes and colours) so the 3D figures match it.

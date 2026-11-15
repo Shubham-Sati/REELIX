@@ -18,16 +18,32 @@ export function findClaude() {
   }
   return c.find((p) => { try { fs.accessSync(p, fs.constants.X_OK); return true; } catch { return false; } });
 }
+/** An existing folder for this video name (any date), newest first, or null. */
+export function findVideo(name) {
+  const V = J("videos"); if (!fs.existsSync(V)) return null;
+  const hit = fs.readdirSync(V).filter((f) => f.replace(/^\d{4}-\d{2}-\d{2}-/, "") === slug(name) && fs.existsSync(path.join(V, f, "brief.json"))).sort().pop();
+  return hit ? path.join(V, hit) : null;
+}
 /** Create videos/<date>-<slug>/brief.json. Returns the folder. */
-export function newVideo(name, about, format, style) {
+export function newVideo(name, about, format, style, look = "painted") {
   const F = readJson(J("config", "formats.json"));
   const dir = J("videos", `${today()}-${slug(name)}`);
   fs.mkdirSync(path.join(dir, "logs"), { recursive: true });
   const f = F[format];
   const brief = { name: slug(name), title: name.replace(/-/g, " "), about, format, style, styleLabel: F.styles[style].label,
     width: f.width, height: f.height, fps: f.fps, imageW: f.imageW, imageH: f.imageH, targetSec: format === "short" ? 30 : 150,
-    imageStyle: F.styles[style].imageStyle, created: new Date().toISOString() };
+    imageStyle: F.styles[style].imageStyle, look, lookLabel: readJson(J("config", "looks.json"))[look]?.label || look,
+    lookStyle: readJson(J("config", "looks.json"))[look]?.styleLock || "", pictures: readJson(J("config", "looks.json"))[look]?.pictures !== false,
+    imageModel: readJson(J("config", "looks.json"))[look]?.imageModel || "schnell", wan: !!readJson(J("config", "looks.json"))[look]?.wan, created: new Date().toISOString() };
   fs.writeFileSync(path.join(dir, "brief.json"), JSON.stringify(brief, null, 1));
-  fs.writeFileSync(path.join(dir, "brief.md"), `# ${brief.title}\n\n${about}\n\n- Format: ${format} (${f.width}x${f.height})\n- Style: ${brief.styleLabel}\n- Target length: ~${brief.targetSec}s\n`);
+  fs.writeFileSync(path.join(dir, "brief.md"), `# ${brief.title}\n\n${about}\n\n- Format: ${format} (${f.width}x${f.height})\n- Style: ${brief.styleLabel}\n- Look: ${brief.lookLabel}\n- Target length: ~${brief.targetSec}s\n`);
   return dir;
 }
+/** Models to try for an agent, in order (.claude/models.json): the first, then fallbacks on a limit or overload. */
+export function agentModels(name) {
+  const M = readJson(J(".claude", "models.json"), {}) || {};
+  const list = M.agents?.[name]?.models || ["opus", "sonnet", "haiku"];
+  return list.map((k) => ({ key: k, id: M.ids?.[k] || k }));
+}
+/** Text that means "this model can't run now, try the next one". */
+export const LIMIT_RE = /hit your (weekly|daily|session|usage) limit|usage limit|rate limit|rate_limit|overloaded|\b529\b|model (is )?(not available|unavailable)|not_found_error.*model/i;

@@ -6,3 +6,4 @@ Lessons from earlier videos. Add 1-3 short, specific lessons after each video; k
 - Anchor 'shot' numbers are 0-based (file names s<scene>_<shot>); v4 used 1-based and an anchor was skipped.
 - Don't use engine "parallax" for shots with a person: the background plate is not inpainted, so a ghost second head shows (v4: s1_1, s2_1, s3_3 all ghosted, P0). Use "image" for people.
 - Hook (v4, P1): the kinetic title "A FAILED WAR PLAN" repeated the spoken words while captions showed them too, over a dark, blurred background. Give the opening kinetic text different words (date/place/number) and open on a clear, striking picture (e.g. the 3D hero shot) in the first second.
+- v6: silk/cloth hero objects come out as rigid picture frames; prompt "soft billowing silk, gathered seams, no wooden frame, no picture frame" and keep ceiling beams visible if the line says it hits the ceiling. For Wan shots, write short motionPrompts that keep poses ("stays standing, no other people").

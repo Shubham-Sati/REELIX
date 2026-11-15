@@ -36,3 +36,22 @@ Every step writes one file; re-running `reelix` / `node cli/pipeline.mjs <folder
 3. It prints each idea's title, hook, why it could go viral, proof, Short/Video and a score, and saves them to `ideas/`. Pick one and it starts `reelix` with the answers already filled in.
 4. `reelix list-ideas [count]` shows saved ideas that have no finished video yet, oldest first (default 5), and starts one when you pick it.
 5. Ideas you pick are remembered in `.claude/agent-memory/idea-scout/picks.md`.
+
+## Looks (questions 4 and 5)
+| 2D or 3D | Look | How it is made |
+|---|---|---|
+| 2D | Realistic painting | FLUX.1 schnell pictures, per-video characters, camera moves, 2.5D, kinetic text |
+| 2D | Cartoon (Pixar-like pictures) | FLUX.2 klein 4B pictures, same pipeline |
+| 3D | 3D animated (AI motion) | Pixar-like pictures (FLUX.2 klein) brought to life by Wan 2.2 TI2V-5B (FastWan, Apache-2.0): ~12-15 min per 3-4 s shot on a 16 GB Mac. Shorts: every shot moves; long videos: key shots move, the rest get camera moves. Clips are colour-matched per scene and given one balanced grade (tools/grade.py) |
+| 3D | 3D Lego / toy world | No AI pictures: the set-builder agent builds low-poly characters and sets in Three.js (library/templates/toy3d-kit.tsx); characters walk, point, turn and talk |
+
+## Agents and models
+Each agent has a model list in `.claude/models.json`. The first model runs; if it hits a usage or rate limit or is overloaded, the same job re-runs on the next model. Effort and a turn cap keep simple jobs cheap.
+| Agent | Models (in order) | Effort |
+|---|---|---|
+| script-writer | Fable 5.1 → Opus → Sonnet → Haiku | high |
+| storyboard-artist, reviewer | Opus → Sonnet → Fable → Haiku | high |
+| set-builder | Opus → Fable → Sonnet → Haiku | high |
+| idea-scout | Opus → Sonnet → Fable → Haiku | medium |
+| animator, visual-artist | Sonnet → Opus → Haiku → Fable | medium |
+| producer, sound-designer, thumbnail-designer | Sonnet → Haiku → Opus → Fable | low |

@@ -31,3 +31,16 @@ Note: these skills mention WoopSocial (their publishing app) and brand-profile/v
 | long-form-continuity-bible | github.com/nolanx-ai/nolanx.ai (595d863), found on skillsmp.com | MIT | storyboard-artist, visual-artist, reviewer |
 | scenario-consistency | github.com/scenario-labs/skills (94cab3f), found on skillsmp.com | MIT | storyboard-artist, visual-artist (method only: reference anchors, change one variable; its Scenario platform calls are not used) |
 Not used: MiniMax-AI 3d-animation-short-generator (no licence), Seedance/Higgsfield character skills (paid video services).
+
+## Added 2026-11-14 (3D toy world look), copied unmodified
+| Skill | Source (commit) | Licence | Used by |
+|---|---|---|---|
+| 3d-generalist, model-characters, rig-characters, animate-characters | github.com/codepawl/creator-generalist (7235f50), plugins/3d-generalist, found on skillsmp.com | MIT | set-builder (3D toy world), animator; animate-characters also covers 2D cut-out animation (Phase 2) |
+Checked and not used: linegel/threejs-complete-set-of-skill (ISC, but written for WebGPU/TSL; our engine renders through React Three Fiber on WebGL), Tripo-based threejs-3d-generator skills (paid API), namuan image-to-threejs (no licence).
+Notes: 3d-generalist also covers Blender/67js and asset kitbashing; REELIX uses only its Three.js + character-acting parts and builds everything in code (no downloads).
+
+## Added 2026-11-15 (3D AI motion look), copied unmodified
+| Skill | Source (commit) | Licence | Used by |
+|---|---|---|---|
+| ffmpeg-color-grading-chromakey | github.com/josiahsiegel/claude-plugin-marketplace (5a1b112), plugins/ffmpeg-effects/skills/ffmpeg-color-grading-chromakey | MIT | colour guide for the animator and reviewer (grade and match AI motion clips); REELIX's tools/grade.py does the automatic per-clip matching |
+Checked and not used: travisjneuman video-production (shot matching only named, no steps), awesome-omni-skill color-grade (DaVinci/Premiere LUTs, licence unclear), kajisho5 color-grading-skill (needs another tool, very new).

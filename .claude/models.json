@@ -1,0 +1,16 @@
+{
+  "_about": "Which model each REELIX agent uses, in order. The pipeline runs the first; if it hits a usage/rate limit or is overloaded, it re-runs the same job on the next one. Strongest -> lightest: fable, opus, sonnet, haiku. Opus and Fable use the most of your usage limit, so simple jobs use sonnet. Edit freely.",
+  "ids": { "fable": "claude-fable-5-1", "opus": "claude-opus-5-5", "sonnet": "claude-sonnet-5-5", "haiku": "claude-haiku-5-5" },
+  "agents": {
+    "script-writer":      { "models": ["fable", "opus", "sonnet", "haiku"], "effort": "high",   "maxTurns": 40,  "why": "Research + the script every other step builds on: the strongest model." },
+    "storyboard-artist":  { "models": ["opus", "sonnet", "fable", "haiku"], "effort": "high",   "maxTurns": 40,  "why": "Plans every shot, the cast and the anchors: careful judgement." },
+    "set-builder":        { "models": ["opus", "fable", "sonnet", "haiku"], "effort": "high",   "maxTurns": 150, "why": "Writes and checks every 3D shot in code: the hardest coding job." },
+    "reviewer":           { "models": ["opus", "sonnet", "fable", "haiku"], "effort": "high",   "maxTurns": 40,  "why": "Strict fresh-eyes review; reads many frames." },
+    "idea-scout":         { "models": ["opus", "sonnet", "fable", "haiku"], "effort": "medium", "maxTurns": 40,  "why": "Turns live trend data into specific, true ideas." },
+    "animator":           { "models": ["sonnet", "opus", "haiku", "fable"], "effort": "medium", "maxTurns": 80,  "why": "Fixes after review and builds 3D inserts; mostly edits files and re-renders." },
+    "visual-artist":      { "models": ["sonnet", "opus", "haiku", "fable"], "effort": "medium", "maxTurns": 50,  "why": "Looks at pictures against the references; a good eye, not deep reasoning." },
+    "producer":           { "models": ["sonnet", "haiku", "opus", "fable"], "effort": "low",    "maxTurns": 30,  "why": "Only the end-of-video memory job: summarise lessons into files." },
+    "sound-designer":     { "models": ["sonnet", "haiku", "opus", "fable"], "effort": "low",    "maxTurns": 25,  "why": "Places sound effects from a short list: a simple timing job." },
+    "thumbnail-designer": { "models": ["sonnet", "haiku", "opus", "fable"], "effort": "low",    "maxTurns": 25,  "why": "One thumbnail prompt + the upload text." }
+  }
+}

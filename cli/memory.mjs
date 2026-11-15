@@ -3,7 +3,7 @@
 //   node cli/memory.mjs            (also run automatically at the end of every video)
 import { spawnSync } from "node:child_process";
 import { pathToFileURL } from "node:url";
-import { ROOT, J, findClaude } from "./common.mjs";
+import { ROOT, J, findClaude, agentModels, LIMIT_RE } from "./common.mjs";
 
 const check = () => { const r = spawnSync("python3", [J("tools", "memory_check.py")], { encoding: "utf8" }); return { ok: r.status === 0, out: r.stdout.trim() }; };
 
@@ -16,7 +16,11 @@ export function tidyMemory(log = console.log) {
       `(short kebab-case name, e.g. 3d-scenes.md; start it with "# <agent>: <topic>" and keep each lesson one line), merge duplicates, drop lessons that are out of date, ` +
       `and leave exactly one pointer line in MEMORY.md like "- 3D scenes: see 3d-scenes.md (read before building custom scenes)". Never lose a still-useful lesson. ` +
       `Then run python3 tools/memory_check.py and repeat until it prints "agent memory ok".`;
-    const r = spawnSync(findClaude(), ["-p", task, "--agent", "producer", "--allowedTools", "Read", "Write", "Edit", "Bash", "Glob", "Grep", "--permission-mode", "acceptEdits"], { cwd: ROOT, encoding: "utf8" });
+    let r = null;
+    for (const m of agentModels("producer")) {   // next model on a usage/rate limit or overload
+      r = spawnSync(findClaude(), ["-p", task, "--agent", "producer", "--model", m.id, "--allowedTools", "Read", "Write", "Edit", "Bash", "Glob", "Grep", "--permission-mode", "acceptEdits"], { cwd: ROOT, encoding: "utf8", input: "" });
+      if (!LIMIT_RE.test((r.stdout || "") + (r.stderr || ""))) break;
+    }
     log(r.stdout?.trim().split("\n").slice(-3).join("\n"));
   }
   const c = check(); log(c.out); return c.ok;

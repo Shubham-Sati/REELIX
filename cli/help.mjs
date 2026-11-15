@@ -3,10 +3,11 @@ import pc from "picocolors";
 const C = (s) => pc.cyan(s), D = pc.dim, B = pc.bold;
 const rows = [
   ["MAKE A VIDEO"],
-  ["reelix <video-name>", "Make a YouTube Video or Short. Asks 3 questions: what it is about, Video or Short, style. Then makes everything (about 30 min for a Short).", ["reelix how-tea-came-to-england"]],
+  ["reelix <video-name>", "Make a YouTube Video or Short. Asks 5 questions: what it is about, Video or Short, style, 2D or 3D, and the look (2D: Realistic painting or Cartoon; 3D: 3D toy world where characters move). Then makes everything (about 30-40 min for a Short).", ["reelix how-tea-came-to-england"]],
   ["  --about \"…\"", "Answer question 1 (what the video is about) from the command line."],
   ["  --format short|video", "Answer question 2: short = 9:16 vertical, video = 16:9."],
   ["  --style explainer|animated", "Answer question 3: Explainer / Tutorial, or Animated / Motion Graphics."],
+  ["  --look painted|cartoon|aimotion|toy3d", "Answer questions 4 and 5: painted / cartoon are 2D (AI pictures); aimotion (AI motion, Wan) and toy3d (Lego, built in code) are 3D."],
   ["  --yes", "Start without asking \"Start making this video?\"", ["reelix moon-dust --about \"Why moon dust is dangerous\" --format short --style animated --yes"]],
   ["", "Run the same command again after a stop or error: finished steps are kept."],
   ["FIND IDEAS"],

@@ -3,7 +3,8 @@
 # Safe to run again: every finished step is skipped. Full guide: SETUP.md
 #
 #   scripts/setup.sh                       everything (tools, packages, all models incl. music)   ~21 GB download
-#   scripts/setup.sh --no-music            everything except the ACE-Step music model (videos get no music)   ~10 GB
+#   scripts/setup.sh --no-music            everything except the ACE-Step music model (videos get no music)
+#   scripts/setup.sh --no-cartoon          skip FLUX.2 klein (only the 2D Cartoon look needs it)
 #   scripts/setup.sh --use-existing <dir>  models are already installed by AI Video Editor in <dir>: use them, download nothing
 #   scripts/setup.sh --check               only check what is installed
 #
@@ -13,7 +14,7 @@ ROOT="$(cd "$(dirname "$0")/.." && pwd)"; cd "$ROOT"
 M="${REELIX_MODELS:-$HOME/.reelix}"
 MUSIC=1; CHECK=0; EXISTING=""
 while [ $# -gt 0 ]; do case "$1" in
-  --no-music) MUSIC=0;; --check) CHECK=1;; --use-existing) EXISTING="$2"; shift;;
+  --no-music) MUSIC=0;; --no-cartoon) NOCARTOON=1;; --check) CHECK=1;; --use-existing) EXISTING="$2"; shift;;
   -h|--help) sed -n 2,11p "$0"; exit 0;; *) echo "unknown option $1 (see --help)"; exit 2;; esac; shift; done
 B="\033[1m"; G="\033[32m"; R="\033[31m"; Y="\033[33m"; N="\033[0m"
 step() { printf "\n${B}== %s${N}\n" "$1"; }
@@ -56,7 +57,8 @@ if [ -n "$EXISTING" ]; then
 import json, sys; A = sys.argv[1] + "/Build/_tools"
 json.dump({"_about": "This laptop only: REELIX uses the models AI Video Editor already installed (scripts/setup.sh --use-existing).",
   "image": {"bin": A + "/venv/bin/mflux-generate", "model": A + "/models/flux1-schnell-4bit"},
-  "voice": {"bin": A + "/envs/tts/bin/mlx_audio.tts.generate"}, "music": {"dir": A + "/ace-step"}},
+  "voice": {"bin": A + "/envs/tts/bin/mlx_audio.tts.generate"}, "music": {"dir": A + "/ace-step"},
+  "imageKlein": {"bin": A + "/venv/bin/mflux-generate-flux2", "model": A + "/models/flux2-klein-4b"}},
   open("config/models.local.json", "w"), indent=2)
 PY
   ok "config/models.local.json written (this laptop only, not in git)"
@@ -66,7 +68,7 @@ else
   mkdir -p "$M"
 
   step "4/5  Models (one after another, live progress per model)"
-  NM=""; [ $MUSIC = 0 ] && NM="--no-music"
+  NM=""; [ $MUSIC = 0 ] && NM="--no-music"; [ -n "$NOCARTOON" ] && NM="$NM --no-cartoon"
   REELIX_MODELS="$M" node cli/setup-models.mjs $NM || { fail "a model did not install: run scripts/setup.sh again (finished ones are kept)"; exit 1; }
 fi
 fi

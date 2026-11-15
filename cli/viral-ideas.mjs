@@ -5,7 +5,7 @@
 //   reelix viral-ideas 10 space history   10 ideas about space history
 import fs from "node:fs"; import path from "node:path"; import { spawn } from "node:child_process";
 import * as p from "@clack/prompts"; import pc from "picocolors";
-import { ROOT, J, slug, today, readJson, findClaude, fmtDur } from "./common.mjs";
+import { ROOT, J, slug, today, readJson, findClaude, fmtDur, agentModels, LIMIT_RE } from "./common.mjs";
 import { printIdeas, ideasMd, pickAndStart } from "./ideas-common.mjs";
 
 const a = process.argv.slice(2).filter((x) => x !== "viral-ideas");
@@ -42,8 +42,18 @@ try {
   si = 1; st0 = Date.now(); sub = "";
   const claude = findClaude(); if (!claude) throw new Error("Claude Code not found: install it or open the Claude desktop app once.");
   const task = `Ideas job. Topic: ${topic ? JSON.stringify(topic) : "none (use the niche in config/voice.md)"}. N = ${N}. Evidence file: ${path.relative(ROOT, evidence)}. Write the ideas JSON to ${path.relative(ROOT, out)}. Do not repeat ideas already saved in ideas/*.json (other files) or already made in videos/: every idea must be new.`;
-  await run(claude, ["-p", task, "--agent", "idea-scout", "--allowedTools", "Read", "Write", "Glob", "Bash", "WebSearch", "WebFetch", "--permission-mode", "acceptEdits", "--output-format", "text"],
-    (l) => { if (/search/i.test(l) && l.length < 120) sub = l.trim().slice(0, 60); });
+  // idea-scout's models in order: on a usage/rate limit or overload, try the next one
+  let ok = false;
+  for (const m of agentModels("idea-scout")) {
+    const before = fs.existsSync(LOG) ? fs.statSync(LOG).size : 0;
+    let err = null;
+    try { await run(claude, ["-p", task, "--agent", "idea-scout", "--model", m.id, "--allowedTools", "Read", "Write", "Glob", "Bash", "WebSearch", "WebFetch", "--permission-mode", "acceptEdits", "--output-format", "text"],
+      (l) => { if (/search/i.test(l) && l.length < 120) sub = l.trim().slice(0, 60); }); } catch (e) { err = e; }
+    const limited = LIMIT_RE.test(fs.readFileSync(LOG, "utf8").slice(before));
+    if (!limited) { if (err) throw err; ok = true; break; }
+    sub = `${m.key} is limited or busy, trying the next model`;
+  }
+  if (!ok) throw new Error("Claude usage limit reached on every model; try again after it resets.");
 } catch (e) { clearInterval(timer); sp ? sp.stop(pc.red(e.message), 1) : console.log(e.message); process.exit(1); }
 clearInterval(timer);
 const R = readJson(out);

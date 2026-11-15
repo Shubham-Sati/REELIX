@@ -1,0 +1,53 @@
+{
+  "_about": "Questions 4 + 5: '2D or 3D?' then 'Which look?' (only the looks of that dimension). 2D = AI pictures from imageModel; 3D = characters move: AI motion (Wan) on Pixar-like pictures, or a Lego-style world built in code.",
+  "painted": {
+    "label": "Realistic painting",
+    "hint": "painted, realistic faces (FLUX schnell)",
+    "pictures": true,
+    "imageModel": "schnell",
+    "styleLock": "painterly 2D illustration, not a photograph, realistic proportions and faces, soft brush texture, cinematic light",
+    "characters": "anchor pictures + cut-outs",
+    "motion": "camera moves, 2.5D parallax, kinetic text, 3D inserts",
+    "dim": "2d"
+  },
+  "cartoon": {
+    "label": "Cartoon (Pixar-like pictures)",
+    "hint": "stylized animated-film characters (FLUX.2 klein)",
+    "pictures": true,
+    "imageModel": "klein",
+    "styleLock": "stylized 3D animated feature film still, appealing cartoon proportions, soft rounded shapes, expressive faces, warm cinematic light",
+    "characters": "anchor pictures + cut-outs",
+    "motion": "camera moves, 2.5D parallax, kinetic text, 3D inserts",
+    "dim": "2d"
+  },
+  "aimotion": {
+    "label": "3D animated (AI motion)",
+    "hint": "Pixar-like pictures brought to life with AI motion (FLUX.2 klein + Wan 2.2)",
+    "pictures": true,
+    "imageModel": "klein",
+    "wan": true,
+    "styleLock": "stylized 3D animated feature film still, modern CG animation look, appealing cartoon proportions, soft rounded shapes, expressive faces, soft global illumination, warm cinematic light",
+    "characters": "anchor pictures + cut-outs, then each shot animated by Wan",
+    "motion": "full AI motion per shot (Shorts: every shot; long videos: key shots, the rest camera moves)",
+    "dim": "3d"
+  },
+  "toy3d": {
+    "label": "3D Lego / toy world",
+    "hint": "low-poly 3D figures that walk, point and talk (no AI pictures)",
+    "pictures": false,
+    "styleLock": "low-poly 3D toy world: simple rounded shapes, flat matte colours, soft studio light, gentle shadows, miniature diorama sets",
+    "characters": "3D figures built in code from the cast list",
+    "motion": "full: walk, point, turn, talk, camera moves, particles",
+    "dim": "3d"
+  },
+  "_dims": {
+    "2d": {
+      "label": "2D",
+      "hint": "AI pictures with camera moves, 2.5D and motion graphics"
+    },
+    "3d": {
+      "label": "3D",
+      "hint": "real 3D-film look with moving characters (AI motion), or a Lego-style toy world"
+    }
+  }
+}

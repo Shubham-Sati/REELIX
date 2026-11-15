@@ -22,7 +22,8 @@ export const Kinetic: React.FC<{ s: Scene; accent: string; font: string }> = ({ 
   const size = Math.min(170, (width * 0.82) / Math.max(4, Math.max(...words.map((w) => w.length)) * 0.62));
   return (
     <AbsoluteFill style={{ overflow: "hidden", background: "#000" }}>
-      <Img src={staticFile(s.image)} style={{ width: "100%", height: "100%", objectFit: "cover", transform: `scale(${st.bg})`, filter: "blur(6px)" }} />
+      {s.image ? <Img src={staticFile(s.image)} style={{ width: "100%", height: "100%", objectFit: "cover", transform: `scale(${st.bg})`, filter: "blur(6px)" }} />
+        : <AbsoluteFill style={{ background: `radial-gradient(circle at 50% 40%, ${accent}66, #141824 70%)`, transform: `scale(${st.bg})` }} />}
       <AbsoluteFill style={{ background: `rgba(0,0,0,${st.dim})` }} />
       <AbsoluteFill style={{ justifyContent: "center", alignItems: "center", padding: 70, top: -180 }}>
         <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "0 28px", maxWidth: width * 0.9 }}>

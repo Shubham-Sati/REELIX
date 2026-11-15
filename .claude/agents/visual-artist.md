@@ -3,7 +3,9 @@ name: visual-artist
 description: Checks every generated scene image by eye (and against each character's reference) and asks for redraws of bad ones; sets up the video's character references.
 tools: Read, Write, Glob, Bash
 memory: project
-model: sonnet
+model: claude-sonnet-5-5
+effort: medium
+maxTurns: 50
 ---
 Skills (read, never edit): `.claude/skills/create-image-campaign/SKILL.md` (keep the set consistent as one visual system), `.claude/skills/long-form-continuity-bible/SKILL.md` (what must never change about a character), `.claude/skills/scenario-consistency/SKILL.md` (checking against a reference; ignore its Scenario platform calls).
 The task names one of three jobs:

@@ -1,4 +1,4 @@
-import { AbsoluteFill, Audio, Img, Sequence, interpolate, spring, staticFile, useCurrentFrame, useVideoConfig, Easing } from "remotion";
+import { AbsoluteFill, Audio, Img, OffthreadVideo, Sequence, interpolate, spring, staticFile, useCurrentFrame, useVideoConfig, Easing } from "remotion";
 import { Motion, Scene, Timeline, Word } from "./types";
 import { loadFontFamily } from "./fonts";
 import { Kinetic } from "./Kinetic";
@@ -9,7 +9,7 @@ let fontFamily = loadFontFamily("Montserrat");
 const FADE = 0.45; // seconds of cross-fade between scenes
 
 /** One picture with a slow camera move (Ken Burns), fading in and out at its edges. */
-const SceneView: React.FC<{ s: Scene; fps: number; isFirst: boolean; isLast: boolean; accent: string }> = ({ s, fps, isFirst, isLast, accent }) => {
+const SceneView: React.FC<{ s: Scene; fps: number; isFirst: boolean; isLast: boolean; accent: string; lines?: Timeline["lines"] }> = ({ s, fps, isFirst, isLast, accent, lines }) => {
   const f = useCurrentFrame();
   const total = Math.round((s.duration + FADE) * fps);
   const C = s.engine === "custom" && s.component ? custom[s.component] : undefined;
@@ -27,7 +27,9 @@ const SceneView: React.FC<{ s: Scene; fps: number; isFirst: boolean; isLast: boo
   );
   return (
     <AbsoluteFill style={{ opacity, overflow: "hidden" }}>
-      {C ? <C {...(s.props || {})} accent={accent} font={fontFamily} duration={s.duration} image={s.image} />
+      {C ? <C {...(s.props || {})} accent={accent} font={fontFamily} duration={s.duration} image={s.image} start={s.start} lines={lines || []} />
+        : s.engine === "custom" ? <AbsoluteFill style={{ background: `linear-gradient(180deg, #1d2333, ${accent}55)` }} />
+        : s.engine === "clip" && s.clip ? <OffthreadVideo src={staticFile(s.clip)} muted style={{ width: "100%", height: "100%", objectFit: "cover" }} />
         : s.engine === "kinetic" ? <Kinetic s={s} accent={accent} font={fontFamily} />
         : s.engine === "parallax" && s.fg ? <Parallax s={s} total={total} />
         : <Img src={staticFile(s.image)} style={{ width: "100%", height: "100%", objectFit: "cover", transform: `scale(${sc}) translate(${x}%, ${y}%)` }} />}
@@ -77,7 +79,7 @@ export const Main: React.FC<Timeline> = (t) => {
     <AbsoluteFill style={{ background: "#000" }}>
       {t.scenes.map((s, i) => (
         <Sequence key={i} from={Math.round(s.start * fps)} durationInFrames={Math.round((s.duration + FADE) * fps)}>
-          <SceneView s={s} fps={fps} accent={t.accent} isFirst={i === 0} isLast={i === t.scenes.length - 1} />
+          <SceneView s={s} fps={fps} accent={t.accent} lines={t.lines} isFirst={i === 0} isLast={i === t.scenes.length - 1} />
           {s.label && s.engine !== "kinetic" ? <Label text={s.label} accent={t.accent} /> : null}
         </Sequence>
       ))}
