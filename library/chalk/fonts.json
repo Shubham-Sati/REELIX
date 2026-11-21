@@ -1,0 +1,61 @@
+{
+ "_about": "Handwriting fonts for the Chalkboard look (Google Fonts, Open Font License). Load one in a shot with import { loadFont } from \"@remotion/google-fonts/<Name without spaces>\" (no download). Approved from docs/experiments/2026-11-21-kit-chalk-fonts; chalk grain = an SVG feTurbulence filter (see that experiment's S_fonts.tsx).",
+ "fonts": [
+  {
+   "name": "Caveat",
+   "module": "@remotion/google-fonts/Caveat"
+  },
+  {
+   "name": "Patrick Hand",
+   "module": "@remotion/google-fonts/PatrickHand"
+  },
+  {
+   "name": "Gochi Hand",
+   "module": "@remotion/google-fonts/GochiHand"
+  },
+  {
+   "name": "Kalam",
+   "module": "@remotion/google-fonts/Kalam"
+  },
+  {
+   "name": "Architects Daughter",
+   "module": "@remotion/google-fonts/ArchitectsDaughter"
+  },
+  {
+   "name": "Permanent Marker",
+   "module": "@remotion/google-fonts/PermanentMarker"
+  },
+  {
+   "name": "Schoolbell",
+   "module": "@remotion/google-fonts/Schoolbell"
+  },
+  {
+   "name": "Rock Salt",
+   "module": "@remotion/google-fonts/RockSalt"
+  },
+  {
+   "name": "Indie Flower",
+   "module": "@remotion/google-fonts/IndieFlower"
+  },
+  {
+   "name": "Shadows Into Light",
+   "module": "@remotion/google-fonts/ShadowsIntoLight"
+  },
+  {
+   "name": "Cabin Sketch",
+   "module": "@remotion/google-fonts/CabinSketch"
+  },
+  {
+   "name": "Finger Paint",
+   "module": "@remotion/google-fonts/FingerPaint"
+  },
+  {
+   "name": "Handlee",
+   "module": "@remotion/google-fonts/Handlee"
+  },
+  {
+   "name": "Coming Soon",
+   "module": "@remotion/google-fonts/ComingSoon"
+  }
+ ]
+}

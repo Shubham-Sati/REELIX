@@ -1,0 +1,16 @@
+rocks 43 s
+mountain 43 s
+pine 41 s
+palm 42 s
+tree 42 s
+nest 41 s
+cottage 42 s
+townhouse 42 s
+hut 42 s
+car 41 s
+bus 42 s
+train 41 s
+bicycle 42 s
+motorbike 42 s
+sailboat 41 s
+plane 41 s

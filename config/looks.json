@@ -1,5 +1,18 @@
 {
-  "_about": "Questions 4 + 5: '2D or 3D?' then 'Which look?' (only the looks of that dimension). 2D = AI pictures from imageModel; 3D = characters move: AI motion (Wan) on Pixar-like pictures, or a Lego-style world built in code.",
+  "_about": "Questions 3-5: style, then the dimension, then the look. Each look lists the styles it is offered for, so every style has looks made for it: Explainer teaches (diagrams, or a 3D world acting it out), Animated tells a story (2D pictures or 3D). A look with \"planned\": true is not offered yet.",
+  "chalkboard": {
+    "label": "Chalkboard / Diagrams",
+    "hint": "diagrams, arrows, labels and equations that draw themselves (Manim)",
+    "pictures": false,
+    "styles": [
+      "explainer"
+    ],
+    "planned": true,
+    "styleLock": "chalkboard explainer: clean diagrams, arrows, labels and equations drawn step by step on a dark board, one idea at a time",
+    "characters": "no characters: diagrams, shapes and labels",
+    "motion": "each part draws itself in time with the voice; flat or 3D diagrams per shot",
+    "dim": "diagram"
+  },
   "painted": {
     "label": "Realistic painting",
     "hint": "painted, realistic faces (FLUX schnell)",
@@ -8,7 +21,10 @@
     "styleLock": "painterly 2D illustration, not a photograph, realistic proportions and faces, soft brush texture, cinematic light",
     "characters": "anchor pictures + cut-outs",
     "motion": "camera moves, 2.5D parallax, kinetic text, 3D inserts",
-    "dim": "2d"
+    "dim": "2d",
+    "styles": [
+      "animated"
+    ]
   },
   "cartoon": {
     "label": "Cartoon (Pixar-like pictures)",
@@ -18,7 +34,10 @@
     "styleLock": "stylized 3D animated feature film still, appealing cartoon proportions, soft rounded shapes, expressive faces, warm cinematic light",
     "characters": "anchor pictures + cut-outs",
     "motion": "camera moves, 2.5D parallax, kinetic text, 3D inserts",
-    "dim": "2d"
+    "dim": "2d",
+    "styles": [
+      "animated"
+    ]
   },
   "aimotion": {
     "label": "3D animated (AI motion)",
@@ -29,18 +48,32 @@
     "styleLock": "stylized 3D animated feature film still, modern CG animation look, appealing cartoon proportions, soft rounded shapes, expressive faces, soft global illumination, warm cinematic light",
     "characters": "anchor pictures + cut-outs, then each shot animated by Wan",
     "motion": "full AI motion per shot (Shorts: every shot; long videos: key shots, the rest camera moves)",
-    "dim": "3d"
+    "dim": "3d",
+    "styles": [
+      "animated",
+      "explainer"
+    ],
+    "best": "animated"
   },
   "toy3d": {
     "label": "3D Lego / toy world",
-    "hint": "low-poly 3D figures that walk, point and talk (no AI pictures)",
+    "hint": "smooth 3D toy figures that walk, jump, talk and show feelings (no AI pictures)",
     "pictures": false,
-    "styleLock": "low-poly 3D toy world: simple rounded shapes, flat matte colours, soft studio light, gentle shadows, miniature diorama sets",
+    "styleLock": "smooth 3D toy world (Lego V5): soft rounded clay-toy characters with human proportions and clear expressions, rigid objects kept crisp, soft studio light, contact shadows, miniature diorama sets",
     "characters": "3D figures built in code from the cast list",
-    "motion": "full: walk, point, turn, talk, camera moves, particles",
-    "dim": "3d"
+    "motion": "full: walk, run, jump, sit, point, head-first turns, anticipation, breathing, blinking, expressions, camera moves, fire and particles",
+    "dim": "3d",
+    "styles": [
+      "animated",
+      "explainer"
+    ],
+    "best": "explainer"
   },
   "_dims": {
+    "diagram": {
+      "label": "Diagrams",
+      "hint": "diagrams that draw themselves (Manim), no characters"
+    },
     "2d": {
       "label": "2D",
       "hint": "AI pictures with camera moves, 2.5D and motion graphics"

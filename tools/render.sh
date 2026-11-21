@@ -10,7 +10,18 @@ find "$SRC" -mindepth 1 ! -name index.ts -delete
   names=()
   for f in "$VD"/project/custom/*.tsx; do [ -f "$f" ] || continue; n="$(basename "$f" .tsx)"; cp "$f" "$SRC/$n.tsx"; case "$n" in _*) continue;; esac; names+=("$n"); echo "import $n from \"./$n\";"; done   # _files are shared kits, not scenes
   echo "export const custom: Record<string, React.FC<any>> = { $(IFS=,; echo "${names[*]}" | sed 's/,/, /g') };"; } > "$SRC/index.ts"
+# ready-made models (library/models) that the shots name, e.g. "models/kenney/car-kit/taxi.glb": copy them into the video's assets
+# (an .obj brings its .mtl, a .gltf brings the .bin/.png files it names, a Kenney kit model brings its kit's Textures folder)
+for m in $(grep -ohE 'models/(kenney|quaternius|kaykit|polypizza)/[A-Za-z0-9_./-]+\.(glb|gltf|obj)' "$VD"/project/custom/*.tsx 2>/dev/null | sort -u); do
+  src="$ROOT/library/$m"; [ -f "$src" ] || { echo "missing model $m (run: python3 tools/model_library.py fetch)"; continue; }
+  mkdir -p "$VD/assets/$(dirname "$m")"; cp "$src" "$VD/assets/$m"
+  case "$m" in *.obj) [ -f "${src%.obj}.mtl" ] && cp "${src%.obj}.mtl" "$VD/assets/${m%.obj}.mtl";;
+    *.gltf) for u in $(grep -oE '"uri" *: *"[^"]+"' "$src" | sed -E 's/.*"([^"]+)"$/\1/' | grep -v '^data:'); do [ -f "$(dirname "$src")/$u" ] && cp "$(dirname "$src")/$u" "$VD/assets/$(dirname "$m")/"; done;; esac
+  [ -d "$(dirname "$src")/Textures" ] && cp -R "$(dirname "$src")/Textures" "$VD/assets/$(dirname "$m")/"
+done
 cd "$ROOT/templates/remotion"
-npx remotion render src/index.ts Main "$VD/final.mp4" --props="$VD/project/timeline.json" --public-dir="$VD/assets" \
-  --codec=h264 --crf=18 --concurrency=4 --gl=angle --log=error
+r() { npx remotion render src/index.ts Main "$VD/final.mp4" --props="$VD/project/timeline.json" --public-dir="$VD/assets" \
+  --codec=h264 --crf=18 --concurrency=$1 --gl=angle --log=error; }
+# 3D scenes can run Chrome out of memory at 4 frames at once: retry with 2, then 1
+r 4 || { echo "render ran out of memory, retrying with 2 frames at a time"; r 2; } || { echo "retrying with 1 frame at a time"; r 1; }
 echo "$VD/final.mp4"

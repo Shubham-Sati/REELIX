@@ -1,0 +1,1582 @@
+# Model library catalog (made by tools/model_library.py index). Use: <KitModel file="<file>" h={<h>} [body=... flip] />. h, l in metres.
+# anim=... : a rigged model that moves; use <AnimatedModel file="<file>" h={<h>} clip="<one of anim>" t={t} /> instead of KitModel.
+# grep it, e.g.: grep -iE 'bus|tram' library/models/catalog.txt    code props (library/props) are copied into the video as _prop_<name>.tsx
+animal   | library/props/kennel.tsx                                  | h=1.0   | l= | code
+animal   | models/quaternius/animals/Alpaca.gltf                     | h=1.8   | l=1.434 | anim=Idle,Idle_2,Idle_Headlow,Idle_HitReact1,Idle_HitReact2,Jump_toIdle,Walk,Death,Eating,Gallop,Gallop_Jump,Attack_Headbutt,Attack_Kick
+animal   | models/quaternius/animals/Bull.gltf                       | h=1.6   | l=2.814 | anim=Idle,Idle_2,Idle_Headlow,Idle_HitReact1,Idle_HitReact2,Jump_toIdle,Walk,Death,Eating,Gallop,Gallop_Jump,Attack_Headbutt,Attack_Kick
+animal   | models/quaternius/animals/Cow.gltf                        | h=1.5   | l=2.638 | anim=Idle,Idle_2,Idle_Headlow,Idle_HitReact1,Idle_HitReact2,Jump_toIdle,Walk,Death,Eating,Gallop,Gallop_Jump,Attack_Headbutt,Attack_Kick
+animal   | models/quaternius/animals/Deer.gltf                       | h=1.3   | l=1.337 | anim=Idle,Idle_2,Idle_Headlow,Idle_HitReact1,Idle_HitReact2,Jump_toIdle,Walk,Death,Eating,Gallop,Gallop_Jump,Attack_Headbutt,Attack_Kick
+animal   | models/quaternius/animals/Donkey.gltf                     | h=1.3   | l=1.548 | anim=Idle,Idle_2,Idle_Headlow,Idle_HitReact1,Idle_HitReact2,Jump_toIdle,Walk,Death,Eating,Gallop,Gallop_Jump,Attack_Headbutt,Attack_Kick
+animal   | models/quaternius/animals/Fox.gltf                        | h=0.45  | l=0.989 | anim=Idle,Idle_2,Idle_2_HeadLow,Idle_HitReact1,Idle_HitReact2,Jump_ToIdle,Walk,Death,Eating,Gallop,Gallop_Jump,Attack
+animal   | models/quaternius/animals/Horse.gltf                      | h=1.7   | l=2.0 | anim=Idle,Idle_2,Idle_Headlow,Idle_HitReact1,Idle_HitReact2,Jump_toIdle,Walk,Death,Eating,Gallop,Gallop_Jump,Attack_Headbutt,Attack_Kick
+animal   | models/quaternius/animals/Horse_White.gltf                | h=1.7   | l=2.0 | anim=Idle,Idle_2,Idle_Headlow,Idle_HitReact1,Idle_HitReact2,Jump_toIdle,Walk,Death,Eating,Gallop,Gallop_Jump,Attack_Headbutt,Attack_Kick
+animal   | models/quaternius/animals/Husky.gltf                      | h=0.6   | l=0.731 | anim=Idle,Idle_2,Idle_2_HeadLow,Idle_HitReact1,Idle_HitReact2,Jump_ToIdle,Walk,Death,Eating,Gallop,Gallop_Jump,Attack
+animal   | models/quaternius/animals/ShibaInu.gltf                   | h=0.45  | l=0.574 | anim=Idle,Idle_2,Idle_2_HeadLow,Idle_HitReact1,Idle_HitReact2,Jump_ToIdle,Walk,Death,Eating,Gallop,Gallop_Jump,Attack
+animal   | models/quaternius/animals/Stag.gltf                       | h=1.9   | l=1.709 | anim=Idle,Idle_2,Idle_Headlow,Idle_HitReact1,Idle_HitReact2,Jump_toIdle,Walk,Death,Eating,Gallop,Gallop_Jump,Attack_Headbutt,Attack_Kick
+animal   | models/quaternius/animals/Wolf.gltf                       | h=0.85  | l=1.761 | anim=Idle,Idle_2,Idle_2_HeadLow,Idle_HitReact1,Idle_HitReact2,Jump_ToIdle,Walk,Death,Eating,Gallop,Gallop_Jump,Attack
+bicycle  | models/quaternius/Bicycle.obj                             | h=1.05  | l=1.75 | body=#2a6fd0 flip
+boat     | models/kenney/city-kit-industrial/shipping-container-a.glb| h=3.126 | l=7.387
+boat     | models/kenney/city-kit-industrial/shipping-container-b.glb| h=3.126 | l=7.387
+boat     | models/kenney/city-kit-industrial/shipping-container-c.glb| h=3.126 | l=7.387
+boat     | models/kenney/nature-kit/canoe.glb                        | h=0.481 | l=3.03
+boat     | models/kenney/nature-kit/canoe_paddle.glb                 | h=0.095 | l=1.555
+boat     | models/kenney/watercraft-kit/boat-fan.glb                 | h=2.385 | l=3.133
+boat     | models/kenney/watercraft-kit/boat-fishing-small.glb       | h=2.838 | l=4.224
+boat     | models/kenney/watercraft-kit/boat-house-a.glb             | h=2.371 | l=5.069
+boat     | models/kenney/watercraft-kit/boat-house-b.glb             | h=2.399 | l=6.06
+boat     | models/kenney/watercraft-kit/boat-house-c.glb             | h=3.277 | l=5.623
+boat     | models/kenney/watercraft-kit/boat-house-d.glb             | h=3.755 | l=5.069
+boat     | models/kenney/watercraft-kit/boat-row-large.glb           | h=0.925 | l=3.113
+boat     | models/kenney/watercraft-kit/boat-row-small.glb           | h=0.925 | l=3.0
+boat     | models/kenney/watercraft-kit/boat-sail-a.glb              | h=5.173 | l=4.115
+boat     | models/kenney/watercraft-kit/boat-sail-b.glb              | h=4.891 | l=4.442
+boat     | models/kenney/watercraft-kit/boat-speed-a.glb             | h=1.637 | l=3.678
+boat     | models/kenney/watercraft-kit/boat-speed-b.glb             | h=1.739 | l=3.592
+boat     | models/kenney/watercraft-kit/boat-speed-c.glb             | h=1.418 | l=3.46
+boat     | models/kenney/watercraft-kit/boat-speed-d.glb             | h=1.31  | l=4.224
+boat     | models/kenney/watercraft-kit/boat-speed-e.glb             | h=1.592 | l=3.133
+boat     | models/kenney/watercraft-kit/boat-speed-f.glb             | h=1.31  | l=3.133
+boat     | models/kenney/watercraft-kit/boat-speed-g.glb             | h=1.419 | l=4.161
+boat     | models/kenney/watercraft-kit/boat-speed-h.glb             | h=1.36  | l=4.006
+boat     | models/kenney/watercraft-kit/boat-speed-i.glb             | h=1.856 | l=4.224
+boat     | models/kenney/watercraft-kit/boat-speed-j.glb             | h=1.36  | l=4.661
+boat     | models/kenney/watercraft-kit/boat-tow-a.glb               | h=3.631 | l=6.683
+boat     | models/kenney/watercraft-kit/boat-tow-b.glb               | h=3.334 | l=6.683
+boat     | models/kenney/watercraft-kit/boat-tug-a.glb               | h=2.442 | l=3.787
+boat     | models/kenney/watercraft-kit/boat-tug-b.glb               | h=2.442 | l=3.133
+boat     | models/kenney/watercraft-kit/boat-tug-c.glb               | h=1.965 | l=3.133
+boat     | models/kenney/watercraft-kit/ship-cargo-a.glb             | h=3.69  | l=11.514
+boat     | models/kenney/watercraft-kit/ship-cargo-b.glb             | h=3.603 | l=11.514
+boat     | models/kenney/watercraft-kit/ship-cargo-c.glb             | h=2.823 | l=11.514
+boat     | models/kenney/watercraft-kit/ship-large.glb               | h=10.875| l=14.299
+boat     | models/kenney/watercraft-kit/ship-ocean-liner.glb         | h=9.751 | l=23.227
+boat     | models/kenney/watercraft-kit/ship-ocean-liner-small.glb   | h=9.751 | l=16.591
+boat     | models/kenney/watercraft-kit/ship-small.glb               | h=10.875| l=11.57
+boat     | models/kenney/watercraft-kit/ship-small-ghost.glb         | h=10.875| l=11.57
+boat     | models/quaternius/rowboat.glb                             | h=1.2   | l=4
+boat     | models/quaternius/sail-ship.glb                           | h=8     | l=8
+boat     | models/quaternius/sailboat.glb                            | h=5     | l=4.5
+boat     | models/quaternius/ship.glb                                | h=5     | l=10
+boat     | models/quaternius/space/Spaceship_BarbaraTheBee.gltf      | h=3.195 | l=4.11
+boat     | models/quaternius/space/Spaceship_FernandoTheFlamingo.gltf| h=1.416 | l=6.24
+boat     | models/quaternius/space/Spaceship_FinnTheFrog.gltf        | h=1.712 | l=6.51
+boat     | models/quaternius/space/Spaceship_RaeTheRedPanda.gltf     | h=1.316 | l=6.255
+building | library/props/clock-tower.tsx                             | h=7.6   | l= | code
+building | library/props/grocery-shop.tsx                            | h=3.3   | l= | code
+bus      | library/props/city-bus.tsx                                | h=3.1   | l= | code
+bus      | models/quaternius/Bus.obj                                 | h=3     | l=9 | body=#d8402e flip
+bus      | models/quaternius/SchoolBus.obj                           | h=3     | l=9 | body=#f2b632 flip
+car      | models/kenney/car-kit/hatchback-sports.glb                | h=1.438 | l=3.727
+car      | models/kenney/car-kit/kart-oobi.glb                       | h=1.738 | l=1.867
+car      | models/kenney/car-kit/kart-oodi.glb                       | h=1.738 | l=1.867
+car      | models/kenney/car-kit/kart-ooli.glb                       | h=1.738 | l=1.867
+car      | models/kenney/car-kit/kart-oopi.glb                       | h=1.738 | l=1.867
+car      | models/kenney/car-kit/kart-oozi.glb                       | h=1.738 | l=1.867
+car      | models/kenney/car-kit/police.glb                          | h=1.7   | l=4.054
+car      | models/kenney/car-kit/race.glb                            | h=0.958 | l=3.347
+car      | models/kenney/car-kit/race-future.glb                     | h=1.089 | l=3.478
+car      | models/kenney/car-kit/sedan.glb                           | h=1.7   | l=3.335
+car      | models/kenney/car-kit/sedan-sports.glb                    | h=1.438 | l=3.335
+car      | models/kenney/car-kit/suv.glb                             | h=1.7   | l=3.531
+car      | models/kenney/car-kit/suv-luxury.glb                      | h=1.7   | l=3.727
+car      | models/kenney/car-kit/taxi.glb                            | h=1.962 | l=3.596
+car      | models/kenney/car-kit/van.glb                             | h=1.765 | l=3.596
+car      | models/kenney/space-kit/craft_racer.glb                   | h=1.702 | l=4.597
+car      | library/props/open-car.tsx                                | h=1.5   | l= | code
+car      | models/quaternius/car.glb                                 | h=1.5   | l=4.2
+car      | models/quaternius/police-car.glb                          | h=1.6   | l=4.4
+car      | models/quaternius/sports-car.glb                          | h=1.3   | l=4.4
+car      | models/quaternius/suv.glb                                 | h=1.8   | l=4.6
+car      | models/quaternius/Taxi.obj                                | h=1.6   | l=4.4 | body=#f2c230
+castle   | models/kenney/castle-kit/bridge-draw.glb                  | h=0.305 | l=3.06
+castle   | models/kenney/castle-kit/bridge-straight.glb              | h=3.591 | l=2.84
+castle   | models/kenney/castle-kit/bridge-straight-pillar.glb       | h=3.591 | l=2.84
+castle   | models/kenney/castle-kit/door.glb                         | h=1.848 | l=1.097
+castle   | models/kenney/castle-kit/flag.glb                         | h=2.643 | l=1.32
+castle   | models/kenney/castle-kit/flag-banner-long.glb             | h=6.626 | l=1.924
+castle   | models/kenney/castle-kit/flag-banner-short.glb            | h=2.382 | l=1.924
+castle   | models/kenney/castle-kit/flag-pennant.glb                 | h=2.643 | l=1.752
+castle   | models/kenney/castle-kit/flag-wide.glb                    | h=2.643 | l=1.67
+castle   | models/kenney/castle-kit/gate.glb                         | h=2.78  | l=2.022
+castle   | models/kenney/castle-kit/metal-gate.glb                   | h=2.229 | l=2.123
+castle   | models/kenney/castle-kit/siege-ballista.glb               | h=2.78  | l=4.978
+castle   | models/kenney/castle-kit/siege-ballista-demolished.glb    | h=1.556 | l=5.357
+castle   | models/kenney/castle-kit/siege-catapult.glb               | h=4.06  | l=5.297
+castle   | models/kenney/castle-kit/siege-catapult-demolished.glb    | h=0.981 | l=5.124
+castle   | models/kenney/castle-kit/siege-ram.glb                    | h=3.616 | l=6.374
+castle   | models/kenney/castle-kit/siege-ram-demolished.glb         | h=2.208 | l=6.347
+castle   | models/kenney/castle-kit/siege-tower.glb                  | h=8.183 | l=6.002
+castle   | models/kenney/castle-kit/siege-tower-demolished.glb       | h=6.402 | l=6.635
+castle   | models/kenney/castle-kit/siege-trebuchet.glb              | h=5.981 | l=5.653
+castle   | models/kenney/castle-kit/siege-trebuchet-demolished.glb   | h=0.946 | l=6.402
+castle   | models/kenney/castle-kit/tower-base.glb                   | h=4.0   | l=3.053
+castle   | models/kenney/castle-kit/tower-hexagon-base.glb           | h=4.0   | l=2.748
+castle   | models/kenney/castle-kit/tower-hexagon-mid.glb            | h=1.405 | l=2.908
+castle   | models/kenney/castle-kit/tower-hexagon-roof.glb           | h=2.534 | l=2.981
+castle   | models/kenney/castle-kit/tower-hexagon-roof-secondary.glb | h=2.301 | l=2.981
+castle   | models/kenney/castle-kit/tower-hexagon-top.glb            | h=0.397 | l=2.638
+castle   | models/kenney/castle-kit/tower-hexagon-top-wood.glb       | h=1.405 | l=2.638
+castle   | models/kenney/castle-kit/tower-slant-roof.glb             | h=6.534 | l=3.573
+castle   | models/kenney/castle-kit/tower-square.glb                 | h=4.0   | l=3.053
+castle   | models/kenney/castle-kit/tower-square-arch.glb            | h=3.084 | l=2.84
+castle   | models/kenney/castle-kit/tower-square-base.glb            | h=3.084 | l=3.053
+castle   | models/kenney/castle-kit/tower-square-base-border.glb     | h=1.374 | l=3.053
+castle   | models/kenney/castle-kit/tower-square-base-color.glb      | h=3.084 | l=3.053
+castle   | models/kenney/castle-kit/tower-square-mid.glb             | h=3.084 | l=2.84
+castle   | models/kenney/castle-kit/tower-square-mid-color.glb       | h=0.616 | l=2.84
+castle   | models/kenney/castle-kit/tower-square-mid-door.glb        | h=3.084 | l=2.84
+castle   | models/kenney/castle-kit/tower-square-mid-open.glb        | h=3.084 | l=2.84
+castle   | models/kenney/castle-kit/tower-square-mid-open-simple.glb | h=2.681 | l=2.84
+castle   | models/kenney/castle-kit/tower-square-mid-windows.glb     | h=3.084 | l=2.84
+castle   | models/kenney/castle-kit/tower-square-roof.glb            | h=6.137 | l=3.053
+castle   | models/kenney/castle-kit/tower-square-top.glb             | h=0.916 | l=3.053
+castle   | models/kenney/castle-kit/tower-square-top-color.glb       | h=1.16  | l=3.053
+castle   | models/kenney/castle-kit/tower-square-top-roof.glb        | h=3.053 | l=3.053
+castle   | models/kenney/castle-kit/tower-square-top-roof-high.glb   | h=4.122 | l=3.053
+castle   | models/kenney/castle-kit/tower-square-top-roof-high-windows.glb| h=3.298 | l=3.053
+castle   | models/kenney/castle-kit/tower-square-top-roof-rounded.glb| h=2.901 | l=3.053
+castle   | models/kenney/castle-kit/tower-top.glb                    | h=0.397 | l=3.053
+castle   | models/kenney/castle-kit/wall.glb                         | h=4.0   | l=3.053
+castle   | models/kenney/castle-kit/wall-corner.glb                  | h=4.0   | l=3.053
+castle   | models/kenney/castle-kit/wall-corner-half.glb             | h=4.0   | l=3.053
+castle   | models/kenney/castle-kit/wall-corner-half-tower.glb       | h=4.397 | l=4.58
+castle   | models/kenney/castle-kit/wall-corner-slant.glb            | h=4.0   | l=3.053
+castle   | models/kenney/castle-kit/wall-doorway.glb                 | h=4.0   | l=3.053
+castle   | models/kenney/castle-kit/wall-half.glb                    | h=4.0   | l=3.053
+castle   | models/kenney/castle-kit/wall-half-modular.glb            | h=4.0   | l=3.053
+castle   | models/kenney/castle-kit/wall-narrow.glb                  | h=4.0   | l=3.053
+castle   | models/kenney/castle-kit/wall-narrow-corner.glb           | h=4.0   | l=1.527
+castle   | models/kenney/castle-kit/wall-narrow-gate.glb             | h=4.0   | l=3.053
+castle   | models/kenney/castle-kit/wall-narrow-stairs.glb           | h=4.0   | l=3.053
+castle   | models/kenney/castle-kit/wall-narrow-stairs-rail.glb      | h=4.422 | l=3.158
+castle   | models/kenney/castle-kit/wall-narrow-wood.glb             | h=4.0   | l=3.053
+castle   | models/kenney/castle-kit/wall-narrow-wood-fence.glb       | h=4.427 | l=3.206
+castle   | models/kenney/castle-kit/wall-pillar.glb                  | h=4.0   | l=3.053
+castle   | models/kenney/castle-kit/wall-stud.glb                    | h=3.389 | l=0.824
+castle   | models/kenney/castle-kit/wall-to-narrow.glb               | h=4.0   | l=3.053
+farm     | models/quaternius/farm/Apple_1.obj                        | h=0.329 | l=0.317
+farm     | models/quaternius/farm/Apple_2.obj                        | h=1.25  | l=0.686
+farm     | models/quaternius/farm/Apple_3.obj                        | h=2.778 | l=1.553
+farm     | models/quaternius/farm/Apple_4.obj                        | h=3.678 | l=2.481
+farm     | models/quaternius/farm/Apple_Harvested.obj                | h=3.678 | l=2.397
+farm     | models/quaternius/farm/Bamboo_1.obj                       | h=0.683 | l=0.51
+farm     | models/quaternius/farm/Bamboo_2.obj                       | h=0.976 | l=0.273
+farm     | models/quaternius/farm/Bamboo_3.obj                       | h=2.059 | l=0.477
+farm     | models/quaternius/farm/Bamboo_4.obj                       | h=3.63  | l=0.743
+farm     | models/quaternius/farm/Barn.obj                           | h=8.0   | l=10.948
+farm     | models/quaternius/farm/Beet_1.obj                         | h=0.869 | l=0.445
+farm     | models/quaternius/farm/Beet_2.obj                         | h=1.145 | l=0.284
+farm     | models/quaternius/farm/Beet_3.obj                         | h=1.157 | l=0.678
+farm     | models/quaternius/farm/Beet_4.obj                         | h=1.467 | l=1.0
+farm     | models/quaternius/farm/BigBarn.obj                        | h=10.501| l=10.948
+farm     | models/quaternius/farm/ChickenCoop.obj                    | h=2.464 | l=3.205
+farm     | models/quaternius/farm/Fence.obj                          | h=1.461 | l=7.842
+farm     | models/quaternius/farm/Fence2.obj                         | h=1.562 | l=7.842
+farm     | models/quaternius/farm/OpenBarn.obj                       | h=6.316 | l=8.231
+farm     | models/quaternius/farm/Silo.obj                           | h=12.074| l=4.883
+farm     | models/quaternius/farm/Silo_House.obj                     | h=12.072| l=7.108
+farm     | models/quaternius/farm/SmallBarn.obj                      | h=6.605 | l=8.353
+farm     | models/quaternius/farm/TowerWindmill.obj                  | h=15.196| l=10.55
+farm     | models/quaternius/farm/WaterTower.obj                     | h=11.222| l=3.371
+farm     | models/quaternius/farm/Well.obj                           | h=2.857 | l=1.98
+farm     | models/quaternius/farm/Windmill.obj                       | h=14.907| l=8.664
+food     | models/kenney/food-kit/advocado-half.glb                  | h=0.09  | l=0.073
+food     | models/kenney/food-kit/apple.glb                          | h=0.08  | l=0.082
+food     | models/kenney/food-kit/apple-half.glb                     | h=0.08  | l=0.082
+food     | models/kenney/food-kit/avocado.glb                        | h=0.09  | l=0.073
+food     | models/kenney/food-kit/bacon.glb                          | h=0.013 | l=0.218
+food     | models/kenney/food-kit/bacon-raw.glb                      | h=0.013 | l=0.218
+food     | models/kenney/food-kit/bag.glb                            | h=0.252 | l=0.173
+food     | models/kenney/food-kit/bag-flat.glb                       | h=0.08  | l=0.273
+food     | models/kenney/food-kit/banana.glb                         | h=0.082 | l=0.264
+food     | models/kenney/food-kit/barrel.glb                         | h=0.285 | l=0.319
+food     | models/kenney/food-kit/beet.glb                           | h=0.111 | l=0.041
+food     | models/kenney/food-kit/bottle-ketchup.glb                 | h=0.165 | l=0.07
+food     | models/kenney/food-kit/bottle-musterd.glb                 | h=0.165 | l=0.07
+food     | models/kenney/food-kit/bottle-oil.glb                     | h=0.261 | l=0.059
+food     | models/kenney/food-kit/bowl.glb                           | h=0.09  | l=0.243
+food     | models/kenney/food-kit/bowl-broth.glb                     | h=0.122 | l=0.243
+food     | models/kenney/food-kit/bowl-cereal.glb                    | h=0.176 | l=0.266
+food     | models/kenney/food-kit/bowl-soup.glb                      | h=0.09  | l=0.243
+food     | models/kenney/food-kit/bread.glb                          | h=0.017 | l=0.186
+food     | models/kenney/food-kit/broccoli.glb                       | h=0.177 | l=0.157
+food     | models/kenney/food-kit/burger.glb                         | h=0.122 | l=0.169
+food     | models/kenney/food-kit/burger-cheese.glb                  | h=0.092 | l=0.159
+food     | models/kenney/food-kit/burger-cheese-double.glb           | h=0.134 | l=0.159
+food     | models/kenney/food-kit/burger-double.glb                  | h=0.151 | l=0.169
+food     | models/kenney/food-kit/cabbage.glb                        | h=0.129 | l=0.169
+food     | models/kenney/food-kit/cake.glb                           | h=0.115 | l=0.268
+food     | models/kenney/food-kit/cake-birthday.glb                  | h=0.153 | l=0.268
+food     | models/kenney/food-kit/cake-slicer.glb                    | h=0.029 | l=0.304
+food     | models/kenney/food-kit/can.glb                            | h=0.134 | l=0.126
+food     | models/kenney/food-kit/can-open.glb                       | h=0.171 | l=0.126
+food     | models/kenney/food-kit/can-small.glb                      | h=0.068 | l=0.126
+food     | models/kenney/food-kit/candy-bar.glb                      | h=0.027 | l=0.123
+food     | models/kenney/food-kit/candy-bar-wrapper.glb              | h=0.034 | l=0.123
+food     | models/kenney/food-kit/carrot.glb                         | h=0.3   | l=0.144
+food     | models/kenney/food-kit/carton.glb                         | h=0.248 | l=0.096
+food     | models/kenney/food-kit/carton-small.glb                   | h=0.164 | l=0.096
+food     | models/kenney/food-kit/celery-stick.glb                   | h=0.226 | l=0.037
+food     | models/kenney/food-kit/cheese.glb                         | h=0.092 | l=0.285
+food     | models/kenney/food-kit/cheese-cut.glb                     | h=0.01  | l=0.161
+food     | models/kenney/food-kit/cheese-slicer.glb                  | h=0.012 | l=0.259
+food     | models/kenney/food-kit/cherries.glb                       | h=0.072 | l=0.068
+food     | models/kenney/food-kit/chinese.glb                        | h=0.238 | l=0.234
+food     | models/kenney/food-kit/chocolate.glb                      | h=0.014 | l=0.123
+food     | models/kenney/food-kit/chocolate-wrapper.glb              | h=0.027 | l=0.123
+food     | models/kenney/food-kit/chopstic-decorative.glb            | h=0.01  | l=0.189
+food     | models/kenney/food-kit/chopstick.glb                      | h=0.01  | l=0.189
+food     | models/kenney/food-kit/cocktail.glb                       | h=0.212 | l=0.152
+food     | models/kenney/food-kit/coconut.glb                        | h=0.104 | l=0.104
+food     | models/kenney/food-kit/coconut-half.glb                   | h=0.052 | l=0.104
+food     | models/kenney/food-kit/cookie.glb                         | h=0.021 | l=0.092
+food     | models/kenney/food-kit/cookie-chocolate.glb               | h=0.027 | l=0.059
+food     | models/kenney/food-kit/cooking-fork.glb                   | h=0.03  | l=0.286
+food     | models/kenney/food-kit/cooking-knife.glb                  | h=0.017 | l=0.3
+food     | models/kenney/food-kit/cooking-knife-chopping.glb         | h=0.017 | l=0.252
+food     | models/kenney/food-kit/cooking-spatula.glb                | h=0.03  | l=0.286
+food     | models/kenney/food-kit/cooking-spoon.glb                  | h=0.01  | l=0.279
+food     | models/kenney/food-kit/corn.glb                           | h=0.133 | l=0.144
+food     | models/kenney/food-kit/corn-dog.glb                       | h=0.039 | l=0.253
+food     | models/kenney/food-kit/croissant.glb                      | h=0.081 | l=0.2
+food     | models/kenney/food-kit/cup.glb                            | h=0.084 | l=0.123
+food     | models/kenney/food-kit/cup-coffee.glb                     | h=0.059 | l=0.12
+food     | models/kenney/food-kit/cup-saucer.glb                     | h=0.016 | l=0.15
+food     | models/kenney/food-kit/cup-tea.glb                        | h=0.084 | l=0.123
+food     | models/kenney/food-kit/cupcake.glb                        | h=0.178 | l=0.149
+food     | models/kenney/food-kit/cutting-board.glb                  | h=0.025 | l=0.344
+food     | models/kenney/food-kit/cutting-board-japanese.glb         | h=0.034 | l=0.352
+food     | models/kenney/food-kit/cutting-board-round.glb            | h=0.025 | l=0.336
+food     | models/kenney/food-kit/dim-sum.glb                        | h=0.05  | l=0.078
+food     | models/kenney/food-kit/donut.glb                          | h=0.037 | l=0.119
+food     | models/kenney/food-kit/donut-chocolate.glb                | h=0.037 | l=0.119
+food     | models/kenney/food-kit/donut-sprinkles.glb                | h=0.04  | l=0.119
+food     | models/kenney/food-kit/egg.glb                            | h=0.069 | l=0.056
+food     | models/kenney/food-kit/egg-cooked.glb                     | h=0.012 | l=0.174
+food     | models/kenney/food-kit/egg-cup.glb                        | h=0.063 | l=0.077
+food     | models/kenney/food-kit/egg-half.glb                       | h=0.045 | l=0.056
+food     | models/kenney/food-kit/fish.glb                           | h=0.135 | l=0.26
+food     | models/kenney/food-kit/fish-bones.glb                     | h=0.03  | l=0.267
+food     | models/kenney/food-kit/frappe.glb                         | h=0.209 | l=0.107
+food     | models/kenney/food-kit/fries.glb                          | h=0.167 | l=0.111
+food     | models/kenney/food-kit/fries-empty.glb                    | h=0.099 | l=0.111
+food     | models/kenney/food-kit/frikandel-speciaal.glb             | h=0.046 | l=0.267
+food     | models/kenney/food-kit/frying-pan.glb                     | h=0.051 | l=0.429
+food     | models/kenney/food-kit/frying-pan-lid.glb                 | h=0.045 | l=0.254
+food     | models/kenney/food-kit/ginger-bread.glb                   | h=0.013 | l=0.109
+food     | models/kenney/food-kit/ginger-bread-cutter.glb            | h=0.018 | l=0.122
+food     | models/kenney/food-kit/glass.glb                          | h=0.12  | l=0.077
+food     | models/kenney/food-kit/glass-wine.glb                     | h=0.21  | l=0.095
+food     | models/kenney/food-kit/grapes.glb                         | h=0.177 | l=0.117
+food     | models/kenney/food-kit/honey.glb                          | h=0.133 | l=0.137
+food     | models/kenney/food-kit/hot-dog.glb                        | h=0.064 | l=0.246
+food     | models/kenney/food-kit/hot-dog-raw.glb                    | h=0.041 | l=0.246
+food     | models/kenney/food-kit/ice-cream.glb                      | h=0.194 | l=0.114
+food     | models/kenney/food-kit/ice-cream-cne.glb                  | h=0.125 | l=0.089
+food     | models/kenney/food-kit/ice-cream-cup.glb                  | h=0.076 | l=0.097
+food     | models/kenney/food-kit/ice-cream-scoop-chocolate.glb      | h=0.069 | l=0.114
+food     | models/kenney/food-kit/ice-cream-scoop-mint.glb           | h=0.069 | l=0.114
+food     | models/kenney/food-kit/knife-block.glb                    | h=0.278 | l=0.267
+food     | models/kenney/food-kit/leek.glb                           | h=0.355 | l=0.114
+food     | models/kenney/food-kit/lemon.glb                          | h=0.094 | l=0.084
+food     | models/kenney/food-kit/lemon-half.glb                     | h=0.047 | l=0.084
+food     | models/kenney/food-kit/loaf.glb                           | h=0.186 | l=0.243
+food     | models/kenney/food-kit/loaf-baguette.glb                  | h=0.105 | l=0.348
+food     | models/kenney/food-kit/loaf-round.glb                     | h=0.123 | l=0.324
+food     | models/kenney/food-kit/lollypop.glb                       | h=0.159 | l=0.079
+food     | models/kenney/food-kit/maki-roe.glb                       | h=0.038 | l=0.05
+food     | models/kenney/food-kit/maki-salmon.glb                    | h=0.029 | l=0.05
+food     | models/kenney/food-kit/maki-vegetable.glb                 | h=0.029 | l=0.05
+food     | models/kenney/food-kit/meat-cooked.glb                    | h=0.027 | l=0.241
+food     | models/kenney/food-kit/meat-patty.glb                     | h=0.026 | l=0.145
+food     | models/kenney/food-kit/meat-raw.glb                       | h=0.027 | l=0.241
+food     | models/kenney/food-kit/meat-ribs.glb                      | h=0.025 | l=0.225
+food     | models/kenney/food-kit/meat-sausage.glb                   | h=0.031 | l=0.164
+food     | models/kenney/food-kit/meat-tenderizer.glb                | h=0.05  | l=0.227
+food     | models/kenney/food-kit/mincemeat-pie.glb                  | h=0.07  | l=0.257
+food     | models/kenney/food-kit/mortar.glb                         | h=0.088 | l=0.192
+food     | models/kenney/food-kit/mortar-pestle.glb                  | h=0.143 | l=0.055
+food     | models/kenney/food-kit/muffin.glb                         | h=0.104 | l=0.128
+food     | models/kenney/food-kit/mug.glb                            | h=0.115 | l=0.144
+food     | models/kenney/food-kit/mussel.glb                         | h=0.017 | l=0.065
+food     | models/kenney/food-kit/mussel-open.glb                    | h=0.034 | l=0.065
+food     | models/kenney/food-kit/onion.glb                          | h=0.105 | l=0.103
+food     | models/kenney/food-kit/onion-half.glb                     | h=0.105 | l=0.103
+food     | models/kenney/food-kit/orange.glb                         | h=0.07  | l=0.071
+food     | models/kenney/food-kit/pan.glb                            | h=0.074 | l=0.32
+food     | models/kenney/food-kit/pan-stew.glb                       | h=0.074 | l=0.32
+food     | models/kenney/food-kit/pancakes.glb                       | h=0.051 | l=0.211
+food     | models/kenney/food-kit/paprika.glb                        | h=0.084 | l=0.07
+food     | models/kenney/food-kit/paprika-slice.glb                  | h=0.013 | l=0.067
+food     | models/kenney/food-kit/peanut-butter.glb                  | h=0.124 | l=0.099
+food     | models/kenney/food-kit/pear.glb                           | h=0.114 | l=0.082
+food     | models/kenney/food-kit/pear-half.glb                      | h=0.114 | l=0.082
+food     | models/kenney/food-kit/pepper.glb                         | h=0.032 | l=0.134
+food     | models/kenney/food-kit/pepper-mill.glb                    | h=0.23  | l=0.066
+food     | models/kenney/food-kit/pie.glb                            | h=0.063 | l=0.399
+food     | models/kenney/food-kit/pizza.glb                          | h=0.018 | l=0.353
+food     | models/kenney/food-kit/pizza-box.glb                      | h=0.37  | l=0.399
+food     | models/kenney/food-kit/pizza-cutter.glb                   | h=0.023 | l=0.225
+food     | models/kenney/food-kit/plate.glb                          | h=0.038 | l=0.374
+food     | models/kenney/food-kit/plate-broken.glb                   | h=0.038 | l=0.374
+food     | models/kenney/food-kit/plate-deep.glb                     | h=0.061 | l=0.374
+food     | models/kenney/food-kit/plate-dinner.glb                   | h=0.093 | l=0.374
+food     | models/kenney/food-kit/plate-rectangle.glb                | h=0.055 | l=0.36
+food     | models/kenney/food-kit/plate-sauerkraut.glb               | h=0.073 | l=0.374
+food     | models/kenney/food-kit/popsicle.glb                       | h=0.206 | l=0.075
+food     | models/kenney/food-kit/popsicle-chocolate.glb             | h=0.206 | l=0.084
+food     | models/kenney/food-kit/popsicle-stick.glb                 | h=0.143 | l=0.017
+food     | models/kenney/food-kit/pot.glb                            | h=0.151 | l=0.345
+food     | models/kenney/food-kit/pot-lid.glb                        | h=0.05  | l=0.276
+food     | models/kenney/food-kit/pot-stew.glb                       | h=0.151 | l=0.345
+food     | models/kenney/food-kit/pot-stew-lid.glb                   | h=0.05  | l=0.276
+food     | models/kenney/food-kit/pudding.glb                        | h=0.084 | l=0.121
+food     | models/kenney/food-kit/pumpkin.glb                        | h=0.096 | l=0.176
+food     | models/kenney/food-kit/pumpkin-basic.glb                  | h=0.125 | l=0.176
+food     | models/kenney/food-kit/radish.glb                         | h=0.242 | l=0.144
+food     | models/kenney/food-kit/rice-ball.glb                      | h=0.055 | l=0.048
+food     | models/kenney/food-kit/rollingPin.glb                     | h=0.059 | l=0.341
+food     | models/kenney/food-kit/salad.glb                          | h=0.115 | l=0.243
+food     | models/kenney/food-kit/sandwich.glb                       | h=0.07  | l=0.182
+food     | models/kenney/food-kit/sausage.glb                        | h=0.05  | l=0.155
+food     | models/kenney/food-kit/sausage-half.glb                   | h=0.05  | l=0.078
+food     | models/kenney/food-kit/shaker-pepper.glb                  | h=0.082 | l=0.04
+food     | models/kenney/food-kit/shaker-salt.glb                    | h=0.082 | l=0.04
+food     | models/kenney/food-kit/skewer.glb                         | h=0.039 | l=0.25
+food     | models/kenney/food-kit/skewer-vegetables.glb              | h=0.045 | l=0.25
+food     | models/kenney/food-kit/soda.glb                           | h=0.181 | l=0.107
+food     | models/kenney/food-kit/soda-bottle.glb                    | h=0.243 | l=0.076
+food     | models/kenney/food-kit/soda-can.glb                       | h=0.147 | l=0.094
+food     | models/kenney/food-kit/soda-can-crushed.glb               | h=0.076 | l=0.104
+food     | models/kenney/food-kit/soda-glass.glb                     | h=0.173 | l=0.124
+food     | models/kenney/food-kit/soy.glb                            | h=0.017 | l=0.08
+food     | models/kenney/food-kit/steamer.glb                        | h=0.252 | l=0.268
+food     | models/kenney/food-kit/strawberry.glb                     | h=0.076 | l=0.05
+food     | models/kenney/food-kit/styrofoam.glb                      | h=0.345 | l=0.537
+food     | models/kenney/food-kit/styrofoam-dinner.glb               | h=0.345 | l=0.537
+food     | models/kenney/food-kit/sub.glb                            | h=0.093 | l=0.283
+food     | models/kenney/food-kit/sundae.glb                         | h=0.28  | l=0.108
+food     | models/kenney/food-kit/sushi-egg.glb                      | h=0.033 | l=0.073
+food     | models/kenney/food-kit/sushi-salmon.glb                   | h=0.037 | l=0.084
+food     | models/kenney/food-kit/taco.glb                           | h=0.11  | l=0.178
+food     | models/kenney/food-kit/tajine.glb                         | h=0.058 | l=0.361
+food     | models/kenney/food-kit/tajine-lid.glb                     | h=0.185 | l=0.333
+food     | models/kenney/food-kit/tomato.glb                         | h=0.06  | l=0.071
+food     | models/kenney/food-kit/tomato-slice.glb                   | h=0.013 | l=0.075
+food     | models/kenney/food-kit/turkey.glb                         | h=0.158 | l=0.398
+food     | models/kenney/food-kit/utensil-fork.glb                   | h=0.01  | l=0.211
+food     | models/kenney/food-kit/utensil-knife.glb                  | h=0.01  | l=0.252
+food     | models/kenney/food-kit/utensil-spoon.glb                  | h=0.012 | l=0.201
+food     | models/kenney/food-kit/waffle.glb                         | h=0.017 | l=0.134
+food     | models/kenney/food-kit/watermelon.glb                     | h=0.2   | l=0.191
+food     | models/kenney/food-kit/whipped-cream.glb                  | h=0.041 | l=0.066
+food     | models/kenney/food-kit/whisk.glb                          | h=0.066 | l=0.304
+food     | models/kenney/food-kit/whole-ham.glb                      | h=0.184 | l=0.268
+food     | models/kenney/food-kit/wholer-ham.glb                     | h=0.165 | l=0.348
+food     | models/kenney/food-kit/wine-red.glb                       | h=0.293 | l=0.08
+food     | models/kenney/food-kit/wine-white.glb                     | h=0.275 | l=0.085
+food     | models/quaternius/food/Apple.obj                          | h=0.08  | l=0.075
+food     | models/quaternius/food/Apple_Green.obj                    | h=0.08  | l=0.075
+food     | models/quaternius/food/Avocado.obj                        | h=0.103 | l=0.071
+food     | models/quaternius/food/Avocado_Empty.obj                  | h=0.103 | l=0.069
+food     | models/quaternius/food/Bacon_Burned.obj                   | h=0.005 | l=0.109
+food     | models/quaternius/food/Bacon_Cooked.obj                   | h=0.005 | l=0.109
+food     | models/quaternius/food/Bacon_Uncooked.obj                 | h=0.005 | l=0.109
+food     | models/quaternius/food/Banana.obj                         | h=0.132 | l=0.11
+food     | models/quaternius/food/Bottle1.obj                        | h=0.147 | l=0.042
+food     | models/quaternius/food/Bottle2.obj                        | h=0.152 | l=0.042
+food     | models/quaternius/food/Bread.obj                          | h=0.08  | l=0.113
+food     | models/quaternius/food/Bread_Slice.obj                    | h=0.08  | l=0.065
+food     | models/quaternius/food/Broccoli.obj                       | h=0.084 | l=0.071
+food     | models/quaternius/food/Burger.obj                         | h=0.1   | l=0.16
+food     | models/quaternius/food/BurgerLarge.obj                    | h=0.136 | l=0.161
+food     | models/quaternius/food/BurgerPatty_Burned.obj             | h=0.032 | l=0.134
+food     | models/quaternius/food/BurgerPatty_Cooked.obj             | h=0.032 | l=0.134
+food     | models/quaternius/food/BurgerPatty_Raw.obj                | h=0.032 | l=0.134
+food     | models/quaternius/food/Burger_Bread.obj                   | h=0.038 | l=0.148
+food     | models/quaternius/food/Carrot.obj                         | h=0.261 | l=0.089
+food     | models/quaternius/food/Cheese_Singles.obj                 | h=0.005 | l=0.097
+food     | models/quaternius/food/Cheeseburger.obj                   | h=0.088 | l=0.145
+food     | models/quaternius/food/ChickenLeg.obj                     | h=0.055 | l=0.131
+food     | models/quaternius/food/ChocolateBar.obj                   | h=0.006 | l=0.082
+food     | models/quaternius/food/Chopsticks.obj                     | h=0.005 | l=0.153
+furniture| models/kaykit/furniture/armchair.gltf                     | h=0.875 | l=1.287
+furniture| models/kaykit/furniture/armchair_pillows.gltf             | h=0.875 | l=1.287
+furniture| models/kaykit/furniture/bed_double_A.gltf                 | h=0.715 | l=2.217
+furniture| models/kaykit/furniture/bed_double_B.gltf                 | h=0.715 | l=2.217
+furniture| models/kaykit/furniture/bed_single_A.gltf                 | h=0.715 | l=2.146
+furniture| models/kaykit/furniture/bed_single_B.gltf                 | h=0.715 | l=2.146
+furniture| models/kaykit/furniture/book_set.gltf                     | h=0.358 | l=0.558
+furniture| models/kaykit/furniture/book_single.gltf                  | h=0.358 | l=0.261
+furniture| models/kaykit/furniture/cabinet_medium.gltf               | h=0.715 | l=1.43
+furniture| models/kaykit/furniture/cabinet_medium_decorated.gltf     | h=1.307 | l=1.46
+furniture| models/kaykit/furniture/cabinet_small.gltf                | h=0.715 | l=0.716
+furniture| models/kaykit/furniture/cabinet_small_decorated.gltf      | h=1.157 | l=0.79
+furniture| models/kaykit/furniture/chair_A.gltf                      | h=0.9   | l=0.604
+furniture| models/kaykit/furniture/chair_A_wood.gltf                 | h=0.9   | l=0.604
+furniture| models/kaykit/furniture/chair_B.gltf                      | h=0.9   | l=0.604
+furniture| models/kaykit/furniture/chair_B_wood.gltf                 | h=0.9   | l=0.604
+furniture| models/kaykit/furniture/chair_C.gltf                      | h=0.86  | l=0.669
+furniture| models/kaykit/furniture/chair_stool.gltf                  | h=0.358 | l=0.536
+furniture| models/kaykit/furniture/chair_stool_wood.gltf             | h=0.358 | l=0.536
+furniture| models/kaykit/furniture/couch.gltf                        | h=0.875 | l=2.146
+furniture| models/kaykit/furniture/couch_pillows.gltf                | h=0.875 | l=2.146
+furniture| models/kaykit/furniture/lamp_standing.gltf                | h=1.802 | l=0.715
+furniture| models/kaykit/furniture/lamp_table.gltf                   | h=0.731 | l=0.715
+furniture| models/kaykit/furniture/pictureframe_large_A.gltf         | h=0.858 | l=0.722
+furniture| models/kaykit/furniture/pictureframe_large_B.gltf         | h=0.858 | l=1.43
+furniture| models/kaykit/furniture/pictureframe_medium.gltf          | h=0.644 | l=0.501
+furniture| models/kaykit/furniture/pictureframe_small_A.gltf         | h=0.429 | l=0.358
+furniture| models/kaykit/furniture/pictureframe_small_B.gltf         | h=0.315 | l=0.501
+furniture| models/kaykit/furniture/pictureframe_small_C.gltf         | h=0.358 | l=0.358
+furniture| models/kaykit/furniture/pictureframe_standing_A.gltf      | h=0.442 | l=0.358
+furniture| models/kaykit/furniture/pictureframe_standing_B.gltf      | h=0.335 | l=0.501
+furniture| models/kaykit/furniture/pillow_A.gltf                     | h=0.143 | l=0.465
+furniture| models/kaykit/furniture/pillow_B.gltf                     | h=0.143 | l=0.465
+furniture| models/kaykit/furniture/rug_oval_A.gltf                   | h=0.072 | l=2.146
+furniture| models/kaykit/furniture/rug_oval_B.gltf                   | h=0.072 | l=2.146
+furniture| models/kaykit/furniture/rug_rectangle_A.gltf              | h=0.072 | l=2.146
+furniture| models/kaykit/furniture/rug_rectangle_B.gltf              | h=0.072 | l=2.146
+furniture| models/kaykit/furniture/rug_rectangle_stripes_A.gltf      | h=0.072 | l=2.146
+furniture| models/kaykit/furniture/rug_rectangle_stripes_B.gltf      | h=0.072 | l=2.146
+furniture| models/kaykit/furniture/shelf_A_big.gltf                  | h=0.286 | l=1.43
+furniture| models/kaykit/furniture/shelf_A_small.gltf                | h=0.286 | l=0.715
+furniture| models/kaykit/furniture/shelf_B_large.gltf                | h=0.286 | l=1.43
+furniture| models/kaykit/furniture/shelf_B_large_decorated.gltf      | h=0.585 | l=1.43
+furniture| models/kaykit/furniture/shelf_B_small.gltf                | h=0.286 | l=0.715
+furniture| models/kaykit/furniture/shelf_B_small_decorated.gltf      | h=0.724 | l=0.715
+furniture| models/kaykit/furniture/table_low.gltf                    | h=0.358 | l=1.717
+furniture| models/kaykit/furniture/table_medium.gltf                 | h=0.715 | l=1.43
+furniture| models/kaykit/furniture/table_medium_long.gltf            | h=0.715 | l=2.146
+furniture| models/kaykit/furniture/table_small.gltf                  | h=0.715 | l=0.715
+furniture| models/kenney/furniture-kit/bathroomCabinet.glb           | h=0.747 | l=0.44
+furniture| models/kenney/furniture-kit/bathroomCabinetDrawer.glb     | h=0.903 | l=0.823
+furniture| models/kenney/furniture-kit/bathroomMirror.glb            | h=0.832 | l=0.577
+furniture| models/kenney/furniture-kit/bathroomSink.glb              | h=1.072 | l=0.651
+furniture| models/kenney/furniture-kit/bathroomSinkSquare.glb        | h=1.111 | l=0.823
+furniture| models/kenney/furniture-kit/bathtub.glb                   | h=0.804 | l=2.279
+furniture| models/kenney/furniture-kit/bear.glb                      | h=0.862 | l=0.746
+furniture| models/kenney/furniture-kit/bedBunk.glb                   | h=1.628 | l=2.097
+furniture| models/kenney/furniture-kit/bedDouble.glb                 | h=0.718 | l=2.154
+furniture| models/kenney/furniture-kit/bedSingle.glb                 | h=0.718 | l=2.154
+furniture| models/kenney/furniture-kit/bench.glb                     | h=0.9   | l=0.766
+furniture| models/kenney/furniture-kit/benchCushion.glb              | h=0.881 | l=0.766
+furniture| models/kenney/furniture-kit/benchCushionLow.glb           | h=0.383 | l=0.804
+furniture| models/kenney/furniture-kit/bookcaseClosed.glb            | h=1.628 | l=0.766
+furniture| models/kenney/furniture-kit/bookcaseClosedDoors.glb       | h=1.628 | l=0.766
+furniture| models/kenney/furniture-kit/bookcaseClosedWide.glb        | h=1.513 | l=1.532
+furniture| models/kenney/furniture-kit/bookcaseOpen.glb              | h=1.685 | l=0.766
+furniture| models/kenney/furniture-kit/bookcaseOpenLow.glb           | h=0.766 | l=0.766
+furniture| models/kenney/furniture-kit/books.glb                     | h=0.199 | l=0.288
+furniture| models/kenney/furniture-kit/cabinetBed.glb                | h=0.447 | l=0.509
+furniture| models/kenney/furniture-kit/cabinetBedDrawer.glb          | h=0.504 | l=0.509
+furniture| models/kenney/furniture-kit/cabinetBedDrawerTable.glb     | h=0.504 | l=0.509
+furniture| models/kenney/furniture-kit/cabinetTelevision.glb         | h=0.594 | l=1.532
+furniture| models/kenney/furniture-kit/cabinetTelevisionDoors.glb    | h=0.594 | l=1.532
+furniture| models/kenney/furniture-kit/cardboardBoxClosed.glb        | h=0.538 | l=0.407
+furniture| models/kenney/furniture-kit/cardboardBoxOpen.glb          | h=0.538 | l=0.712
+furniture| models/kenney/furniture-kit/ceilingFan.glb                | h=0.256 | l=1.005
+furniture| models/kenney/furniture-kit/chair.glb                     | h=0.9   | l=0.383
+furniture| models/kenney/furniture-kit/chairCushion.glb              | h=0.881 | l=0.383
+furniture| models/kenney/furniture-kit/chairDesk.glb                 | h=1.163 | l=0.641
+furniture| models/kenney/furniture-kit/chairModernCushion.glb        | h=0.881 | l=0.383
+furniture| models/kenney/furniture-kit/chairModernFrameCushion.glb   | h=0.881 | l=0.383
+furniture| models/kenney/furniture-kit/chairRounded.glb              | h=0.871 | l=0.383
+furniture| models/kenney/furniture-kit/computerKeyboard.glb          | h=0.053 | l=0.54
+furniture| models/kenney/furniture-kit/computerMouse.glb             | h=0.045 | l=0.163
+furniture| models/kenney/furniture-kit/computerScreen.glb            | h=0.564 | l=0.752
+furniture| models/kenney/furniture-kit/desk.glb                      | h=0.736 | l=1.406
+furniture| models/kenney/furniture-kit/deskCorner.glb                | h=0.736 | l=1.866
+furniture| models/kenney/furniture-kit/doorway.glb                   | h=1.933 | l=0.931
+furniture| models/kenney/furniture-kit/doorwayFront.glb              | h=1.933 | l=0.931
+furniture| models/kenney/furniture-kit/doorwayOpen.glb               | h=1.933 | l=0.931
+furniture| models/kenney/furniture-kit/dryer.glb                     | h=0.9   | l=0.747
+furniture| models/kenney/furniture-kit/floorCorner.glb               | h=0.096 | l=1.053
+furniture| models/kenney/furniture-kit/floorCornerRound.glb          | h=0.096 | l=1.053
+furniture| models/kenney/furniture-kit/floorFull.glb                 | h=0.096 | l=1.915
+furniture| models/kenney/furniture-kit/floorHalf.glb                 | h=0.096 | l=1.915
+furniture| models/kenney/furniture-kit/hoodLarge.glb                 | h=0.708 | l=0.823
+furniture| models/kenney/furniture-kit/hoodModern.glb                | h=0.765 | l=0.823
+furniture| models/kenney/furniture-kit/kitchenBar.glb                | h=0.804 | l=0.823
+furniture| models/kenney/furniture-kit/kitchenBarEnd.glb             | h=0.804 | l=0.402
+furniture| models/kenney/furniture-kit/kitchenBlender.glb            | h=0.436 | l=0.26
+furniture| models/kenney/furniture-kit/kitchenCabinet.glb            | h=0.862 | l=0.862
+furniture| models/kenney/furniture-kit/kitchenCabinetCornerInner.glb | h=0.862 | l=0.881
+furniture| models/kenney/furniture-kit/kitchenCabinetCornerRound.glb | h=0.862 | l=0.862
+furniture| models/kenney/furniture-kit/kitchenCabinetDrawer.glb      | h=0.862 | l=0.862
+furniture| models/kenney/furniture-kit/kitchenCabinetUpper.glb       | h=0.747 | l=0.823
+furniture| models/kenney/furniture-kit/kitchenCabinetUpperCorner.glb | h=0.747 | l=0.412
+furniture| models/kenney/furniture-kit/kitchenCabinetUpperDouble.glb | h=0.747 | l=0.823
+furniture| models/kenney/furniture-kit/kitchenCabinetUpperLow.glb    | h=0.373 | l=0.823
+furniture| models/kenney/furniture-kit/kitchenCoffeeMachine.glb      | h=0.34  | l=0.46
+furniture| models/kenney/furniture-kit/kitchenFridge.glb             | h=1.762 | l=0.823
+furniture| models/kenney/furniture-kit/kitchenFridgeBuiltIn.glb      | h=1.664 | l=0.862
+furniture| models/kenney/furniture-kit/kitchenFridgeLarge.glb        | h=1.762 | l=0.996
+furniture| models/kenney/furniture-kit/kitchenFridgeSmall.glb        | h=1.149 | l=0.823
+furniture| models/kenney/furniture-kit/kitchenMicrowave.glb          | h=0.345 | l=0.555
+furniture| models/kenney/furniture-kit/kitchenSink.glb               | h=0.938 | l=0.862
+furniture| models/kenney/furniture-kit/kitchenStove.glb              | h=0.862 | l=0.862
+furniture| models/kenney/furniture-kit/kitchenStoveElectric.glb      | h=0.862 | l=0.862
+furniture| models/kenney/furniture-kit/lampRoundFloor.glb            | h=1.647 | l=0.336
+furniture| models/kenney/furniture-kit/lampRoundTable.glb            | h=0.602 | l=0.336
+furniture| models/kenney/furniture-kit/lampSquareCeiling.glb         | h=0.44  | l=0.23
+furniture| models/kenney/furniture-kit/lampSquareFloor.glb           | h=1.647 | l=0.23
+furniture| models/kenney/furniture-kit/lampSquareTable.glb           | h=0.555 | l=0.23
+furniture| models/kenney/furniture-kit/lampWall.glb                  | h=0.178 | l=0.434
+furniture| models/kenney/furniture-kit/laptop.glb                    | h=0.31  | l=0.506
+furniture| models/kenney/furniture-kit/loungeChair.glb               | h=0.881 | l=0.938
+furniture| models/kenney/furniture-kit/loungeChairRelax.glb          | h=1.206 | l=1.292
+furniture| models/kenney/furniture-kit/loungeDesignChair.glb         | h=0.766 | l=1.397
+furniture| models/kenney/furniture-kit/loungeDesignSofa.glb          | h=0.766 | l=2.145
+furniture| models/kenney/furniture-kit/loungeDesignSofaCorner.glb    | h=0.766 | l=2.585
+furniture| models/kenney/furniture-kit/loungeSofa.glb                | h=0.881 | l=1.877
+furniture| models/kenney/furniture-kit/loungeSofaCorner.glb          | h=0.881 | l=1.877
+furniture| models/kenney/furniture-kit/loungeSofaLong.glb            | h=0.881 | l=1.877
+furniture| models/kenney/furniture-kit/loungeSofaOttoman.glb         | h=0.44  | l=0.862
+furniture| models/kenney/furniture-kit/paneling.glb                  | h=1.139 | l=0.957
+furniture| models/kenney/furniture-kit/pillow.glb                    | h=0.425 | l=0.44
+furniture| models/kenney/furniture-kit/pillowBlue.glb                | h=0.246 | l=0.44
+furniture| models/kenney/furniture-kit/pillowBlueLong.glb            | h=0.425 | l=0.989
+furniture| models/kenney/furniture-kit/pillowLong.glb                | h=0.425 | l=0.74
+furniture| models/kenney/furniture-kit/radio.glb                     | h=0.437 | l=0.603
+furniture| models/kenney/furniture-kit/rugDoormat.glb                | h=0.019 | l=0.822
+furniture| models/kenney/furniture-kit/rugRectangle.glb              | h=0.019 | l=3.006
+furniture| models/kenney/furniture-kit/rugSquare.glb                 | h=0.019 | l=1.762
+furniture| models/kenney/furniture-kit/shower.glb                    | h=2.095 | l=1.114
+furniture| models/kenney/furniture-kit/showerRound.glb               | h=2.095 | l=1.076
+furniture| models/kenney/furniture-kit/sideTable.glb                 | h=0.736 | l=1.023
+furniture| models/kenney/furniture-kit/sideTableDrawers.glb          | h=0.736 | l=1.023
+furniture| models/kenney/furniture-kit/speaker.glb                   | h=1.219 | l=0.283
+furniture| models/kenney/furniture-kit/speakerSmall.glb              | h=0.571 | l=0.283
+furniture| models/kenney/furniture-kit/stairs.glb                    | h=2.565 | l=3.492
+furniture| models/kenney/furniture-kit/stairsCorner.glb              | h=2.565 | l=3.396
+furniture| models/kenney/furniture-kit/stairsOpen.glb                | h=2.565 | l=3.492
+furniture| models/kenney/furniture-kit/stairsOpenSingle.glb          | h=2.565 | l=3.492
+furniture| models/kenney/furniture-kit/stoolBar.glb                  | h=0.833 | l=0.508
+furniture| models/kenney/furniture-kit/stoolBarSquare.glb            | h=0.776 | l=0.294
+furniture| models/kenney/furniture-kit/table.glb                     | h=0.626 | l=1.611
+furniture| models/kenney/furniture-kit/tableCloth.glb                | h=0.626 | l=1.611
+furniture| models/kenney/furniture-kit/tableCoffee.glb               | h=0.44  | l=1.266
+furniture| models/kenney/furniture-kit/tableCoffeeGlass.glb          | h=0.44  | l=1.266
+furniture| models/kenney/furniture-kit/tableCoffeeGlassSquare.glb    | h=0.44  | l=0.766
+furniture| models/kenney/furniture-kit/tableCoffeeSquare.glb         | h=0.44  | l=0.766
+furniture| models/kenney/furniture-kit/tableCross.glb                | h=0.665 | l=1.632
+furniture| models/kenney/furniture-kit/tableCrossCloth.glb           | h=0.665 | l=1.632
+furniture| models/kenney/furniture-kit/tableGlass.glb                | h=0.626 | l=1.611
+furniture| models/kenney/furniture-kit/tableRound.glb                | h=0.702 | l=1.532
+furniture| models/kenney/furniture-kit/televisionAntenna.glb         | h=0.197 | l=0.507
+furniture| models/kenney/furniture-kit/televisionModern.glb          | h=0.871 | l=1.311
+furniture| models/kenney/furniture-kit/televisionVintage.glb         | h=0.517 | l=0.785
+furniture| models/kenney/furniture-kit/toaster.glb                   | h=0.249 | l=0.36
+furniture| models/kenney/furniture-kit/toilet.glb                    | h=0.864 | l=0.914
+furniture| models/kenney/furniture-kit/toiletSquare.glb              | h=0.864 | l=0.741
+furniture| models/kenney/furniture-kit/trashcan.glb                  | h=0.819 | l=0.448
+furniture| models/kenney/furniture-kit/wall.glb                      | h=2.469 | l=1.915
+furniture| models/kenney/furniture-kit/wallCorner.glb                | h=2.469 | l=1.053
+furniture| models/kenney/furniture-kit/wallCornerRond.glb            | h=2.469 | l=1.053
+furniture| models/kenney/furniture-kit/wallDoorway.glb               | h=2.469 | l=1.915
+furniture| models/kenney/furniture-kit/wallDoorwayWide.glb           | h=2.469 | l=1.915
+furniture| models/kenney/furniture-kit/wallHalf.glb                  | h=2.469 | l=0.957
+furniture| models/kenney/furniture-kit/wallWindow.glb                | h=2.469 | l=1.915
+furniture| models/kenney/furniture-kit/wallWindowSlide.glb           | h=2.469 | l=1.915
+furniture| models/kenney/furniture-kit/washer.glb                    | h=0.9   | l=0.747
+furniture| models/kenney/furniture-kit/washerDryerStacked.glb        | h=1.8   | l=0.747
+ground   | models/kenney/castle-kit/ground.glb                       | h=0.01  | l=3.053
+ground   | models/kenney/castle-kit/ground-hills.glb                 | h=0.88  | l=3.053
+ground   | models/kenney/city-kit-roads/road-crossroad-path.glb      | h=0.18  | l=9.0
+ground   | models/kenney/city-kit-roads/road-driveway-double.glb     | h=0.18  | l=9.0
+ground   | models/kenney/city-kit-roads/road-driveway-double-barrier.glb| h=0.72  | l=9.0
+ground   | models/kenney/city-kit-roads/road-driveway-single.glb     | h=0.18  | l=9.0
+ground   | models/kenney/city-kit-roads/road-driveway-single-barrier.glb| h=0.72  | l=9.0
+ground   | models/kenney/city-kit-roads/road-intersection-path.glb   | h=0.18  | l=9.0
+ground   | models/kenney/city-kit-suburban/driveway-long.glb         | h=0.072 | l=2.879
+ground   | models/kenney/city-kit-suburban/driveway-short.glb        | h=0.072 | l=2.591
+ground   | models/kenney/city-kit-suburban/path-long.glb             | h=0.072 | l=2.879
+ground   | models/kenney/city-kit-suburban/path-short.glb            | h=0.072 | l=1.44
+ground   | models/kenney/city-kit-suburban/path-stones-long.glb      | h=0.072 | l=2.879
+ground   | models/kenney/city-kit-suburban/path-stones-messy.glb     | h=0.072 | l=2.601
+ground   | models/kenney/city-kit-suburban/path-stones-short.glb     | h=0.072 | l=1.44
+ground   | models/kenney/furniture-kit/rugRound.glb                  | h=0.019 | l=1.762
+ground   | models/kenney/furniture-kit/rugRounded.glb                | h=0.019 | l=3.006
+ground   | models/kenney/nature-kit/ground_grass.glb                 | h=0.01  | l=2.635
+ground   | models/kenney/nature-kit/ground_pathBend.glb              | h=0.132 | l=2.635
+ground   | models/kenney/nature-kit/ground_pathBendBank.glb          | h=0.132 | l=2.635
+ground   | models/kenney/nature-kit/ground_pathCorner.glb            | h=0.132 | l=2.635
+ground   | models/kenney/nature-kit/ground_pathCornerSmall.glb       | h=0.132 | l=2.635
+ground   | models/kenney/nature-kit/ground_pathCross.glb             | h=0.132 | l=2.635
+ground   | models/kenney/nature-kit/ground_pathEnd.glb               | h=0.132 | l=2.635
+ground   | models/kenney/nature-kit/ground_pathEndClosed.glb         | h=0.132 | l=2.635
+ground   | models/kenney/nature-kit/ground_pathOpen.glb              | h=0.01  | l=2.635
+ground   | models/kenney/nature-kit/ground_pathRocks.glb             | h=0.132 | l=2.635
+ground   | models/kenney/nature-kit/ground_pathSide.glb              | h=0.132 | l=2.635
+ground   | models/kenney/nature-kit/ground_pathSideOpen.glb          | h=0.132 | l=2.635
+ground   | models/kenney/nature-kit/ground_pathSplit.glb             | h=0.132 | l=2.635
+ground   | models/kenney/nature-kit/ground_pathStraight.glb          | h=0.132 | l=2.635
+ground   | models/kenney/nature-kit/ground_pathTile.glb              | h=0.132 | l=2.635
+ground   | models/kenney/nature-kit/ground_riverBend.glb             | h=0.132 | l=2.635
+ground   | models/kenney/nature-kit/ground_riverBendBank.glb         | h=0.132 | l=2.635
+ground   | models/kenney/nature-kit/ground_riverCorner.glb           | h=0.132 | l=2.635
+ground   | models/kenney/nature-kit/ground_riverCornerSmall.glb      | h=0.132 | l=2.635
+ground   | models/kenney/nature-kit/ground_riverCross.glb            | h=0.132 | l=2.635
+ground   | models/kenney/nature-kit/ground_riverEnd.glb              | h=0.132 | l=2.635
+ground   | models/kenney/nature-kit/ground_riverEndClosed.glb        | h=0.132 | l=2.635
+ground   | models/kenney/nature-kit/ground_riverOpen.glb             | h=0.01  | l=2.635
+ground   | models/kenney/nature-kit/ground_riverRocks.glb            | h=0.132 | l=2.635
+ground   | models/kenney/nature-kit/ground_riverSide.glb             | h=0.132 | l=2.635
+ground   | models/kenney/nature-kit/ground_riverSideOpen.glb         | h=0.132 | l=2.635
+ground   | models/kenney/nature-kit/ground_riverSplit.glb            | h=0.132 | l=2.635
+ground   | models/kenney/nature-kit/ground_riverStraight.glb         | h=0.132 | l=2.635
+ground   | models/kenney/nature-kit/ground_riverTile.glb             | h=0.132 | l=2.635
+ground   | models/kenney/nature-kit/path_stone.glb                   | h=0.132 | l=2.635
+ground   | models/kenney/nature-kit/path_stoneCircle.glb             | h=0.132 | l=2.457
+ground   | models/kenney/nature-kit/path_stoneCorner.glb             | h=0.132 | l=2.051
+ground   | models/kenney/nature-kit/path_stoneEnd.glb                | h=0.132 | l=1.629
+ground   | models/kenney/nature-kit/path_wood.glb                    | h=0.132 | l=2.635
+ground   | models/kenney/nature-kit/path_woodCorner.glb              | h=0.132 | l=1.976
+ground   | models/kenney/nature-kit/path_woodEnd.glb                 | h=0.132 | l=1.62
+ground   | models/kenney/nature-kit/platform_beach.glb               | h=0.217 | l=2.353
+ground   | models/kenney/nature-kit/platform_grass.glb               | h=0.217 | l=2.353
+ground   | models/kenney/nature-kit/platform_stone.glb               | h=0.217 | l=2.353
+ground   | models/kenney/nature-kit/tree_pineGroundA.glb             | h=2.409 | l=1.462
+ground   | models/kenney/nature-kit/tree_pineGroundB.glb             | h=2.745 | l=1.462
+ground   | models/kenney/space-kit/platform_center.glb               | h=0.01  | l=2.269
+ground   | models/kenney/space-kit/platform_corner.glb               | h=0.227 | l=2.269
+ground   | models/kenney/space-kit/platform_cornerOpen.glb           | h=0.227 | l=2.269
+ground   | models/kenney/space-kit/platform_cornerRound.glb          | h=0.227 | l=2.269
+ground   | models/kenney/space-kit/platform_end.glb                  | h=0.227 | l=2.269
+ground   | models/kenney/space-kit/platform_high.glb                 | h=2.269 | l=2.269
+ground   | models/kenney/space-kit/platform_large.glb                | h=0.227 | l=4.539
+ground   | models/kenney/space-kit/platform_long.glb                 | h=0.227 | l=4.539
+ground   | models/kenney/space-kit/platform_low.glb                  | h=1.135 | l=2.269
+ground   | models/kenney/space-kit/platform_side.glb                 | h=0.227 | l=2.269
+ground   | models/kenney/space-kit/platform_small.glb                | h=0.227 | l=2.269
+ground   | models/kenney/space-kit/platform_smallDiagonal.glb        | h=0.227 | l=2.269
+ground   | models/kenney/space-kit/platform_straight.glb             | h=0.227 | l=2.269
+ground   | models/quaternius/space/SolarPanel_Ground.gltf            | h=0.614 | l=0.934
+house    | models/kenney/city-kit-commercial/building-a.glb          | h=11.6  | l=8.433
+house    | models/kenney/city-kit-commercial/building-b.glb          | h=11.6  | l=8.702
+house    | models/kenney/city-kit-commercial/building-c.glb          | h=8.011 | l=9.779
+house    | models/kenney/city-kit-commercial/building-d.glb          | h=11.6  | l=8.074
+house    | models/kenney/city-kit-commercial/building-e.glb          | h=8.011 | l=14.713
+house    | models/kenney/city-kit-commercial/building-f.glb          | h=15.189| l=9.241
+house    | models/kenney/city-kit-commercial/building-g.glb          | h=15.189| l=8.702
+house    | models/kenney/city-kit-commercial/building-h.glb          | h=11.6  | l=9.042
+house    | models/kenney/city-kit-commercial/building-i.glb          | h=15.072| l=11.681
+house    | models/kenney/city-kit-commercial/building-j.glb          | h=15.189| l=18.693
+house    | models/kenney/city-kit-commercial/building-k.glb          | h=13.188| l=18.693
+house    | models/kenney/city-kit-commercial/building-l.glb          | h=20.365| l=12.578
+house    | models/kenney/city-kit-commercial/building-m.glb          | h=28.26 | l=11.142
+house    | models/kenney/city-kit-commercial/building-n.glb          | h=22.249| l=20.814
+house    | models/kenney/city-kit-commercial/building-skyscraper-a.glb| h=25.838| l=12.201
+house    | models/kenney/city-kit-commercial/building-skyscraper-b.glb| h=40.192| l=12.201
+house    | models/kenney/city-kit-commercial/building-skyscraper-c.glb| h=36.603| l=12.451
+house    | models/kenney/city-kit-commercial/building-skyscraper-d.glb| h=49.073| l=12.451
+house    | models/kenney/city-kit-commercial/building-skyscraper-e.glb| h=36.603| l=11.618
+house    | models/kenney/city-kit-commercial/detail-awning.glb       | h=3.589 | l=3.589
+house    | models/kenney/city-kit-commercial/detail-awning-wide.glb  | h=3.589 | l=7.177
+house    | models/kenney/city-kit-commercial/detail-overhang.glb     | h=3.589 | l=4.486
+house    | models/kenney/city-kit-commercial/detail-overhang-wide.glb| h=3.589 | l=8.971
+house    | models/kenney/city-kit-commercial/detail-parasol-a.glb    | h=4.037 | l=3.589
+house    | models/kenney/city-kit-commercial/detail-parasol-b.glb    | h=4.037 | l=3.589
+house    | models/kenney/city-kit-commercial/low-detail-building-a.glb| h=17.943| l=4.486
+house    | models/kenney/city-kit-commercial/low-detail-building-b.glb| h=19.961| l=4.486
+house    | models/kenney/city-kit-commercial/low-detail-building-c.glb| h=20.186| l=4.486
+house    | models/kenney/city-kit-commercial/low-detail-building-d.glb| h=15.7  | l=4.486
+house    | models/kenney/city-kit-commercial/low-detail-building-e.glb| h=16.148| l=4.486
+house    | models/kenney/city-kit-commercial/low-detail-building-f.glb| h=17.943| l=4.486
+house    | models/kenney/city-kit-commercial/low-detail-building-g.glb| h=17.943| l=4.486
+house    | models/kenney/city-kit-commercial/low-detail-building-h.glb| h=18.84 | l=4.486
+house    | models/kenney/city-kit-commercial/low-detail-building-i.glb| h=15.924| l=4.486
+house    | models/kenney/city-kit-commercial/low-detail-building-j.glb| h=15.7  | l=4.486
+house    | models/kenney/city-kit-commercial/low-detail-building-k.glb| h=13.906| l=4.486
+house    | models/kenney/city-kit-commercial/low-detail-building-l.glb| h=16.597| l=4.486
+house    | models/kenney/city-kit-commercial/low-detail-building-m.glb| h=17.718| l=4.486
+house    | models/kenney/city-kit-commercial/low-detail-building-n.glb| h=6.28  | l=4.486
+house    | models/kenney/city-kit-commercial/low-detail-building-wide-a.glb| h=9.869 | l=8.971
+house    | models/kenney/city-kit-commercial/low-detail-building-wide-b.glb| h=10.317| l=8.971
+house    | models/kenney/city-kit-industrial/building-a.glb          | h=13.2  | l=18.71
+house    | models/kenney/city-kit-industrial/building-b.glb          | h=13.2  | l=18.71
+house    | models/kenney/city-kit-industrial/building-c.glb          | h=11.224| l=18.929
+house    | models/kenney/city-kit-industrial/building-d.glb          | h=12.702| l=12.751
+house    | models/kenney/city-kit-industrial/building-e.glb          | h=14.816| l=15.118
+house    | models/kenney/city-kit-industrial/building-f.glb          | h=17.286| l=16.073
+house    | models/kenney/city-kit-industrial/building-g.glb          | h=11.494| l=15.069
+house    | models/kenney/city-kit-industrial/building-h.glb          | h=6.587 | l=11.869
+house    | models/kenney/city-kit-industrial/building-i.glb          | h=6.587 | l=11.673
+house    | models/kenney/city-kit-industrial/building-j.glb          | h=7.733 | l=11.673
+house    | models/kenney/city-kit-industrial/building-k.glb          | h=6.939 | l=11.699
+house    | models/kenney/city-kit-industrial/building-l.glb          | h=17.286| l=18.71
+house    | models/kenney/city-kit-industrial/building-m.glb          | h=13.64 | l=15.265
+house    | models/kenney/city-kit-industrial/building-n.glb          | h=17.102| l=12.751
+house    | models/kenney/city-kit-industrial/building-o.glb          | h=8.243 | l=11.135
+house    | models/kenney/city-kit-industrial/building-p.glb          | h=6.416 | l=15.118
+house    | models/kenney/city-kit-industrial/building-q.glb          | h=7.902 | l=19.216
+house    | models/kenney/city-kit-industrial/building-r.glb          | h=12.509| l=22.302
+house    | models/kenney/city-kit-industrial/building-s.glb          | h=7.514 | l=19.037
+house    | models/kenney/city-kit-industrial/building-t.glb          | h=9.11  | l=15.46
+house    | models/kenney/city-kit-suburban/building-type-a.glb       | h=6.0   | l=9.358
+house    | models/kenney/city-kit-suburban/building-type-b.glb       | h=8.188 | l=13.158
+house    | models/kenney/city-kit-suburban/building-type-c.glb       | h=7.44  | l=9.26
+house    | models/kenney/city-kit-suburban/building-type-d.glb       | h=8.908 | l=12.643
+house    | models/kenney/city-kit-suburban/building-type-e.glb       | h=8.188 | l=9.358
+house    | models/kenney/city-kit-suburban/building-type-f.glb       | h=8.188 | l=10.279
+house    | models/kenney/city-kit-suburban/building-type-g.glb       | h=5.53  | l=10.437
+house    | models/kenney/city-kit-suburban/building-type-h.glb       | h=5.309 | l=9.358
+house    | models/kenney/city-kit-suburban/building-type-i.glb       | h=5.309 | l=9.26
+house    | models/kenney/city-kit-suburban/building-type-j.glb       | h=7.468 | l=9.862
+house    | models/kenney/city-kit-suburban/building-type-k.glb       | h=8.275 | l=7.342
+house    | models/kenney/city-kit-suburban/building-type-l.glb       | h=7.552 | l=7.44
+house    | models/kenney/city-kit-suburban/building-type-m.glb       | h=5.309 | l=10.279
+house    | models/kenney/city-kit-suburban/building-type-n.glb       | h=8.188 | l=12.844
+house    | models/kenney/city-kit-suburban/building-type-o.glb       | h=8.188 | l=9.142
+house    | models/kenney/city-kit-suburban/building-type-p.glb       | h=6.608 | l=8.926
+house    | models/kenney/city-kit-suburban/building-type-q.glb       | h=6.608 | l=8.926
+house    | models/kenney/city-kit-suburban/building-type-r.glb       | h=8.214 | l=7.4
+house    | models/kenney/city-kit-suburban/building-type-s.glb       | h=8.188 | l=10.121
+house    | models/kenney/city-kit-suburban/building-type-t.glb       | h=8.324 | l=10.123
+house    | models/kenney/city-kit-suburban/building-type-u.glb       | h=8.188 | l=10.279
+house    | library/props/farmhouse.tsx                               | h=3.4   | l= | code
+house    | models/quaternius/fantasy-house.glb                       | h=6     | l=5
+house    | models/quaternius/house.glb                               | h=5     | l=5
+house    | models/quaternius/house-tiled.glb                         | h=5     | l=5
+house    | models/quaternius/huts.glb                                | h=3.5   | l=7
+house    | models/quaternius/shelter-hut.glb                         | h=3.5   | l=4
+house    | models/quaternius/space/Building_L.gltf                   | h=2.417 | l=4.368
+house    | models/quaternius/townhouse.glb                           | h=7     | l=4
+house    | models/quaternius/townhouse-narrow.glb                    | h=7     | l=5
+industry | models/kenney/city-kit-industrial/chimney-basic.glb       | h=8.98  | l=1.796
+industry | models/kenney/city-kit-industrial/chimney-large.glb       | h=15.265| l=9.698
+industry | models/kenney/city-kit-industrial/chimney-medium.glb      | h=17.286| l=4.041
+industry | models/kenney/city-kit-industrial/chimney-small.glb       | h=6.735 | l=2.694
+industry | models/kenney/city-kit-industrial/detail-tank.glb         | h=3.729 | l=7.615
+industry | models/kenney/city-kit-industrial/detail-tank-large.glb   | h=8.635 | l=14.802
+industry | models/kenney/city-kit-industrial/solar-panel-flat.glb    | h=0.552 | l=6.406
+industry | models/kenney/city-kit-industrial/solar-panel-landscape.glb| h=2.356 | l=6.406
+industry | models/kenney/city-kit-industrial/solar-panel-landscape-group.glb| h=2.356 | l=13.59
+industry | models/kenney/city-kit-industrial/solar-panel-portrait.glb| h=3.681 | l=5.824
+industry | models/kenney/city-kit-industrial/solar-panel-portrait-group.glb| h=3.681 | l=11.212
+industry | models/kenney/city-kit-industrial/water-tower.glb         | h=19.231| l=7.653
+industry | models/kenney/city-kit-industrial/windmill.glb            | h=20.777| l=10.119
+industry | models/kenney/city-kit-industrial/windmill-low.glb        | h=16.108| l=10.119
+insect   | models/polypizza/insects/armabee.glb                      | h=0.02  | l=0.046
+insect   | models/polypizza/insects/bee.glb                          | h=0.015 | l=0.02
+insect   | models/polypizza/insects/cobweb.glb                       | h=0.3   | l=0.479
+insect   | models/polypizza/insects/dragonfly.glb                    | h=0.02  | l=0.078
+insect   | models/polypizza/insects/dragonfly-red.glb                | h=0.02  | l=0.078
+insect   | models/polypizza/insects/frog.glb                         | h=0.06  | l=0.103
+insect   | models/polypizza/insects/honeycomb.glb                    | h=0.03  | l=1.229
+insect   | models/polypizza/insects/ladybird.glb                     | h=0.007 | l=0.031
+insect   | models/polypizza/insects/spider.glb                       | h=0.02  | l=0.061
+insect   | models/polypizza/insects/worm.glb                         | h=0.01  | l=0.01
+landform | models/kenney/nature-kit/cliff_blockCave_rock.glb         | h=2.635 | l=2.635
+landform | models/kenney/nature-kit/cliff_blockCave_stone.glb        | h=2.635 | l=2.635
+landform | models/kenney/nature-kit/cliff_blockDiagonal_rock.glb     | h=2.635 | l=2.635
+landform | models/kenney/nature-kit/cliff_blockDiagonal_stone.glb    | h=2.635 | l=2.635
+landform | models/kenney/nature-kit/cliff_blockHalf_rock.glb         | h=1.317 | l=2.635
+landform | models/kenney/nature-kit/cliff_blockHalf_stone.glb        | h=1.317 | l=2.635
+landform | models/kenney/nature-kit/cliff_blockQuarter_rock.glb      | h=0.659 | l=2.635
+landform | models/kenney/nature-kit/cliff_blockQuarter_stone.glb     | h=0.659 | l=2.635
+landform | models/kenney/nature-kit/cliff_blockSlopeHalfWalls_rock.glb| h=1.317 | l=2.635
+landform | models/kenney/nature-kit/cliff_blockSlopeHalfWalls_stone.glb| h=1.317 | l=2.635
+landform | models/kenney/nature-kit/cliff_blockSlopeWalls_rock.glb   | h=2.635 | l=2.635
+landform | models/kenney/nature-kit/cliff_blockSlopeWalls_stone.glb  | h=2.635 | l=2.635
+landform | models/kenney/nature-kit/cliff_blockSlope_rock.glb        | h=2.635 | l=3.162
+landform | models/kenney/nature-kit/cliff_blockSlope_stone.glb       | h=2.635 | l=3.162
+landform | models/kenney/nature-kit/cliff_block_rock.glb             | h=2.635 | l=2.635
+landform | models/kenney/nature-kit/cliff_block_stone.glb            | h=2.635 | l=2.635
+landform | models/kenney/nature-kit/cliff_cave_rock.glb              | h=2.635 | l=2.635
+landform | models/kenney/nature-kit/cliff_cave_stone.glb             | h=2.635 | l=2.635
+landform | models/kenney/nature-kit/cliff_cornerInnerLarge_rock.glb  | h=2.635 | l=2.635
+landform | models/kenney/nature-kit/cliff_cornerInnerLarge_stone.glb | h=2.635 | l=2.635
+landform | models/kenney/nature-kit/cliff_cornerInnerTop_rock.glb    | h=2.635 | l=2.635
+landform | models/kenney/nature-kit/cliff_cornerInnerTop_stone.glb   | h=2.635 | l=2.635
+landform | models/kenney/nature-kit/cliff_cornerInner_rock.glb       | h=2.635 | l=2.635
+landform | models/kenney/nature-kit/cliff_cornerInner_stone.glb      | h=2.635 | l=2.635
+landform | models/kenney/nature-kit/cliff_cornerLarge_rock.glb       | h=2.635 | l=1.103
+landform | models/kenney/nature-kit/cliff_cornerLarge_stone.glb      | h=2.635 | l=1.103
+landform | models/kenney/nature-kit/cliff_cornerTop_rock.glb         | h=2.635 | l=0.707
+landform | models/kenney/nature-kit/cliff_cornerTop_stone.glb        | h=2.635 | l=0.707
+landform | models/kenney/nature-kit/cliff_corner_rock.glb            | h=2.635 | l=0.444
+landform | models/kenney/nature-kit/cliff_corner_stone.glb           | h=2.635 | l=0.444
+landform | models/kenney/nature-kit/cliff_diagonal_rock.glb          | h=2.635 | l=3.079
+landform | models/kenney/nature-kit/cliff_diagonal_stone.glb         | h=2.635 | l=3.079
+landform | models/kenney/nature-kit/cliff_halfCornerInner_rock.glb   | h=1.317 | l=2.635
+landform | models/kenney/nature-kit/cliff_halfCornerInner_stone.glb  | h=1.317 | l=2.635
+landform | models/kenney/nature-kit/cliff_halfCorner_rock.glb        | h=1.317 | l=1.103
+landform | models/kenney/nature-kit/cliff_halfCorner_stone.glb       | h=1.317 | l=1.103
+landform | models/kenney/nature-kit/cliff_half_rock.glb              | h=1.317 | l=2.635
+landform | models/kenney/nature-kit/cliff_half_stone.glb             | h=1.317 | l=2.635
+landform | models/kenney/nature-kit/cliff_large_rock.glb             | h=2.635 | l=2.635
+landform | models/kenney/nature-kit/cliff_large_stone.glb            | h=2.635 | l=2.635
+landform | models/kenney/nature-kit/cliff_rock.glb                   | h=2.635 | l=2.635
+landform | models/kenney/nature-kit/cliff_stepsCornerInner_rock.glb  | h=2.635 | l=2.635
+landform | models/kenney/nature-kit/cliff_stepsCornerInner_stone.glb | h=2.635 | l=2.635
+landform | models/kenney/nature-kit/cliff_stepsCorner_rock.glb       | h=2.635 | l=2.767
+landform | models/kenney/nature-kit/cliff_stepsCorner_stone.glb      | h=2.635 | l=2.767
+landform | models/kenney/nature-kit/cliff_steps_rock.glb             | h=2.635 | l=2.767
+landform | models/kenney/nature-kit/cliff_steps_stone.glb            | h=2.635 | l=2.767
+landform | models/kenney/nature-kit/cliff_stone.glb                  | h=2.635 | l=2.635
+landform | models/kenney/nature-kit/cliff_topDiagonal_rock.glb       | h=2.635 | l=3.342
+landform | models/kenney/nature-kit/cliff_topDiagonal_stone.glb      | h=2.635 | l=3.342
+landform | models/kenney/nature-kit/cliff_top_rock.glb               | h=2.635 | l=2.635
+landform | models/kenney/nature-kit/cliff_top_stone.glb              | h=2.635 | l=2.635
+landform | models/kenney/nature-kit/cliff_waterfallTop_rock.glb      | h=2.635 | l=2.635
+landform | models/kenney/nature-kit/cliff_waterfallTop_stone.glb     | h=2.635 | l=2.635
+landform | models/kenney/nature-kit/cliff_waterfall_rock.glb         | h=2.635 | l=2.635
+landform | models/kenney/nature-kit/cliff_waterfall_stone.glb        | h=2.635 | l=2.635
+landform | models/kenney/space-kit/terrain_sideCliff.glb             | h=1.135 | l=2.269
+landform | models/quaternius/mountain.glb                            | h=8     | l=12
+landform | models/quaternius/mountain-group.glb                      | h=11    | l=14
+landform | models/quaternius/mountain-tall.glb                       | h=8     | l=12
+part     | models/kenney/car-kit/debris-bolt.glb                     | h=0.34  | l=0.262
+part     | models/kenney/car-kit/debris-bumper.glb                   | h=0.523 | l=1.7
+part     | models/kenney/car-kit/debris-door.glb                     | h=1.177 | l=1.046
+part     | models/kenney/car-kit/debris-door-window.glb              | h=1.177 | l=1.046
+part     | models/kenney/car-kit/debris-nut.glb                      | h=0.131 | l=0.262
+part     | models/kenney/car-kit/debris-plate-a.glb                  | h=0.131 | l=1.177
+part     | models/kenney/car-kit/debris-plate-b.glb                  | h=0.262 | l=1.177
+part     | models/kenney/car-kit/debris-plate-small-a.glb            | h=0.131 | l=0.588
+part     | models/kenney/car-kit/debris-plate-small-b.glb            | h=0.262 | l=0.588
+part     | models/kenney/car-kit/debris-spoiler-a.glb                | h=0.392 | l=1.438
+part     | models/kenney/car-kit/debris-spoiler-b.glb                | h=0.458 | l=1.308
+part     | models/kenney/car-kit/debris-tire.glb                     | h=0.785 | l=0.785
+part     | models/kenney/car-kit/wheel-dark.glb                      | h=0.785 | l=0.785
+part     | models/kenney/car-kit/wheel-default.glb                   | h=0.785 | l=0.785
+part     | models/kenney/car-kit/wheel-racing.glb                    | h=0.785 | l=0.785
+part     | models/kenney/car-kit/wheel-tractor-back.glb              | h=1.144 | l=1.144
+part     | models/kenney/car-kit/wheel-tractor-dark-back.glb         | h=1.144 | l=1.144
+part     | models/kenney/car-kit/wheel-tractor-dark-front.glb        | h=0.704 | l=0.704
+part     | models/kenney/car-kit/wheel-tractor-front.glb             | h=0.704 | l=0.704
+part     | models/kenney/car-kit/wheel-truck.glb                     | h=0.785 | l=0.785
+person   | models/kaykit/adventurers/Barbarian.glb                   | h=1.85  | l=2.295 | anim=2H_Melee_Idle,Idle,Jump_Idle,Lie_Idle,Sit_Chair_Idle,Sit_Floor_Idle,Unarmed_Idle,Walking_A,Walking_B,Walking_Backwards,Walking_C,Running_A,Running_B,Running_Strafe_Left,+62 more (index.json)
+person   | models/kaykit/adventurers/Knight.glb                      | h=1.85  | l=2.017 | anim=2H_Melee_Idle,Idle,Jump_Idle,Lie_Idle,Sit_Chair_Idle,Sit_Floor_Idle,Unarmed_Idle,Walking_A,Walking_B,Walking_Backwards,Walking_C,Running_A,Running_B,Running_Strafe_Left,+62 more (index.json)
+person   | models/kaykit/adventurers/Mage.glb                        | h=2.05  | l=1.737 | anim=2H_Melee_Idle,Idle,Jump_Idle,Lie_Idle,Sit_Chair_Idle,Sit_Floor_Idle,Unarmed_Idle,Walking_A,Walking_B,Walking_Backwards,Walking_C,Running_A,Running_B,Running_Strafe_Left,+62 more (index.json)
+person   | models/kaykit/adventurers/Rogue.glb                       | h=1.8   | l=2.424 | anim=2H_Melee_Idle,Idle,Jump_Idle,Lie_Idle,Sit_Chair_Idle,Sit_Floor_Idle,Unarmed_Idle,Walking_A,Walking_B,Walking_Backwards,Walking_C,Running_A,Running_B,Running_Strafe_Left,+62 more (index.json)
+person   | models/kaykit/adventurers/Rogue_Hooded.glb                | h=1.8   | l=2.355 | anim=2H_Melee_Idle,Idle,Jump_Idle,Lie_Idle,Sit_Chair_Idle,Sit_Floor_Idle,Unarmed_Idle,Walking_A,Walking_B,Walking_Backwards,Walking_C,Running_A,Running_B,Running_Strafe_Left,+62 more (index.json)
+plant    | models/kaykit/furniture/cactus_medium_A.gltf              | h=0.592 | l=0.629
+plant    | models/kaykit/furniture/cactus_medium_B.gltf              | h=0.592 | l=0.629
+plant    | models/kaykit/furniture/cactus_small_A.gltf               | h=0.395 | l=0.358
+plant    | models/kaykit/furniture/cactus_small_B.gltf               | h=0.395 | l=0.358
+plant    | models/kenney/city-kit-suburban/planter.glb               | h=1.275 | l=2.879
+plant    | models/kenney/food-kit/cauliflower.glb                    | h=0.129 | l=0.169
+plant    | models/kenney/food-kit/eggplant.glb                       | h=0.17  | l=0.09
+plant    | models/kenney/food-kit/mushroom.glb                       | h=0.058 | l=0.06
+plant    | models/kenney/food-kit/mushroom-half.glb                  | h=0.058 | l=0.06
+plant    | models/kenney/furniture-kit/plantSmall1.glb               | h=0.268 | l=0.181
+plant    | models/kenney/furniture-kit/plantSmall2.glb               | h=0.268 | l=0.181
+plant    | models/kenney/furniture-kit/plantSmall3.glb               | h=0.278 | l=0.188
+plant    | models/kenney/furniture-kit/pottedPlant.glb               | h=1.252 | l=0.462
+plant    | models/kenney/nature-kit/cactus_short.glb                 | h=1.404 | l=0.9
+plant    | models/kenney/nature-kit/cactus_tall.glb                  | h=1.976 | l=1.044
+plant    | models/kenney/nature-kit/crop_carrot.glb                  | h=1.632 | l=0.904
+plant    | models/kenney/nature-kit/crop_melon.glb                   | h=0.917 | l=1.1
+plant    | models/kenney/nature-kit/crop_pumpkin.glb                 | h=0.88  | l=1.191
+plant    | models/kenney/nature-kit/crop_turnip.glb                  | h=1.741 | l=0.904
+plant    | models/kenney/nature-kit/crops_bambooStageA.glb           | h=1.447 | l=0.896
+plant    | models/kenney/nature-kit/crops_bambooStageB.glb           | h=2.345 | l=0.896
+plant    | models/kenney/nature-kit/crops_cornStageA.glb             | h=1.317 | l=0.802
+plant    | models/kenney/nature-kit/crops_cornStageB.glb             | h=2.635 | l=0.802
+plant    | models/kenney/nature-kit/crops_cornStageC.glb             | h=3.294 | l=0.802
+plant    | models/kenney/nature-kit/crops_cornStageD.glb             | h=3.294 | l=1.163
+plant    | models/kenney/nature-kit/crops_dirtDoubleRow.glb          | h=0.132 | l=2.635
+plant    | models/kenney/nature-kit/crops_dirtDoubleRowCorner.glb    | h=0.132 | l=2.471
+plant    | models/kenney/nature-kit/crops_dirtDoubleRowEnd.glb       | h=0.132 | l=2.471
+plant    | models/kenney/nature-kit/crops_dirtRow.glb                | h=0.132 | l=2.635
+plant    | models/kenney/nature-kit/crops_dirtRowCorner.glb          | h=0.132 | l=2.053
+plant    | models/kenney/nature-kit/crops_dirtRowEnd.glb             | h=0.132 | l=1.634
+plant    | models/kenney/nature-kit/crops_dirtSingle.glb             | h=0.263 | l=1.054
+plant    | models/kenney/nature-kit/crops_leafsStageA.glb            | h=1.125 | l=1.026
+plant    | models/kenney/nature-kit/crops_leafsStageB.glb            | h=1.784 | l=1.026
+plant    | models/kenney/nature-kit/crops_wheatStageA.glb            | h=0.883 | l=1.422
+plant    | models/kenney/nature-kit/crops_wheatStageB.glb            | h=1.409 | l=1.422
+plant    | models/kenney/nature-kit/flower_purpleA.glb               | h=0.639 | l=0.477
+plant    | models/kenney/nature-kit/flower_purpleB.glb               | h=0.549 | l=0.63
+plant    | models/kenney/nature-kit/flower_purpleC.glb               | h=0.481 | l=0.477
+plant    | models/kenney/nature-kit/flower_redA.glb                  | h=0.771 | l=0.477
+plant    | models/kenney/nature-kit/flower_redB.glb                  | h=0.681 | l=0.63
+plant    | models/kenney/nature-kit/flower_redC.glb                  | h=0.613 | l=0.477
+plant    | models/kenney/nature-kit/flower_yellowA.glb               | h=0.507 | l=0.477
+plant    | models/kenney/nature-kit/flower_yellowB.glb               | h=0.418 | l=0.63
+plant    | models/kenney/nature-kit/flower_yellowC.glb               | h=0.349 | l=0.477
+plant    | models/kenney/nature-kit/grass.glb                        | h=0.669 | l=1.033
+plant    | models/kenney/nature-kit/grass_large.glb                  | h=0.669 | l=1.078
+plant    | models/kenney/nature-kit/grass_leafs.glb                  | h=0.375 | l=0.678
+plant    | models/kenney/nature-kit/grass_leafsLarge.glb             | h=0.375 | l=1.284
+plant    | models/kenney/nature-kit/mushroom_red.glb                 | h=0.534 | l=0.529
+plant    | models/kenney/nature-kit/mushroom_redGroup.glb            | h=0.66  | l=0.71
+plant    | models/kenney/nature-kit/mushroom_redTall.glb             | h=0.66  | l=0.376
+plant    | models/kenney/nature-kit/mushroom_tan.glb                 | h=0.405 | l=0.582
+plant    | models/kenney/nature-kit/mushroom_tanGroup.glb            | h=0.66  | l=0.71
+plant    | models/kenney/nature-kit/mushroom_tanTall.glb             | h=0.66  | l=0.376
+plant    | models/kenney/nature-kit/plant_bush.glb                   | h=0.644 | l=1.043
+plant    | models/kenney/nature-kit/plant_bushDetailed.glb           | h=0.95  | l=1.588
+plant    | models/kenney/nature-kit/plant_bushLarge.glb              | h=0.64  | l=0.986
+plant    | models/kenney/nature-kit/plant_bushLargeTriangle.glb      | h=0.446 | l=1.24
+plant    | models/kenney/nature-kit/plant_bushSmall.glb              | h=0.546 | l=1.009
+plant    | models/kenney/nature-kit/plant_bushTriangle.glb           | h=0.779 | l=1.09
+plant    | models/kenney/nature-kit/plant_flatShort.glb              | h=0.619 | l=0.731
+plant    | models/kenney/nature-kit/plant_flatTall.glb               | h=0.749 | l=0.716
+plant    | models/polypizza/insects/bee-on-flower.glb                | h=0.15  | l=0.116
+plant    | models/quaternius/farm/Apple_Crop.obj                     | h=0.224 | l=0.211
+plant    | models/quaternius/farm/Bamboo_Crop.obj                    | h=0.435 | l=0.132
+plant    | models/quaternius/farm/Beet_Crop.obj                      | h=0.692 | l=0.42
+plant    | models/quaternius/farm/BushBerries_1.obj                  | h=0.47  | l=0.345
+plant    | models/quaternius/farm/BushBerries_2.obj                  | h=0.673 | l=0.789
+plant    | models/quaternius/farm/BushBerries_3.obj                  | h=0.99  | l=1.697
+plant    | models/quaternius/farm/BushBerries_4.obj                  | h=1.699 | l=2.289
+plant    | models/quaternius/farm/BushBerries_Crop.obj               | h=0.175 | l=0.225
+plant    | models/quaternius/farm/BushBerries_Harvested.obj          | h=1.659 | l=2.287
+plant    | models/quaternius/farm/Cactus_1.obj                       | h=0.222 | l=0.123
+plant    | models/quaternius/farm/Cactus_2.obj                       | h=0.503 | l=0.401
+plant    | models/quaternius/farm/Cactus_3.obj                       | h=0.961 | l=0.524
+plant    | models/quaternius/space/Bush_1.gltf                       | h=1.388 | l=1.824
+plant    | models/quaternius/space/Bush_2.gltf                       | h=0.895 | l=1.021
+plant    | models/quaternius/space/Bush_3.gltf                       | h=0.888 | l=1.043
+plant    | models/quaternius/space/Grass_1.gltf                      | h=0.555 | l=0.711
+plant    | models/quaternius/space/Grass_2.gltf                      | h=0.786 | l=0.954
+plant    | models/quaternius/space/Grass_3.gltf                      | h=1.333 | l=1.246
+plant    | models/quaternius/space/Plant_1.gltf                      | h=1.221 | l=1.01
+plant    | models/quaternius/space/Plant_2.gltf                      | h=1.106 | l=0.592
+plant    | models/quaternius/space/Plant_3.gltf                      | h=1.668 | l=1.188
+prop     | models/kenney/car-kit/box.glb                             | h=0.935 | l=0.935
+prop     | models/kenney/car-kit/cone.glb                            | h=0.778 | l=0.623
+prop     | models/kenney/car-kit/cone-flat.glb                       | h=0.367 | l=0.623
+prop     | models/kenney/city-kit-suburban/fence.glb                 | h=1.944 | l=3.419
+prop     | models/kenney/city-kit-suburban/fence-1x2.glb             | h=1.944 | l=6.298
+prop     | models/kenney/city-kit-suburban/fence-1x3.glb             | h=1.944 | l=9.178
+prop     | models/kenney/city-kit-suburban/fence-1x4.glb             | h=1.944 | l=12.057
+prop     | models/kenney/city-kit-suburban/fence-2x2.glb             | h=1.944 | l=6.298
+prop     | models/kenney/city-kit-suburban/fence-2x3.glb             | h=1.944 | l=9.178
+prop     | models/kenney/city-kit-suburban/fence-3x2.glb             | h=1.944 | l=8.908
+prop     | models/kenney/city-kit-suburban/fence-3x3.glb             | h=1.944 | l=9.178
+prop     | models/kenney/city-kit-suburban/fence-low.glb             | h=1.224 | l=9.178
+prop     | models/kenney/nature-kit/bed.glb                          | h=0.721 | l=1.969
+prop     | models/kenney/nature-kit/bed_floor.glb                    | h=0.243 | l=1.969
+prop     | models/kenney/nature-kit/bridge_center_stone.glb          | h=0.79  | l=2.635
+prop     | models/kenney/nature-kit/bridge_center_stoneRound.glb     | h=0.527 | l=2.635
+prop     | models/kenney/nature-kit/bridge_center_wood.glb           | h=0.79  | l=2.635
+prop     | models/kenney/nature-kit/bridge_center_woodRound.glb      | h=0.527 | l=2.635
+prop     | models/kenney/nature-kit/bridge_side_stone.glb            | h=1.054 | l=2.74
+prop     | models/kenney/nature-kit/bridge_side_stoneRound.glb       | h=1.186 | l=2.74
+prop     | models/kenney/nature-kit/bridge_side_wood.glb             | h=1.054 | l=2.74
+prop     | models/kenney/nature-kit/bridge_side_woodRound.glb        | h=1.186 | l=2.74
+prop     | models/kenney/nature-kit/bridge_stone.glb                 | h=1.054 | l=2.74
+prop     | models/kenney/nature-kit/bridge_stoneNarrow.glb           | h=0.922 | l=2.74
+prop     | models/kenney/nature-kit/bridge_stoneRound.glb            | h=1.186 | l=2.74
+prop     | models/kenney/nature-kit/bridge_stoneRoundNarrow.glb      | h=1.054 | l=2.74
+prop     | models/kenney/nature-kit/bridge_wood.glb                  | h=1.054 | l=2.74
+prop     | models/kenney/nature-kit/bridge_woodNarrow.glb            | h=0.922 | l=2.74
+prop     | models/kenney/nature-kit/bridge_woodRound.glb             | h=1.186 | l=2.74
+prop     | models/kenney/nature-kit/bridge_woodRoundNarrow.glb       | h=1.054 | l=2.74
+prop     | models/kenney/nature-kit/campfire_bricks.glb              | h=0.178 | l=1.236
+prop     | models/kenney/nature-kit/campfire_logs.glb                | h=0.165 | l=0.769
+prop     | models/kenney/nature-kit/campfire_planks.glb              | h=0.105 | l=0.922
+prop     | models/kenney/nature-kit/campfire_stones.glb              | h=0.205 | l=1.425
+prop     | models/kenney/nature-kit/fence_bend.glb                   | h=0.909 | l=2.635
+prop     | models/kenney/nature-kit/fence_bendCenter.glb             | h=0.909 | l=2.635
+prop     | models/kenney/nature-kit/fence_corner.glb                 | h=0.909 | l=2.635
+prop     | models/kenney/nature-kit/fence_gate.glb                   | h=0.909 | l=2.635
+prop     | models/kenney/nature-kit/fence_planks.glb                 | h=0.909 | l=2.635
+prop     | models/kenney/nature-kit/fence_planksDouble.glb           | h=0.909 | l=2.635
+prop     | models/kenney/nature-kit/fence_simple.glb                 | h=0.909 | l=2.635
+prop     | models/kenney/nature-kit/fence_simpleCenter.glb           | h=0.909 | l=2.635
+prop     | models/kenney/nature-kit/fence_simpleDiagonal.glb         | h=0.909 | l=2.635
+prop     | models/kenney/nature-kit/fence_simpleDiagonalCenter.glb   | h=0.909 | l=2.635
+prop     | models/kenney/nature-kit/fence_simpleHigh.glb             | h=0.909 | l=2.743
+prop     | models/kenney/nature-kit/fence_simpleLow.glb              | h=0.514 | l=2.743
+prop     | models/kenney/nature-kit/hanging_moss.glb                 | h=1.261 | l=0.421
+prop     | models/kenney/nature-kit/lily_large.glb                   | h=0.258 | l=0.827
+prop     | models/kenney/nature-kit/lily_small.glb                   | h=0.105 | l=0.574
+prop     | models/kenney/nature-kit/log.glb                          | h=0.456 | l=1.871
+prop     | models/kenney/nature-kit/log_large.glb                    | h=1.098 | l=2.635
+prop     | models/kenney/nature-kit/log_stack.glb                    | h=0.913 | l=1.871
+prop     | models/kenney/nature-kit/log_stackLarge.glb               | h=0.913 | l=1.871
+prop     | models/kenney/nature-kit/pot_large.glb                    | h=0.527 | l=1.485
+prop     | models/kenney/nature-kit/pot_small.glb                    | h=0.706 | l=0.852
+prop     | models/kenney/nature-kit/sign.glb                         | h=1.077 | l=0.79
+prop     | models/kenney/nature-kit/statue_block.glb                 | h=1.054 | l=1.054
+prop     | models/kenney/nature-kit/statue_column.glb                | h=2.635 | l=0.79
+prop     | models/kenney/nature-kit/statue_columnDamaged.glb         | h=1.844 | l=0.79
+prop     | models/kenney/nature-kit/statue_head.glb                  | h=2.635 | l=1.913
+prop     | models/kenney/nature-kit/statue_obelisk.glb               | h=2.307 | l=0.809
+prop     | models/kenney/nature-kit/statue_ring.glb                  | h=2.098 | l=1.581
+prop     | models/kenney/nature-kit/stump_old.glb                    | h=0.702 | l=0.978
+prop     | models/kenney/nature-kit/stump_oldTall.glb                | h=1.756 | l=0.978
+prop     | models/kenney/nature-kit/stump_round.glb                  | h=0.544 | l=0.978
+prop     | models/kenney/nature-kit/stump_roundDetailed.glb          | h=0.544 | l=0.978
+prop     | models/kenney/nature-kit/stump_square.glb                 | h=0.79  | l=0.947
+prop     | models/kenney/nature-kit/stump_squareDetailed.glb         | h=0.527 | l=1.159
+prop     | models/kenney/nature-kit/stump_squareDetailedWide.glb     | h=0.527 | l=1.686
+prop     | models/kenney/nature-kit/tent_detailedClosed.glb          | h=1.478 | l=2.305
+prop     | models/kenney/nature-kit/tent_detailedOpen.glb            | h=1.478 | l=2.305
+prop     | models/kenney/nature-kit/tent_smallClosed.glb             | h=1.478 | l=1.677
+prop     | models/kenney/nature-kit/tent_smallOpen.glb               | h=1.478 | l=1.756
+prop     | models/kenney/train-kit/train-carriage-flatbed.glb        | h=2.935 | l=6.833
+prop     | models/kenney/train-kit/train-carriage-flatbed-wood.glb   | h=2.935 | l=6.833
+prop     | models/kenney/watercraft-kit/arrow.glb                    | h=0.655 | l=3.274
+prop     | models/kenney/watercraft-kit/arrow-standing.glb           | h=2.183 | l=3.274
+prop     | models/kenney/watercraft-kit/buoy.glb                     | h=2.013 | l=1.013
+prop     | models/kenney/watercraft-kit/buoy-flag.glb                | h=2.966 | l=1.407
+prop     | models/kenney/watercraft-kit/cargo-container-a.glb        | h=1.205 | l=3.013
+prop     | models/kenney/watercraft-kit/cargo-container-b.glb        | h=1.205 | l=3.013
+prop     | models/kenney/watercraft-kit/cargo-container-c.glb        | h=1.205 | l=3.013
+prop     | models/kenney/watercraft-kit/cargo-pile-a.glb             | h=1.31  | l=3.004
+prop     | models/kenney/watercraft-kit/cargo-pile-b.glb             | h=1.31  | l=3.325
+prop     | models/kenney/watercraft-kit/gate.glb                     | h=5.075 | l=6.767
+prop     | models/kenney/watercraft-kit/gate-finish.glb              | h=5.075 | l=6.767
+prop     | models/kenney/watercraft-kit/ramp.glb                     | h=1.241 | l=3.072
+prop     | models/kenney/watercraft-kit/ramp-wide.glb                | h=1.241 | l=5.615
+prop     | library/props/toy-compass.tsx                             | h=0.08  | l= | code
+rock     | models/kenney/castle-kit/rocks-large.glb                  | h=1.527 | l=4.116
+rock     | models/kenney/castle-kit/rocks-small.glb                  | h=1.527 | l=3.375
+rock     | models/kenney/castle-kit/stairs-stone.glb                 | h=2.061 | l=2.501
+rock     | models/kenney/castle-kit/stairs-stone-square.glb          | h=2.061 | l=2.501
+rock     | models/kenney/nature-kit/rock_largeA.glb                  | h=0.684 | l=2.676
+rock     | models/kenney/nature-kit/rock_largeB.glb                  | h=1.134 | l=2.676
+rock     | models/kenney/nature-kit/rock_largeC.glb                  | h=0.846 | l=2.805
+rock     | models/kenney/nature-kit/rock_largeD.glb                  | h=1.497 | l=2.816
+rock     | models/kenney/nature-kit/rock_largeE.glb                  | h=0.77  | l=2.886
+rock     | models/kenney/nature-kit/rock_largeF.glb                  | h=1.262 | l=2.886
+rock     | models/kenney/nature-kit/rock_smallA.glb                  | h=0.504 | l=0.951
+rock     | models/kenney/nature-kit/rock_smallB.glb                  | h=0.466 | l=0.951
+rock     | models/kenney/nature-kit/rock_smallC.glb                  | h=0.323 | l=0.951
+rock     | models/kenney/nature-kit/rock_smallD.glb                  | h=0.608 | l=1.122
+rock     | models/kenney/nature-kit/rock_smallE.glb                  | h=0.675 | l=0.951
+rock     | models/kenney/nature-kit/rock_smallF.glb                  | h=0.646 | l=0.932
+rock     | models/kenney/nature-kit/rock_smallFlatA.glb              | h=0.171 | l=1.306
+rock     | models/kenney/nature-kit/rock_smallFlatB.glb              | h=0.171 | l=1.132
+rock     | models/kenney/nature-kit/rock_smallFlatC.glb              | h=0.171 | l=1.239
+rock     | models/kenney/nature-kit/rock_smallG.glb                  | h=0.646 | l=1.806
+rock     | models/kenney/nature-kit/rock_smallH.glb                  | h=1.073 | l=1.217
+rock     | models/kenney/nature-kit/rock_smallI.glb                  | h=0.732 | l=1.09
+rock     | models/kenney/nature-kit/rock_smallTopA.glb               | h=0.58  | l=1.289
+rock     | models/kenney/nature-kit/rock_smallTopB.glb               | h=0.738 | l=1.703
+rock     | models/kenney/nature-kit/rock_tallA.glb                   | h=2.624 | l=2.59
+rock     | models/kenney/nature-kit/rock_tallB.glb                   | h=2.329 | l=2.029
+rock     | models/kenney/nature-kit/rock_tallC.glb                   | h=2.063 | l=1.202
+rock     | models/kenney/nature-kit/rock_tallD.glb                   | h=2.034 | l=1.216
+rock     | models/kenney/nature-kit/rock_tallE.glb                   | h=1.169 | l=1.388
+rock     | models/kenney/nature-kit/rock_tallF.glb                   | h=1.512 | l=1.35
+rock     | models/kenney/nature-kit/rock_tallG.glb                   | h=2.063 | l=1.293
+rock     | models/kenney/nature-kit/rock_tallH.glb                   | h=1.873 | l=1.749
+rock     | models/kenney/nature-kit/rock_tallI.glb                   | h=2.139 | l=1.223
+rock     | models/kenney/nature-kit/rock_tallJ.glb                   | h=1.634 | l=1.418
+rock     | models/kenney/nature-kit/stone_largeA.glb                 | h=0.684 | l=2.676
+rock     | models/kenney/nature-kit/stone_largeB.glb                 | h=1.134 | l=2.676
+rock     | models/kenney/nature-kit/stone_largeC.glb                 | h=0.846 | l=2.805
+rock     | models/kenney/nature-kit/stone_largeD.glb                 | h=1.497 | l=2.816
+rock     | models/kenney/nature-kit/stone_largeE.glb                 | h=0.77  | l=2.886
+rock     | models/kenney/nature-kit/stone_largeF.glb                 | h=1.262 | l=2.886
+rock     | models/kenney/nature-kit/stone_smallA.glb                 | h=0.504 | l=0.951
+rock     | models/kenney/nature-kit/stone_smallB.glb                 | h=0.466 | l=0.951
+rock     | models/kenney/nature-kit/stone_smallC.glb                 | h=0.323 | l=0.951
+rock     | models/kenney/nature-kit/stone_smallD.glb                 | h=0.608 | l=1.122
+rock     | models/kenney/nature-kit/stone_smallE.glb                 | h=0.675 | l=0.951
+rock     | models/kenney/nature-kit/stone_smallF.glb                 | h=0.646 | l=0.932
+rock     | models/kenney/nature-kit/stone_smallFlatA.glb             | h=0.171 | l=1.306
+rock     | models/kenney/nature-kit/stone_smallFlatB.glb             | h=0.171 | l=1.132
+rock     | models/kenney/nature-kit/stone_smallFlatC.glb             | h=0.171 | l=1.239
+rock     | models/kenney/nature-kit/stone_smallG.glb                 | h=0.646 | l=1.806
+rock     | models/kenney/nature-kit/stone_smallH.glb                 | h=1.073 | l=1.217
+rock     | models/kenney/nature-kit/stone_smallI.glb                 | h=0.732 | l=1.09
+rock     | models/kenney/nature-kit/stone_smallTopA.glb              | h=0.58  | l=1.289
+rock     | models/kenney/nature-kit/stone_smallTopB.glb              | h=0.738 | l=1.703
+rock     | models/kenney/nature-kit/stone_tallA.glb                  | h=2.624 | l=2.59
+rock     | models/kenney/nature-kit/stone_tallB.glb                  | h=2.329 | l=2.029
+rock     | models/kenney/nature-kit/stone_tallC.glb                  | h=2.063 | l=1.202
+rock     | models/kenney/nature-kit/stone_tallD.glb                  | h=2.034 | l=1.216
+rock     | models/kenney/nature-kit/stone_tallE.glb                  | h=1.169 | l=1.388
+rock     | models/kenney/nature-kit/stone_tallF.glb                  | h=1.512 | l=1.35
+rock     | models/kenney/nature-kit/stone_tallG.glb                  | h=2.063 | l=1.293
+rock     | models/kenney/nature-kit/stone_tallH.glb                  | h=1.873 | l=1.749
+rock     | models/kenney/nature-kit/stone_tallI.glb                  | h=2.139 | l=1.223
+rock     | models/kenney/nature-kit/stone_tallJ.glb                  | h=1.634 | l=1.418
+rock     | models/kenney/space-kit/rock.glb                          | h=0.681 | l=1.931
+rock     | models/kenney/space-kit/rock_crystals.glb                 | h=0.766 | l=1.931
+rock     | models/kenney/space-kit/rock_crystalsLargeA.glb           | h=1.228 | l=2.086
+rock     | models/kenney/space-kit/rock_crystalsLargeB.glb           | h=1.248 | l=2.132
+rock     | models/kenney/space-kit/rock_largeA.glb                   | h=1.135 | l=2.086
+rock     | models/kenney/space-kit/rock_largeB.glb                   | h=1.135 | l=2.132
+rock     | models/kenney/space-kit/rocket_baseA.glb                  | h=3.631 | l=4.085
+rock     | models/kenney/space-kit/rocket_baseB.glb                  | h=2.95  | l=4.085
+rock     | models/kenney/space-kit/rocket_finsA.glb                  | h=1.589 | l=2.723
+rock     | models/kenney/space-kit/rocket_finsB.glb                  | h=1.589 | l=2.723
+rock     | models/kenney/space-kit/rocket_fuelA.glb                  | h=1.135 | l=2.269
+rock     | models/kenney/space-kit/rocket_fuelB.glb                  | h=2.269 | l=2.269
+rock     | models/kenney/space-kit/rocket_sidesA.glb                 | h=2.269 | l=2.269
+rock     | models/kenney/space-kit/rocket_sidesB.glb                 | h=2.269 | l=2.95
+rock     | models/kenney/space-kit/rocket_topA.glb                   | h=1.815 | l=2.269
+rock     | models/kenney/space-kit/rocket_topB.glb                   | h=2.496 | l=2.269
+rock     | models/kenney/space-kit/rocks_smallA.glb                  | h=0.238 | l=2.127
+rock     | models/kenney/space-kit/rocks_smallB.glb                  | h=0.422 | l=1.654
+rock     | models/quaternius/rock.glb                                | h=1.0   | l=1.4
+rock     | models/quaternius/rocks.glb                               | h=0.7   | l=1.6
+rock     | models/quaternius/space/Rock_1.gltf                       | h=2.022 | l=1.734
+rock     | models/quaternius/space/Rock_2.gltf                       | h=1.519 | l=1.536
+rock     | models/quaternius/space/Rock_3.gltf                       | h=2.147 | l=1.85
+rock     | models/quaternius/space/Rock_4.gltf                       | h=1.94  | l=1.208
+rock     | models/quaternius/space/Rock_Large_1.gltf                 | h=1.842 | l=4.297
+rock     | models/quaternius/space/Rock_Large_2.gltf                 | h=4.597 | l=4.786
+rock     | models/quaternius/space/Rock_Large_3.gltf                 | h=4.161 | l=2.977
+space    | models/kenney/space-kit/alien.glb                         | h=1.913 | l=1.097
+space    | models/kenney/space-kit/astronautA.glb                    | h=1.8   | l=1.097
+space    | models/kenney/space-kit/astronautB.glb                    | h=1.8   | l=1.097
+space    | models/kenney/space-kit/barrel.glb                        | h=0.567 | l=0.454
+space    | models/kenney/space-kit/barrels.glb                       | h=0.794 | l=1.248
+space    | models/kenney/space-kit/barrels_rail.glb                  | h=0.794 | l=1.248
+space    | models/kenney/space-kit/bones.glb                         | h=1.003 | l=1.955
+space    | models/kenney/space-kit/chimney.glb                       | h=4.539 | l=0.908
+space    | models/kenney/space-kit/chimney_detailed.glb              | h=4.539 | l=0.908
+space    | models/kenney/space-kit/corridor.glb                      | h=2.269 | l=2.269
+space    | models/kenney/space-kit/corridor_corner.glb               | h=2.269 | l=2.269
+space    | models/kenney/space-kit/corridor_cornerRound.glb          | h=2.269 | l=2.269
+space    | models/kenney/space-kit/corridor_cornerRoundWindow.glb    | h=2.269 | l=2.269
+space    | models/kenney/space-kit/corridor_cross.glb                | h=2.269 | l=2.269
+space    | models/kenney/space-kit/corridor_detailed.glb             | h=2.496 | l=2.723
+space    | models/kenney/space-kit/corridor_end.glb                  | h=2.269 | l=2.269
+space    | models/kenney/space-kit/corridor_open.glb                 | h=2.269 | l=2.269
+space    | models/kenney/space-kit/corridor_roof.glb                 | h=0.548 | l=2.269
+space    | models/kenney/space-kit/corridor_split.glb                | h=2.269 | l=2.269
+space    | models/kenney/space-kit/corridor_wall.glb                 | h=1.815 | l=2.269
+space    | models/kenney/space-kit/corridor_wallCorner.glb           | h=1.815 | l=2.269
+space    | models/kenney/space-kit/corridor_window.glb               | h=2.269 | l=2.269
+space    | models/kenney/space-kit/corridor_windowClosed.glb         | h=2.269 | l=2.269
+space    | models/kenney/space-kit/craft_cargoA.glb                  | h=1.815 | l=5.56
+space    | models/kenney/space-kit/craft_cargoB.glb                  | h=2.042 | l=5.673
+space    | models/kenney/space-kit/craft_miner.glb                   | h=1.589 | l=5.9
+space    | models/kenney/space-kit/craft_speederA.glb                | h=1.815 | l=4.766
+space    | models/kenney/space-kit/craft_speederB.glb                | h=1.362 | l=4.597
+space    | models/kenney/space-kit/craft_speederC.glb                | h=1.362 | l=6.354
+space    | models/kenney/space-kit/craft_speederD.glb                | h=2.042 | l=6.354
+space    | models/kenney/space-kit/crater.glb                        | h=0.267 | l=1.874
+space    | models/kenney/space-kit/craterLarge.glb                   | h=0.272 | l=2.011
+space    | models/kenney/space-kit/desk_chair.glb                    | h=0.667 | l=0.34
+space    | models/kenney/space-kit/desk_chairArms.glb                | h=0.78  | l=0.567
+space    | models/kenney/space-kit/desk_chairStool.glb               | h=0.383 | l=0.34
+space    | models/kenney/space-kit/desk_computer.glb                 | h=0.851 | l=1.191
+space    | models/kenney/space-kit/desk_computerCorner.glb           | h=0.851 | l=1.702
+space    | models/kenney/space-kit/desk_computerScreen.glb           | h=1.447 | l=1.191
+space    | models/kenney/space-kit/gate_complex.glb                  | h=2.299 | l=2.269
+space    | models/kenney/space-kit/gate_simple.glb                   | h=2.451 | l=2.269
+space    | models/kenney/space-kit/hangar_largeA.glb                 | h=2.269 | l=6.808
+space    | models/kenney/space-kit/hangar_largeB.glb                 | h=2.496 | l=6.808
+space    | models/kenney/space-kit/hangar_roundA.glb                 | h=3.404 | l=7.424
+space    | models/kenney/space-kit/hangar_roundB.glb                 | h=4.085 | l=7.424
+space    | models/kenney/space-kit/hangar_roundGlass.glb             | h=3.177 | l=7.424
+space    | models/kenney/space-kit/hangar_smallA.glb                 | h=2.269 | l=4.539
+space    | models/kenney/space-kit/hangar_smallB.glb                 | h=2.269 | l=4.539
+space    | models/kenney/space-kit/machine_barrel.glb                | h=1.362 | l=1.467
+space    | models/kenney/space-kit/machine_barrelLarge.glb           | h=1.362 | l=1.712
+space    | models/kenney/space-kit/machine_generator.glb             | h=0.908 | l=1.589
+space    | models/kenney/space-kit/machine_generatorLarge.glb        | h=1.55  | l=2.95
+space    | models/kenney/space-kit/machine_wireless.glb              | h=1.362 | l=1.702
+space    | models/kenney/space-kit/machine_wirelessCable.glb         | h=1.815 | l=1.702
+space    | models/kenney/space-kit/meteor.glb                        | h=1.668 | l=1.965
+space    | models/kenney/space-kit/meteor_detailed.glb               | h=1.668 | l=1.965
+space    | models/kenney/space-kit/meteor_half.glb                   | h=0.834 | l=1.965
+space    | models/kenney/space-kit/pipe_corner.glb                   | h=1.362 | l=1.921
+space    | models/kenney/space-kit/pipe_cornerDiagonal.glb           | h=1.362 | l=1.921
+space    | models/kenney/space-kit/pipe_cornerRound.glb              | h=1.362 | l=1.921
+space    | models/kenney/space-kit/pipe_cornerRoundLarge.glb         | h=1.362 | l=4.19
+space    | models/kenney/space-kit/pipe_cross.glb                    | h=1.362 | l=2.269
+space    | models/kenney/space-kit/pipe_end.glb                      | h=1.362 | l=2.269
+space    | models/kenney/space-kit/pipe_entrance.glb                 | h=1.815 | l=2.096
+space    | models/kenney/space-kit/pipe_open.glb                     | h=1.362 | l=2.269
+space    | models/kenney/space-kit/pipe_rampLarge.glb                | h=2.723 | l=4.539
+space    | models/kenney/space-kit/pipe_rampSmall.glb                | h=2.042 | l=4.539
+space    | models/kenney/space-kit/pipe_ring.glb                     | h=1.815 | l=2.269
+space    | models/kenney/space-kit/pipe_ringHigh.glb                 | h=2.95  | l=2.269
+space    | models/kenney/space-kit/pipe_ringHighEnd.glb              | h=2.95  | l=2.096
+space    | models/kenney/space-kit/pipe_ringSupport.glb              | h=2.95  | l=2.096
+space    | models/kenney/space-kit/pipe_split.glb                    | h=1.362 | l=2.269
+space    | models/kenney/space-kit/pipe_straight.glb                 | h=1.362 | l=2.269
+space    | models/kenney/space-kit/pipe_supportHigh.glb              | h=2.269 | l=0.908
+space    | models/kenney/space-kit/pipe_supportLow.glb               | h=1.135 | l=0.908
+space    | models/kenney/space-kit/rail.glb                          | h=0.567 | l=1.815
+space    | models/kenney/space-kit/rail_corner.glb                   | h=0.567 | l=2.042
+space    | models/kenney/space-kit/rail_end.glb                      | h=0.567 | l=2.042
+space    | models/kenney/space-kit/rail_middle.glb                   | h=0.567 | l=2.269
+space    | models/kenney/space-kit/rover.glb                         | h=0.874 | l=0.794
+space    | models/kenney/space-kit/satelliteDish.glb                 | h=1.399 | l=1.562
+space    | models/kenney/space-kit/satelliteDish_detailed.glb        | h=1.399 | l=1.589
+space    | models/kenney/space-kit/satelliteDish_large.glb           | h=1.848 | l=1.926
+space    | models/kenney/space-kit/stairs.glb                        | h=1.135 | l=1.589
+space    | models/kenney/space-kit/stairs_corner.glb                 | h=1.135 | l=1.362
+space    | models/kenney/space-kit/stairs_short.glb                  | h=0.624 | l=0.908
+space    | models/kenney/space-kit/structure.glb                     | h=2.269 | l=2.269
+space    | models/kenney/space-kit/structure_closed.glb              | h=2.269 | l=2.269
+space    | models/kenney/space-kit/structure_detailed.glb            | h=2.269 | l=2.269
+space    | models/kenney/space-kit/structure_diagonal.glb            | h=2.269 | l=2.269
+space    | models/kenney/space-kit/supports_high.glb                 | h=2.269 | l=1.872
+space    | models/kenney/space-kit/supports_low.glb                  | h=1.135 | l=1.872
+space    | models/kenney/space-kit/terrain.glb                       | h=0.01  | l=2.269
+space    | models/kenney/space-kit/terrain_ramp.glb                  | h=1.135 | l=2.269
+space    | models/kenney/space-kit/terrain_rampLarge.glb             | h=1.135 | l=4.539
+space    | models/kenney/space-kit/terrain_rampLarge_detailed.glb    | h=1.135 | l=4.539
+space    | models/kenney/space-kit/terrain_roadCorner.glb            | h=0.01  | l=2.269
+space    | models/kenney/space-kit/terrain_roadCross.glb             | h=0.01  | l=2.269
+space    | models/kenney/space-kit/terrain_roadEnd.glb               | h=0.01  | l=2.269
+space    | models/kenney/space-kit/terrain_roadSplit.glb             | h=0.01  | l=2.269
+space    | models/kenney/space-kit/terrain_roadStraight.glb          | h=0.01  | l=2.269
+space    | models/kenney/space-kit/terrain_side.glb                  | h=1.135 | l=2.269
+space    | models/kenney/space-kit/terrain_sideCorner.glb            | h=1.135 | l=2.269
+space    | models/kenney/space-kit/terrain_sideCornerInner.glb       | h=1.135 | l=2.269
+space    | models/kenney/space-kit/terrain_sideEnd.glb               | h=1.135 | l=2.269
+space    | models/kenney/space-kit/turret_double.glb                 | h=1.589 | l=2.042
+space    | models/kenney/space-kit/turret_single.glb                 | h=2.042 | l=1.639
+space    | models/kenney/space-kit/weapon_gun.glb                    | h=0.511 | l=0.794
+space    | models/kenney/space-kit/weapon_rifle.glb                  | h=0.624 | l=1.135
+space    | models/quaternius/space/Astronaut_BarbaraTheBee.gltf      | h=1.8   | l=2.604 | anim=Idle,Idle_Gun,Jump_Idle,Walk,Walk_Gun,Run,Run_Gun,Run_Gun_Shoot,Death,Jump,Jump_Land,Wave,Punch,HitReact,+4 more (index.json)
+space    | models/quaternius/space/Astronaut_FernandoTheFlamingo.gltf| h=1.811 | l=2.604 | anim=Idle,Idle_Gun,Jump_Idle,Walk,Walk_Gun,Run,Run_Gun,Run_Gun_Shoot,Death,Jump,Jump_Land,Wave,Punch,HitReact,+4 more (index.json)
+space    | models/quaternius/space/Astronaut_FinnTheFrog.gltf        | h=1.741 | l=2.604 | anim=Idle,Idle_Gun,Jump_Idle,Walk,Walk_Gun,Run,Run_Gun,Run_Gun_Shoot,Death,Jump,Jump_Land,Wave,Punch,HitReact,+4 more (index.json)
+space    | models/quaternius/space/Astronaut_RaeTheRedPanda.gltf     | h=1.876 | l=2.604 | anim=Idle,Idle_Gun,Jump_Idle,Walk,Walk_Gun,Run,Run_Gun,Run_Gun_Shoot,Death,Jump,Jump_Land,Wave,Punch,HitReact,+4 more (index.json)
+space    | models/quaternius/space/Base_Large.gltf                   | h=2.785 | l=4.778
+space    | models/quaternius/space/Connector.gltf                    | h=1.24  | l=1.887
+space    | models/quaternius/space/Enemy_ExtraSmall.gltf             | h=0.94  | l=0.515 | anim=Flying_Idle,Death,Punch,HitReact,Fast_Flying,Headbutt,No,Yes
+space    | models/quaternius/space/Enemy_Flying.gltf                 | h=2.077 | l=0.704 | anim=Flying_Idle,Death,Punch,HitReact,Fast_Flying,Headbutt,No,Yes
+space    | models/quaternius/space/Enemy_Large.gltf                  | h=2.132 | l=2.604 | anim=Idle,Jump_Idle,Walk,Run,Death,Jump,Jump_Land,Wave,Punch,HitReact,Duck,No,Weapon,Yes
+space    | models/quaternius/space/Enemy_Small.gltf                  | h=1.317 | l=0.835 | anim=Flying_Idle,Death,Punch,HitReact,Fast_Flying,Headbutt,No,Yes
+space    | models/quaternius/space/GeodesicDome.gltf                 | h=2.958 | l=4.778
+space    | models/quaternius/space/House_Cylinder.gltf               | h=2.422 | l=3.142
+space    | models/quaternius/space/House_Long.gltf                   | h=2.412 | l=4.364
+space    | models/quaternius/space/House_Open.gltf                   | h=2.241 | l=2.237
+space    | models/quaternius/space/House_OpenBack.gltf               | h=2.241 | l=2.237
+space    | models/quaternius/space/House_Single.gltf                 | h=2.241 | l=2.237
+space    | models/quaternius/space/House_Single_Support.gltf         | h=0.489 | l=2.005
+space    | models/quaternius/space/Mech_BarbaraTheBee.gltf           | h=1.678 | l=1.632 | anim=Idle,Walk,Run,Death,Jump,Jump_Landing,Jump_NoHeight,Pickup,HitRecieve_1,HitRecieve_2,Dance,Hello,Kick,No,+3 more (index.json)
+space    | models/quaternius/space/Mech_FernandoTheFlamingo.gltf     | h=1.989 | l=1.512 | anim=Idle,Walk,Run,Death,Jump,Jump_Landing,Jump_NoHeight,Pickup,HitRecieve_1,HitRecieve_2,Dance,Hello,Kick,No,+3 more (index.json)
+space    | models/quaternius/space/Mech_FinnTheFrog.gltf             | h=1.716 | l=1.895 | anim=Idle,Walk,Run,Death,Jump,Jump_Landing,Jump_NoHeight,Pickup,HitRecieve_1,HitRecieve_2,Dance,Hello,Kick,No,+3 more (index.json)
+space    | models/quaternius/space/Mech_RaeTheRedPanda.gltf          | h=1.734 | l=1.512 | anim=Idle,Walk,Run,Death,Jump,Jump_Landing,Jump_NoHeight,Pickup,HitRecieve_1,HitRecieve_2,Dance,Hello,Kick,No,+3 more (index.json)
+space    | models/quaternius/space/MetalSupport.gltf                 | h=0.673 | l=3.336
+space    | models/quaternius/space/Pickup_Bullets.gltf               | h=0.472 | l=0.464
+space    | models/quaternius/space/Pickup_Crate.gltf                 | h=0.48  | l=0.504
+space    | models/quaternius/space/Pickup_Health.gltf                | h=0.562 | l=0.543
+space    | models/quaternius/space/Pickup_Jar.gltf                   | h=0.573 | l=0.388
+space    | models/quaternius/space/Pickup_KeyCard.gltf               | h=0.378 | l=0.584
+space    | models/quaternius/space/Pickup_Sphere.gltf                | h=0.496 | l=0.496
+space    | models/quaternius/space/Pickup_Thunder.gltf               | h=0.483 | l=0.545
+space    | models/quaternius/space/Planet_1.gltf                     | h=2.2   | l=2.131
+space    | models/quaternius/space/Planet_10.gltf                    | h=2.624 | l=3.213
+space    | models/quaternius/space/Planet_11.gltf                    | h=3.177 | l=3.218
+space    | models/quaternius/space/Planet_2.gltf                     | h=2.137 | l=2.151
+space    | models/quaternius/space/Planet_3.gltf                     | h=2.046 | l=2.031
+space    | models/quaternius/space/Planet_4.gltf                     | h=2.289 | l=2.516
+space    | models/quaternius/space/Planet_5.gltf                     | h=2.53  | l=2.372
+space    | models/quaternius/space/Planet_6.gltf                     | h=2.099 | l=2.105
+space    | models/quaternius/space/Planet_7.gltf                     | h=1.606 | l=2.693
+space    | models/quaternius/space/Planet_8.gltf                     | h=2.101 | l=2.098
+space    | models/quaternius/space/Planet_9.gltf                     | h=2.099 | l=2.141
+space    | models/quaternius/space/Ramp.gltf                         | h=0.78  | l=1.745
+space    | models/quaternius/space/Roof_Antenna.gltf                 | h=1.985 | l=0.803
+space    | models/quaternius/space/Roof_Opening.gltf                 | h=0.67  | l=0.803
+space    | models/quaternius/space/Roof_Radar.gltf                   | h=1.52  | l=0.924
+space    | models/quaternius/space/Roof_VentL.gltf                   | h=0.643 | l=0.803
+space    | models/quaternius/space/Roof_VentR.gltf                   | h=0.643 | l=0.803
+space    | models/quaternius/space/Rover_1.gltf                      | h=2.735 | l=2.89
+space    | models/quaternius/space/Rover_2.gltf                      | h=2.735 | l=3.676
+space    | models/quaternius/space/Rover_Round.gltf                  | h=2.895 | l=3.243
+space    | models/quaternius/space/SolarPanel_Roof.gltf              | h=0.953 | l=1.528
+space    | models/quaternius/space/SolarPanel_Structure.gltf         | h=1.719 | l=2.241
+space    | models/quaternius/space/Stairs.gltf                       | h=0.78  | l=1.745
+street   | models/kenney/city-kit-roads/bridge-pillar.glb            | h=4.5   | l=0.9
+street   | models/kenney/city-kit-roads/bridge-pillar-wide.glb       | h=4.5   | l=1.26
+street   | models/kenney/city-kit-roads/construction-barrier.glb     | h=1.17  | l=2.025
+street   | models/kenney/city-kit-roads/construction-cone.glb        | h=0.844 | l=0.675
+street   | models/kenney/city-kit-roads/construction-fence.glb       | h=1.609 | l=3.375
+street   | models/kenney/city-kit-roads/construction-light.glb       | h=2.104 | l=0.675
+street   | models/kenney/city-kit-roads/dumpster.glb                 | h=1.885 | l=3.33
+street   | models/kenney/city-kit-roads/electricity-pole.glb         | h=4.725 | l=5.212
+street   | models/kenney/city-kit-roads/electricity-pole-single.glb  | h=4.725 | l=1.928
+street   | models/kenney/city-kit-roads/electricity-pole-wide.glb    | h=4.725 | l=9.712
+street   | models/kenney/city-kit-roads/electricity-side.glb         | h=4.725 | l=5.071
+street   | models/kenney/city-kit-roads/electricity-side-single.glb  | h=4.725 | l=3.875
+street   | models/kenney/city-kit-roads/electricity-side-wide.glb    | h=4.725 | l=9.571
+street   | models/kenney/city-kit-roads/electricity-wires.glb        | h=0.582 | l=4.553
+street   | models/kenney/city-kit-roads/electricity-wires-wide.glb   | h=0.94  | l=9.065
+street   | models/kenney/city-kit-roads/light-curved.glb             | h=6.075 | l=2.025
+street   | models/kenney/city-kit-roads/light-curved-cross.glb       | h=6.075 | l=3.6
+street   | models/kenney/city-kit-roads/light-curved-double.glb      | h=6.075 | l=3.6
+street   | models/kenney/city-kit-roads/light-square.glb             | h=5.4   | l=2.138
+street   | models/kenney/city-kit-roads/light-square-cross.glb       | h=5.4   | l=3.825
+street   | models/kenney/city-kit-roads/light-square-double.glb      | h=5.4   | l=3.825
+street   | models/kenney/city-kit-roads/road-bend.glb                | h=0.18  | l=9.0
+street   | models/kenney/city-kit-roads/road-bend-barrier.glb        | h=0.72  | l=9.0
+street   | models/kenney/city-kit-roads/road-bend-sidewalk.glb       | h=0.18  | l=9.0
+street   | models/kenney/city-kit-roads/road-bend-square.glb         | h=0.18  | l=9.0
+street   | models/kenney/city-kit-roads/road-bend-square-barrier.glb | h=0.72  | l=9.0
+street   | models/kenney/city-kit-roads/road-bridge.glb              | h=4.68  | l=9.0
+street   | models/kenney/city-kit-roads/road-crossing.glb            | h=0.18  | l=9.0
+street   | models/kenney/city-kit-roads/road-crossroad.glb           | h=0.18  | l=9.0
+street   | models/kenney/city-kit-roads/road-crossroad-barrier.glb   | h=0.72  | l=9.0
+street   | models/kenney/city-kit-roads/road-crossroad-line.glb      | h=0.18  | l=9.0
+street   | models/kenney/city-kit-roads/road-curve.glb               | h=0.18  | l=18.0
+street   | models/kenney/city-kit-roads/road-curve-barrier.glb       | h=0.72  | l=18.0
+street   | models/kenney/city-kit-roads/road-curve-intersection.glb  | h=0.18  | l=18.0
+street   | models/kenney/city-kit-roads/road-curve-intersection-barrier.glb| h=0.72  | l=18.0
+street   | models/kenney/city-kit-roads/road-curve-pavement.glb      | h=0.18  | l=18.0
+street   | models/kenney/city-kit-roads/road-end.glb                 | h=0.18  | l=9.0
+street   | models/kenney/city-kit-roads/road-end-barrier.glb         | h=0.72  | l=9.0
+street   | models/kenney/city-kit-roads/road-end-round.glb           | h=0.18  | l=9.0
+street   | models/kenney/city-kit-roads/road-end-round-barrier.glb   | h=0.72  | l=9.0
+street   | models/kenney/city-kit-roads/road-intersection.glb        | h=0.18  | l=9.0
+street   | models/kenney/city-kit-roads/road-intersection-barrier.glb| h=0.72  | l=9.0
+street   | models/kenney/city-kit-roads/road-intersection-line.glb   | h=0.18  | l=9.0
+street   | models/kenney/city-kit-roads/road-roundabout.glb          | h=0.18  | l=27.0
+street   | models/kenney/city-kit-roads/road-roundabout-barrier.glb  | h=0.72  | l=27.0
+street   | models/kenney/city-kit-roads/road-side.glb                | h=0.18  | l=11.79
+street   | models/kenney/city-kit-roads/road-side-barrier.glb        | h=0.72  | l=11.79
+street   | models/kenney/city-kit-roads/road-side-entry.glb          | h=0.18  | l=11.79
+street   | models/kenney/city-kit-roads/road-side-entry-barrier.glb  | h=0.72  | l=11.79
+street   | models/kenney/city-kit-roads/road-side-exit.glb           | h=0.18  | l=11.79
+street   | models/kenney/city-kit-roads/road-side-exit-barrier.glb   | h=0.72  | l=11.79
+street   | models/kenney/city-kit-roads/road-sign-empty.glb          | h=4.275 | l=0.45
+street   | models/kenney/city-kit-roads/road-sign-empty-hanging.glb  | h=4.275 | l=2.655
+street   | models/kenney/city-kit-roads/road-sign-object-stop.glb    | h=1.131 | l=1.131
+street   | models/kenney/city-kit-roads/road-sign-object-warning.glb | h=1.204 | l=1.204
+street   | models/kenney/city-kit-roads/road-sign-stop.glb           | h=4.447 | l=1.244
+street   | models/kenney/city-kit-roads/road-sign-warning.glb        | h=4.487 | l=1.325
+street   | models/kenney/city-kit-roads/road-slant.glb               | h=2.43  | l=9.0
+street   | models/kenney/city-kit-roads/road-slant-barrier.glb       | h=2.97  | l=9.0
+street   | models/kenney/city-kit-roads/road-slant-curve.glb         | h=4.68  | l=18.0
+street   | models/kenney/city-kit-roads/road-slant-curve-barrier.glb | h=5.22  | l=18.0
+street   | models/kenney/city-kit-roads/road-slant-flat.glb          | h=2.43  | l=9.0
+street   | models/kenney/city-kit-roads/road-slant-flat-curve.glb    | h=4.68  | l=18.0
+street   | models/kenney/city-kit-roads/road-slant-flat-high.glb     | h=4.68  | l=9.0
+street   | models/kenney/city-kit-roads/road-slant-high.glb          | h=4.68  | l=9.0
+street   | models/kenney/city-kit-roads/road-slant-high-barrier.glb  | h=5.22  | l=9.0
+street   | models/kenney/city-kit-roads/road-split.glb               | h=0.18  | l=18.0
+street   | models/kenney/city-kit-roads/road-split-barrier.glb       | h=0.72  | l=18.0
+street   | models/kenney/city-kit-roads/road-square.glb              | h=0.18  | l=9.0
+street   | models/kenney/city-kit-roads/road-square-barrier.glb      | h=0.72  | l=9.0
+street   | models/kenney/city-kit-roads/road-straight.glb            | h=0.18  | l=9.0
+street   | models/kenney/city-kit-roads/road-straight-barrier.glb    | h=0.72  | l=9.0
+street   | models/kenney/city-kit-roads/road-straight-barrier-end.glb| h=0.72  | l=9.0
+street   | models/kenney/city-kit-roads/road-straight-barrier-half.glb| h=0.72  | l=9.0
+street   | models/kenney/city-kit-roads/road-straight-half.glb       | h=0.18  | l=9.0
+street   | models/kenney/city-kit-roads/sign-highway.glb             | h=6.366 | l=9.0
+street   | models/kenney/city-kit-roads/sign-highway-detailed.glb    | h=7.399 | l=9.0
+street   | models/kenney/city-kit-roads/sign-highway-wide.glb        | h=6.366 | l=9.0
+street   | models/kenney/city-kit-roads/tile-high.glb                | h=2.25  | l=9.0
+street   | models/kenney/city-kit-roads/tile-low.glb                 | h=0.18  | l=9.0
+street   | models/kenney/city-kit-roads/tile-slant.glb               | h=2.43  | l=9.0
+street   | models/kenney/city-kit-roads/tile-slantHigh.glb           | h=4.68  | l=9.0
+street   | models/kenney/city-kit-roads/traffic-light.glb            | h=4.635 | l=1.058
+street   | models/kenney/city-kit-roads/traffic-light-hanging.glb    | h=4.582 | l=2.655
+street   | models/kenney/city-kit-roads/traffic-light-object-hanging.glb| h=1.289 | l=0.878
+street   | models/kenney/city-kit-roads/traffic-light-object-horizontal.glb| h=0.55  | l=1.289
+street   | models/kenney/city-kit-roads/traffic-light-object-vertical.glb| h=1.289 | l=0.878
+street   | library/props/bus-stop.tsx                                | h=2.9   | l= | code
+street   | library/props/traffic-signal.tsx                          | h=3.2   | l= | code
+tool     | library/props/hay-fork.tsx                                | h=1.5   | l= | code
+tool     | library/props/stopwatch.tsx                               | h=2.6   | l= | code
+track    | models/kenney/furniture-kit/coatRack.glb                  | h=0.536 | l=0.858
+track    | models/kenney/furniture-kit/coatRackStanding.glb          | h=1.474 | l=0.522
+track    | models/kenney/space-kit/monorail_trackCornerLarge.glb     | h=0.295 | l=3.631
+track    | models/kenney/space-kit/monorail_trackCornerSmall.glb     | h=0.295 | l=1.362
+track    | models/kenney/space-kit/monorail_trackSlope.glb           | h=1.43  | l=2.269
+track    | models/kenney/space-kit/monorail_trackStraight.glb        | h=0.295 | l=2.269
+track    | models/kenney/space-kit/monorail_trackSupport.glb         | h=1.135 | l=0.454
+track    | models/kenney/space-kit/monorail_trackSupportCorner.glb   | h=1.135 | l=0.454
+track    | models/kenney/train-kit/railroad-corner-large.glb         | h=0.253 | l=11.357
+track    | models/kenney/train-kit/railroad-corner-large-ramp.glb    | h=2.787 | l=11.357
+track    | models/kenney/train-kit/railroad-corner-small.glb         | h=0.253 | l=6.308
+track    | models/kenney/train-kit/railroad-corner-small-ramp.glb    | h=2.81  | l=6.307
+track    | models/kenney/train-kit/railroad-curve.glb                | h=0.253 | l=10.124
+track    | models/kenney/train-kit/railroad-damaged-corner-large.glb | h=0.253 | l=11.36
+track    | models/kenney/train-kit/railroad-damaged-corner-large-ramp.glb| h=2.795 | l=11.363
+track    | models/kenney/train-kit/railroad-damaged-corner-small.glb | h=0.253 | l=6.336
+track    | models/kenney/train-kit/railroad-damaged-corner-small-ramp.glb| h=2.803 | l=6.31
+track    | models/kenney/train-kit/railroad-damaged-curve.glb        | h=0.253 | l=10.124
+track    | models/kenney/train-kit/railroad-damaged-straight.glb     | h=0.253 | l=10.124
+track    | models/kenney/train-kit/railroad-damaged-straight-bend.glb| h=5.082 | l=5.085
+track    | models/kenney/train-kit/railroad-damaged-straight-bend-large.glb| h=10.124| l=10.124
+track    | models/kenney/train-kit/railroad-damaged-straight-bump-down.glb| h=1.534 | l=10.124
+track    | models/kenney/train-kit/railroad-damaged-straight-bump-up.glb| h=1.515 | l=10.124
+track    | models/kenney/train-kit/railroad-damaged-straight-hill-beginning.glb| h=2.711 | l=10.124
+track    | models/kenney/train-kit/railroad-damaged-straight-hill-complete.glb| h=2.784 | l=10.124
+track    | models/kenney/train-kit/railroad-damaged-straight-hill-complete-half.glb| h=1.52  | l=10.124
+track    | models/kenney/train-kit/railroad-damaged-straight-hill-end.glb| h=2.784 | l=10.302
+track    | models/kenney/train-kit/railroad-damaged-straight-skew-left.glb| h=1.84  | l=10.124
+track    | models/kenney/train-kit/railroad-damaged-straight-skew-left-side.glb| h=2.526 | l=10.124
+track    | models/kenney/train-kit/railroad-damaged-straight-skew-right.glb| h=1.834 | l=10.124
+track    | models/kenney/train-kit/railroad-damaged-straight-skew-right-side.glb| h=2.573 | l=10.124
+track    | models/kenney/train-kit/railroad-rail-corner-large.glb    | h=0.253 | l=11.009
+track    | models/kenney/train-kit/railroad-rail-corner-large-ramp.glb| h=2.784 | l=11.009
+track    | models/kenney/train-kit/railroad-rail-corner-small.glb    | h=0.253 | l=5.948
+track    | models/kenney/train-kit/railroad-rail-corner-small-ramp.glb| h=2.784 | l=5.948
+track    | models/kenney/train-kit/railroad-rail-curve.glb           | h=0.253 | l=10.124
+track    | models/kenney/train-kit/railroad-rail-straight.glb        | h=0.253 | l=10.124
+track    | models/kenney/train-kit/railroad-rail-straight-bend.glb   | h=5.062 | l=5.062
+track    | models/kenney/train-kit/railroad-rail-straight-bend-large.glb| h=10.124| l=10.124
+track    | models/kenney/train-kit/railroad-rail-straight-bump-down.glb| h=1.515 | l=10.124
+track    | models/kenney/train-kit/railroad-rail-straight-bump-up.glb| h=1.515 | l=10.124
+track    | models/kenney/train-kit/railroad-rail-straight-hill-beginning.glb| h=2.71  | l=10.124
+track    | models/kenney/train-kit/railroad-rail-straight-hill-complete.glb| h=2.784 | l=10.124
+track    | models/kenney/train-kit/railroad-rail-straight-hill-complete-half.glb| h=1.519 | l=10.124
+track    | models/kenney/train-kit/railroad-rail-straight-hill-end.glb| h=2.784 | l=10.302
+track    | models/kenney/train-kit/railroad-rail-straight-skew-left.glb| h=1.432 | l=10.124
+track    | models/kenney/train-kit/railroad-rail-straight-skew-left-side.glb| h=1.806 | l=10.124
+track    | models/kenney/train-kit/railroad-rail-straight-skew-right.glb| h=1.432 | l=10.124
+track    | models/kenney/train-kit/railroad-rail-straight-skew-right-side.glb| h=1.806 | l=10.124
+track    | models/kenney/train-kit/railroad-straight.glb             | h=0.253 | l=10.124
+track    | models/kenney/train-kit/railroad-straight-bend.glb        | h=5.062 | l=5.062
+track    | models/kenney/train-kit/railroad-straight-bend-large.glb  | h=10.124| l=10.124
+track    | models/kenney/train-kit/railroad-straight-bump-down.glb   | h=1.515 | l=10.124
+track    | models/kenney/train-kit/railroad-straight-bump-up.glb     | h=1.515 | l=10.124
+track    | models/kenney/train-kit/railroad-straight-hill-beginning.glb| h=2.71  | l=10.124
+track    | models/kenney/train-kit/railroad-straight-hill-complete.glb| h=2.784 | l=10.124
+track    | models/kenney/train-kit/railroad-straight-hill-complete-half.glb| h=1.519 | l=10.124
+track    | models/kenney/train-kit/railroad-straight-hill-end.glb    | h=2.784 | l=10.302
+track    | models/kenney/train-kit/railroad-straight-skew-left.glb   | h=1.798 | l=10.124
+track    | models/kenney/train-kit/railroad-straight-skew-left-side.glb| h=2.519 | l=10.124
+track    | models/kenney/train-kit/railroad-straight-skew-right.glb  | h=1.798 | l=10.124
+track    | models/kenney/train-kit/railroad-straight-skew-right-side.glb| h=2.519 | l=10.124
+track    | models/kenney/train-kit/spline-segment.glb                | h=0.19  | l=2.531
+track    | models/kenney/train-kit/spline-track.glb                  | h=0.253 | l=2.531
+track    | models/kenney/train-kit/spline-track-damaged.glb          | h=0.253 | l=2.531
+track    | models/kenney/train-kit/track.glb                         | h=0.38  | l=2.531
+track    | models/kenney/train-kit/track-detailed.glb                | h=0.38  | l=2.531
+track    | models/kenney/train-kit/track-single.glb                  | h=0.38  | l=2.531
+track    | models/kenney/train-kit/track-single-detailed.glb         | h=0.38  | l=2.531
+train    | models/kenney/car-kit/debris-drivetrain.glb               | h=0.387 | l=2.511
+train    | models/kenney/car-kit/debris-drivetrain-axle.glb          | h=0.387 | l=1.575
+train    | models/kenney/space-kit/monorail_trainBox.glb             | h=1.815 | l=2.269
+train    | models/kenney/space-kit/monorail_trainCargo.glb           | h=1.452 | l=2.269
+train    | models/kenney/space-kit/monorail_trainEnd.glb             | h=1.815 | l=2.269
+train    | models/kenney/space-kit/monorail_trainFlat.glb            | h=0.567 | l=2.269
+train    | models/kenney/space-kit/monorail_trainFront.glb           | h=1.815 | l=2.383
+train    | models/kenney/space-kit/monorail_trainPassenger.glb       | h=1.815 | l=2.269
+train    | models/kenney/train-kit/train-carriage-box.glb            | h=3.284 | l=6.833
+train    | models/kenney/train-kit/train-carriage-coal.glb           | h=4.165 | l=6.833
+train    | models/kenney/train-kit/train-carriage-container-blue.glb | h=3.441 | l=6.833
+train    | models/kenney/train-kit/train-carriage-container-green.glb| h=3.441 | l=6.833
+train    | models/kenney/train-kit/train-carriage-container-red.glb  | h=3.441 | l=6.833
+train    | models/kenney/train-kit/train-carriage-dirt.glb           | h=4.165 | l=6.833
+train    | models/kenney/train-kit/train-carriage-lumber.glb         | h=2.935 | l=6.833
+train    | models/kenney/train-kit/train-carriage-tank.glb           | h=4.435 | l=6.833
+train    | models/kenney/train-kit/train-carriage-tank-large.glb     | h=4.435 | l=6.833
+train    | models/kenney/train-kit/train-carriage-wood.glb           | h=3.986 | l=6.833
+train    | models/kenney/train-kit/train-connector.glb               | h=2.278 | l=2.278
+train    | models/kenney/train-kit/train-diesel-a.glb                | h=4.042 | l=6.074
+train    | models/kenney/train-kit/train-diesel-b.glb                | h=3.757 | l=6.074
+train    | models/kenney/train-kit/train-diesel-box-a.glb            | h=4.238 | l=6.639
+train    | models/kenney/train-kit/train-diesel-box-b.glb            | h=4.174 | l=6.58
+train    | models/kenney/train-kit/train-diesel-box-c.glb            | h=4.174 | l=6.58
+train    | models/kenney/train-kit/train-diesel-c.glb                | h=3.694 | l=6.074
+train    | models/kenney/train-kit/train-electric-bullet-a.glb       | h=4.144 | l=7.084
+train    | models/kenney/train-kit/train-electric-bullet-b.glb       | h=4.144 | l=6.58
+train    | models/kenney/train-kit/train-electric-bullet-c.glb       | h=4.144 | l=6.58
+train    | models/kenney/train-kit/train-electric-city-a.glb         | h=4.259 | l=6.074
+train    | models/kenney/train-kit/train-electric-city-b.glb         | h=5.617 | l=6.833
+train    | models/kenney/train-kit/train-electric-city-c.glb         | h=4.259 | l=6.833
+train    | models/kenney/train-kit/train-electric-double-a.glb       | h=4.869 | l=6.327
+train    | models/kenney/train-kit/train-electric-double-b.glb       | h=4.869 | l=6.675
+train    | models/kenney/train-kit/train-electric-double-c.glb       | h=4.869 | l=6.675
+train    | models/kenney/train-kit/train-electric-square-a.glb       | h=5.87  | l=6.58
+train    | models/kenney/train-kit/train-electric-square-b.glb       | h=4.512 | l=6.58
+train    | models/kenney/train-kit/train-electric-square-c.glb       | h=4.512 | l=6.58
+train    | models/kenney/train-kit/train-electric-subway-a.glb       | h=3.977 | l=6.58
+train    | models/kenney/train-kit/train-electric-subway-b.glb       | h=3.977 | l=6.58
+train    | models/kenney/train-kit/train-electric-subway-c.glb       | h=3.977 | l=6.58
+train    | models/kenney/train-kit/train-locomotive-a.glb            | h=4.2   | l=6.58
+train    | models/kenney/train-kit/train-locomotive-b.glb            | h=4.2   | l=6.58
+train    | models/kenney/train-kit/train-locomotive-c.glb            | h=4.2   | l=7.086
+train    | models/kenney/train-kit/train-locomotive-passenger-a.glb  | h=4.174 | l=6.58
+train    | models/kenney/train-kit/train-locomotive-passenger-b.glb  | h=4.174 | l=6.58
+train    | models/kenney/train-kit/train-tram-classic.glb            | h=6.376 | l=6.612
+train    | models/kenney/train-kit/train-tram-modern.glb             | h=5.823 | l=6.799
+train    | models/kenney/train-kit/train-tram-round.glb              | h=6.314 | l=6.58
+train    | models/quaternius/cargo-train.glb                         | h=3.8   | l=8
+train    | models/quaternius/Train.obj                               | h=3.6   | l=8 | body=#2f6b3a
+train    | models/quaternius/steam-train.glb                         | h=3.8   | l=8
+train    | models/quaternius/train-carriage.glb                      | h=3.8   | l=9
+tram     | library/props/tram.tsx                                    | h=5.4   | l= | code
+tree     | models/kenney/castle-kit/tree-large.glb                   | h=5.646 | l=2.717
+tree     | models/kenney/castle-kit/tree-log.glb                     | h=0.846 | l=3.053
+tree     | models/kenney/castle-kit/tree-small.glb                   | h=4.12  | l=2.254
+tree     | models/kenney/castle-kit/tree-trunk.glb                   | h=1.145 | l=1.209
+tree     | models/kenney/city-kit-roads/road-sign-object-street.glb  | h=0.54  | l=1.732
+tree     | models/kenney/city-kit-roads/road-sign-street.glb         | h=4.275 | l=1.766
+tree     | models/kenney/city-kit-suburban/tree-large.glb            | h=5.521 | l=1.749
+tree     | models/kenney/city-kit-suburban/tree-small.glb            | h=4.081 | l=1.749
+tree     | models/kenney/food-kit/pineapple.glb                      | h=0.198 | l=0.103
+tree     | models/kenney/nature-kit/tree_blocks.glb                  | h=3.122 | l=1.581
+tree     | models/kenney/nature-kit/tree_blocks_dark.glb             | h=3.122 | l=1.581
+tree     | models/kenney/nature-kit/tree_blocks_fall.glb             | h=3.122 | l=1.581
+tree     | models/kenney/nature-kit/tree_cone.glb                    | h=3.769 | l=1.396
+tree     | models/kenney/nature-kit/tree_cone_dark.glb               | h=3.769 | l=1.396
+tree     | models/kenney/nature-kit/tree_cone_fall.glb               | h=3.769 | l=1.396
+tree     | models/kenney/nature-kit/tree_default.glb                 | h=4.5   | l=1.989
+tree     | models/kenney/nature-kit/tree_default_dark.glb            | h=4.5   | l=1.989
+tree     | models/kenney/nature-kit/tree_default_fall.glb            | h=4.5   | l=1.989
+tree     | models/kenney/nature-kit/tree_detailed.glb                | h=3.511 | l=2.232
+tree     | models/kenney/nature-kit/tree_detailed_dark.glb           | h=3.511 | l=2.232
+tree     | models/kenney/nature-kit/tree_detailed_fall.glb           | h=3.511 | l=2.232
+tree     | models/kenney/nature-kit/tree_fat.glb                     | h=3.031 | l=1.989
+tree     | models/kenney/nature-kit/tree_fat_darkh.glb               | h=3.031 | l=1.989
+tree     | models/kenney/nature-kit/tree_fat_fall.glb                | h=3.031 | l=1.989
+tree     | models/kenney/nature-kit/tree_oak.glb                     | h=3.231 | l=1.949
+tree     | models/kenney/nature-kit/tree_oak_dark.glb                | h=3.231 | l=1.949
+tree     | models/kenney/nature-kit/tree_oak_fall.glb                | h=3.231 | l=1.949
+tree     | models/kenney/nature-kit/tree_palm.glb                    | h=3.991 | l=2.668
+tree     | models/kenney/nature-kit/tree_palmBend.glb                | h=3.636 | l=2.668
+tree     | models/kenney/nature-kit/tree_palmDetailedShort.glb       | h=2.962 | l=3.854
+tree     | models/kenney/nature-kit/tree_palmDetailedTall.glb        | h=3.751 | l=3.854
+tree     | models/kenney/nature-kit/tree_palmShort.glb               | h=2.783 | l=2.725
+tree     | models/kenney/nature-kit/tree_palmTall.glb                | h=3.572 | l=2.725
+tree     | models/kenney/nature-kit/tree_pineDefaultA.glb            | h=4.073 | l=1.402
+tree     | models/kenney/nature-kit/tree_pineDefaultB.glb            | h=4.073 | l=1.402
+tree     | models/kenney/nature-kit/tree_pineRoundA.glb              | h=3.6   | l=1.877
+tree     | models/kenney/nature-kit/tree_pineRoundB.glb              | h=3.151 | l=1.616
+tree     | models/kenney/nature-kit/tree_pineRoundC.glb              | h=3.301 | l=1.462
+tree     | models/kenney/nature-kit/tree_pineRoundD.glb              | h=2.85  | l=1.462
+tree     | models/kenney/nature-kit/tree_pineRoundE.glb              | h=3.306 | l=1.402
+tree     | models/kenney/nature-kit/tree_pineRoundF.glb              | h=3.306 | l=1.402
+tree     | models/kenney/nature-kit/tree_pineSmallA.glb              | h=2.548 | l=1.317
+tree     | models/kenney/nature-kit/tree_pineSmallB.glb              | h=2.658 | l=1.033
+tree     | models/kenney/nature-kit/tree_pineSmallC.glb              | h=2.959 | l=1.033
+tree     | models/kenney/nature-kit/tree_pineSmallD.glb              | h=2.518 | l=0.941
+tree     | models/kenney/nature-kit/tree_pineTallA.glb               | h=4.03  | l=1.033
+tree     | models/kenney/nature-kit/tree_pineTallA_detailed.glb      | h=4.03  | l=1.033
+tree     | models/kenney/nature-kit/tree_pineTallB.glb               | h=5.097 | l=1.033
+tree     | models/kenney/nature-kit/tree_pineTallB_detailed.glb      | h=5.097 | l=1.033
+tree     | models/kenney/nature-kit/tree_pineTallC.glb               | h=4.401 | l=1.462
+tree     | models/kenney/nature-kit/tree_pineTallC_detailed.glb      | h=4.401 | l=1.462
+tree     | models/kenney/nature-kit/tree_pineTallD.glb               | h=5.469 | l=1.462
+tree     | models/kenney/nature-kit/tree_pineTallD_detailed.glb      | h=5.469 | l=1.462
+tree     | models/kenney/nature-kit/tree_plateau.glb                 | h=3.292 | l=1.726
+tree     | models/kenney/nature-kit/tree_plateau_dark.glb            | h=3.292 | l=1.726
+tree     | models/kenney/nature-kit/tree_plateau_fall.glb            | h=3.292 | l=1.726
+tree     | models/kenney/nature-kit/tree_simple.glb                  | h=4.003 | l=1.079
+tree     | models/kenney/nature-kit/tree_simple_dark.glb             | h=4.003 | l=1.079
+tree     | models/kenney/nature-kit/tree_simple_fall.glb             | h=4.003 | l=1.079
+tree     | models/kenney/nature-kit/tree_small.glb                   | h=2.925 | l=1.079
+tree     | models/kenney/nature-kit/tree_small_dark.glb              | h=2.925 | l=1.079
+tree     | models/kenney/nature-kit/tree_small_fall.glb              | h=2.925 | l=1.079
+tree     | models/kenney/nature-kit/tree_tall.glb                    | h=4.447 | l=1.216
+tree     | models/kenney/nature-kit/tree_tall_dark.glb               | h=4.447 | l=1.216
+tree     | models/kenney/nature-kit/tree_tall_fall.glb               | h=4.447 | l=1.216
+tree     | models/kenney/nature-kit/tree_thin.glb                    | h=3.927 | l=1.793
+tree     | models/kenney/nature-kit/tree_thin_dark.glb               | h=3.927 | l=1.793
+tree     | models/kenney/nature-kit/tree_thin_fall.glb               | h=3.927 | l=1.793
+tree     | models/quaternius/birch-trees.glb                         | h=5     | l=5
+tree     | models/quaternius/dead-trees.glb                          | h=4.5   | l=5
+tree     | models/quaternius/palm.glb                                | h=5.5   | l=4
+tree     | models/quaternius/palm-trees.glb                          | h=5.5   | l=6
+tree     | models/quaternius/pine.glb                                | h=5     | l=2.6
+tree     | models/quaternius/pine-trees.glb                          | h=5     | l=5
+tree     | models/quaternius/space/Tree_Blob_1.gltf                  | h=3.291 | l=2.164
+tree     | models/quaternius/space/Tree_Blob_2.gltf                  | h=2.582 | l=2.164
+tree     | models/quaternius/tree-round.glb                          | h=4.5   | l=3.6
+tree     | models/quaternius/trees.glb                               | h=5     | l=6
+truck    | models/kenney/car-kit/ambulance.glb                       | h=2.354 | l=4.25
+truck    | models/kenney/car-kit/delivery.glb                        | h=2.158 | l=4.25
+truck    | models/kenney/car-kit/delivery-flat.glb                   | h=1.765 | l=4.25
+truck    | models/kenney/car-kit/firetruck.glb                       | h=2.223 | l=4.446
+truck    | models/kenney/car-kit/garbage-truck.glb                   | h=2.092 | l=4.512
+truck    | models/kenney/car-kit/tractor.glb                         | h=2.095 | l=2.879
+truck    | models/kenney/car-kit/tractor-police.glb                  | h=2.226 | l=3.01
+truck    | models/kenney/car-kit/tractor-shovel.glb                  | h=1.977 | l=3.23
+truck    | models/kenney/car-kit/truck.glb                           | h=1.7   | l=3.858
+truck    | models/kenney/car-kit/truck-flat.glb                      | h=1.7   | l=3.59
+truck    | library/props/farm-truck.tsx                              | h=2.4   | l= | code

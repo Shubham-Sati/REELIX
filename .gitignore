@@ -59,3 +59,25 @@ templates/remotion/src/custom/*
 
 # ---- Idea lists from reelix viral-ideas (personal, like videos) ----
 ideas/
+
+# ---- Experiments: the whole folder stays local (no use to someone who clones, and too big). Each experiment keeps its
+# scripts and STATS.md on this Mac only. ----
+docs/experiments/
+
+# ---- Loose pictures/videos in the engine folder (stills land here by mistake) ----
+templates/remotion/*.png
+templates/remotion/*.jpg
+
+# ---- Private working notes ----
+todos.md
+
+# ---- 3D model library: the model files come from setup (python3 tools/model_library.py fetch); only the lists are in git ----
+library/models/*
+!library/models/sources.json
+!library/models/index.json
+!library/models/catalog.txt
+
+# ---- 2D and Chalkboard assets: fetched by setup (python3 tools/asset_library.py fetch); library/chalk/fonts.json is in git ----
+library/icons/
+library/maps/
+library/peeps/

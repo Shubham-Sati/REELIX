@@ -2,7 +2,7 @@
 // Rules that make 3D render correctly in Remotion:
 //  - Everything is driven by useCurrentFrame(); never use useFrame/clock (the render would drift or flicker).
 //  - Use <ThreeCanvas> from @remotion/three with width/height from useVideoConfig().
-//  - Portrait 9:16: keep the object in the middle band (top 15% and bottom 30% stay free for labels and captions); pull the camera back.
+//  - Keep the object in the middle band, both formats (16:9: top 15% / bottom 18% free; 9:16: top 17% / bottom 28% free, for labels and captions); pull the camera back.
 //  - Props you always get: accent (hex), font, duration (s), image (the scene picture, usable as a backdrop).
 import { AbsoluteFill, Img, interpolate, spring, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
 import { ThreeCanvas } from "@remotion/three";

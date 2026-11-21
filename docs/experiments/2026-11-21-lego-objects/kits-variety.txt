@@ -1,0 +1,19 @@
+# Quaternius varieties: more trees, houses, vehicles, mountains and rocks (same columns as kits.txt)
+birch-trees|models/q/v-birch.glb|5|5
+dead-trees|models/q/v-dead.glb|4.5|5
+trees|models/q/v-trees.glb|5|6
+pine-trees|models/q/v-pines.glb|5|5
+palm-trees|models/q/v-palms.glb|5.5|6
+fantasy-house|models/q/v-fantasy-house.glb|6|5
+house-2|models/q/v-house2.glb|5|5
+townhouse-2|models/q/v-townhouse2.glb|7|5
+huts|models/q/v-huts.glb|3.5|7
+police-car|models/q/v-police.glb|1.6|4.4
+sports-car|models/q/v-sports.glb|1.3|4.4
+suv|models/q/v-suv.glb|1.8|4.6
+taxi|models/q/Taxi.obj|1.6|4.4|#f2c230
+cargo-train|models/q/v-cargo-train.glb|3.8|8
+old-train|models/q/Train.obj|3.6|8|#2f6b3a
+sail-ship|models/q/v-sail-ship.glb|8|8
+ship|models/q/v-ship.glb|5|10
+mountain-2|models/q/v-mountain2.glb|8|12

@@ -1,0 +1,65 @@
+#!/usr/bin/env python3
+"""Recorded sound effects for library/sfx: 6 Kenney audio kits (kenney.nl, CC0), next to the sounds tools/make_sfx.sh makes with ffmpeg.
+
+  python3 tools/sfx_library.py fetch                 download the kits, keep up to 2 takes of every kind of sound, save them as
+                                                     library/sfx/kenney/<id>.wav (48 kHz stereo, loudness-matched) and rebuild index.json
+  python3 tools/sfx_library.py fetch --from <dir>    use kits already unpacked in <dir>/<kit>/ (no network)
+  python3 tools/sfx_library.py index                 rebuild library/sfx/index.json only (generated + Kenney sounds)
+
+The .wav files are not in git (*.wav is ignored); index.json is. scripts/setup.sh runs make_sfx.sh, then this.
+Approved from docs/experiments/2026-11-21-kit-audio."""
+import glob, http.cookiejar, io, json, os, re, subprocess, sys, tempfile, urllib.request, zipfile
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__))); SFX = os.path.join(ROOT, "library", "sfx"); OUT = os.path.join(SFX, "kenney")
+KITS = ["impact-sounds", "interface-sounds", "ui-audio", "digital-audio", "sci-fi-sounds", "music-jingles"]
+GEN_TAGS = {"whoosh": "transition cut fast", "whoosh-soft": "transition gentle", "impact": "boom reveal big moment", "hit": "punch text-slam", "pop": "label appear ui",
+            "click": "ui tick", "ding": "fact idea success", "riser": "build-up before reveal", "swell": "emotional build", "fire": "flame burn heat",
+            "wind": "sky air height outdoors", "crowd": "people audience cheer", "typewriter": "text typing date", "heartbeat": "tension suspense"}   # same as make_sfx.sh
+WORDS = {"footstep": "walk steps feet", "impact": "hit knock", "glass": "glass break clink", "metal": "metal clang", "wood": "wood knock thud", "plank": "wood board",
+         "plate": "plate dish", "punch": "punch fight", "soft": "soft thud", "bell": "bell ring", "tin": "tin can", "mining": "pickaxe stone", "click": "ui click",
+         "confirmation": "ui success yes", "error": "ui wrong no", "switch": "ui toggle", "laser": "laser zap scifi", "powerup": "power-up win game",
+         "door": "door", "engine": "engine motor", "explosion": "explosion boom", "thruster": "rocket thrust", "computer": "computer beep", "jingle": "music jingle sting",
+         "carpet": "indoor", "concrete": "street city", "grass": "outdoors nature", "snow": "winter", "drop": "drop fall", "open": "open", "close": "close",
+         "pluck": "pluck string", "scratch": "scratch", "tick": "tick clock", "toggle": "toggle", "maximize": "ui grow", "minimize": "ui shrink", "rollover": "ui hover"}
+
+def kenney_zip(kit):
+    op = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(http.cookiejar.CookieJar())); UA = {"User-Agent": "Mozilla/5.0"}
+    g = lambda u, ref=None: op.open(urllib.request.Request(u, headers={**UA, **({"Referer": ref} if ref else {})}), timeout=120).read()
+    page = f"https://kenney.nl/assets/{kit}"; g(page)                                   # the site hands out a session cookie first
+    return zipfile.ZipFile(io.BytesIO(g(json.loads(g("https://kenney.nl/download-link/" + ("assets/" + kit).encode().hex(), page))["url"], page)))
+
+def ident(kit, base):
+    b = re.sub(r"([a-z])([A-Z])", r"\1-\2", base).lower().replace("_", "-")
+    if kit == "music-jingles": b = "jingle-" + b.replace("jingles-", "")
+    return re.sub(r"-+", "-", b).strip("-")
+
+def fetch(local=None):
+    os.makedirs(OUT, exist_ok=True); n = 0
+    for kit in KITS:
+        with tempfile.TemporaryDirectory() as tmp:
+            src = os.path.join(local, kit) if local else tmp
+            if not local: kenney_zip(kit).extractall(tmp)
+            files = sorted(f for f in glob.glob(os.path.join(src, "**", "*.ogg"), recursive=True) if "preview" not in f.lower())
+            takes = {}
+            for f in files:   # group takes of one sound: footstep_grass_000.ogg / _001 ... laser1 / laser2 ...
+                base = re.sub(r"(_\d+|\d+)$", "", os.path.splitext(os.path.basename(f))[0]); takes.setdefault(base, []).append(f)
+            for base, fs in takes.items():
+                for i, f in enumerate(fs[:2]):
+                    out = os.path.join(OUT, ident(kit, base) + ("" if i == 0 else "-2") + ".wav")
+                    if os.path.exists(out): continue
+                    subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-i", f, "-af", "loudnorm=I=-16:TP=-1.5", "-ar", "48000", "-ac", "2", out], check=True); n += 1
+        print(f"{kit}: done")
+    print(n, "new sounds"); index()
+
+def index():
+    dur = lambda f: round(float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", f], capture_output=True, text=True).stdout or 0), 2)
+    out = [{"id": os.path.basename(f)[:-4], "file": f"sfx/{os.path.basename(f)}", "duration": dur(f), "tags": GEN_TAGS.get(os.path.basename(f)[:-4], "generated").split(),
+            "licence": "generated by REELIX (ffmpeg), free"} for f in sorted(glob.glob(os.path.join(SFX, "*.wav")))]
+    for f in sorted(glob.glob(os.path.join(OUT, "*.wav"))):
+        i = os.path.basename(f)[:-4]; tags = ["recorded"] + [t for w, ts in WORDS.items() if w in i.replace("-", "") or w in i for t in ts.split()]
+        out.append({"id": "k-" + i, "file": f"sfx/kenney/{os.path.basename(f)}", "duration": dur(f), "tags": list(dict.fromkeys(tags)), "licence": "Kenney (CC0)"})
+    json.dump(out, open(os.path.join(SFX, "index.json"), "w"), indent=1); print(len(out), "sounds in library/sfx/index.json")
+
+if __name__ == "__main__":
+    cmd = sys.argv[1] if len(sys.argv) > 1 else "index"
+    fetch(sys.argv[sys.argv.index("--from") + 1] if "--from" in sys.argv else None) if cmd == "fetch" else index()

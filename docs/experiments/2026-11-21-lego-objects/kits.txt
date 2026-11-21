@@ -1,0 +1,18 @@
+# name | file (in assets) | height m | length m | [smooth] | [#body colour: OBJ parts coloured by name]
+mountain|models/q/mountain.glb|8|12
+mountain-group|models/q/mountain-group.glb|8|14
+rocks|models/q/rocks.glb|0.7|1.6
+pine|models/q/pine.glb|5|2.6
+palm|models/q/palm.glb|5.5|4
+tree|models/q/tree.glb|4.5|3.6
+house|models/q/house.glb|5|5
+townhouse|models/q/townhouse.glb|7|4
+hut|models/q/hut.glb|3.5|4
+car|models/q/car.glb|1.5|4.2
+bus|models/q/Bus.obj|3|9|#d8402e|flip
+schoolbus|models/q/SchoolBus.obj|3|9|#f2b632|flip
+train|models/q/train-front.glb|3.8|8
+train-carriage|models/q/train-carriage.glb|3.8|9
+bicycle|models/q/Bicycle.obj|1.05|1.75|#2a6fd0
+sailboat|models/q/sailboat.glb|5|4.5
+boat|models/q/boat.glb|1.2|4

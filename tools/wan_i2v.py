@@ -13,6 +13,7 @@ Clips that already exist are skipped (re-runs continue). Prints "clip i/n" for p
 Heavy (~10-12 GB): run it alone, never next to FLUX, Kokoro, ACE-Step or a render.
 """
 import gc, json, os, sys, time
+os.environ.setdefault("HF_HUB_OFFLINE", "1"); os.environ.setdefault("TRANSFORMERS_OFFLINE", "1")   # all models are local: never wait on the internet (an IPv6 check once hung a run)
 import mlx.core as mx
 import mlx_video.models.wan_2.scheduler as S
 

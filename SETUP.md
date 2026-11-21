@@ -32,7 +32,7 @@ It runs these steps in order. Steps that are already done are skipped, so it's s
 |---|---|---|
 | 1. This Mac | checks Apple Silicon, RAM and free disk | — |
 | 2. Tools | node, ffmpeg, uv, whisper-cpp (Homebrew); checks the Node version and Claude Code | ~0.5 GB |
-| 3. REELIX packages | terminal packages, the Remotion engine (Three.js, GSAP), the `reelix` command, the sound-effect library | ~0.7 GB |
+| 3. REELIX packages | terminal packages, the Remotion engine (Three.js, GSAP), the `reelix` command, the sound-effect library (+ 169 recorded Kenney sounds: `python3 tools/sfx_library.py fetch`), the 3D model library (1,572 free CC0 models incl. animated animals: `python3 tools/model_library.py fetch`), 2D and Chalkboard assets (icons, maps, Open Peeps: `python3 tools/asset_library.py fetch`) | ~1 GB |
 | 5. Pictures | **FLUX.1 schnell 4-bit** + mflux | ~9.6 GB |
 | 6. Voice | **Kokoro-82M** + mlx-audio | ~0.5 GB |
 | 7. Captions | **whisper.cpp large-v3-turbo** | ~0.6 GB |
@@ -89,7 +89,7 @@ Not used, because they're not licensed for commercial use: FLUX Kontext and edge
 |---|---|
 | `.claude/` agents, skills, **agent memory** (`.claude/agent-memory/`) | models in `~/.reelix` and `~/.cache` |
 | `cli/`, `tools/`, `scripts/`, `config/models.json` | `config/models.local.json` (this laptop's model paths) |
-| `templates/remotion/` engine, `library/` (sfx, templates) | `node_modules/`, `videos/` |
+| `templates/remotion/` engine, `library/` (sfx list, templates, props, model lists `library/models/sources.json` + `catalog.txt`, `library/chalk/fonts.json`) | `node_modules/`, `videos/`, the downloaded files in `library/models/`, `library/sfx/` (sounds), `library/icons/`, `library/maps/`, `library/peeps/` (all fetched by setup) |
 
 Agent memory is the lessons the agents learn from every video. Commit it after making videos, so everyone who clones the repo starts with those lessons.
 

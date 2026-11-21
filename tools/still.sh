@@ -9,6 +9,15 @@ find "$SRC" -mindepth 1 ! -name index.ts -delete
   echo "export const custom: Record<string, React.FC<any>> = { $(IFS=,; echo "${names[*]}" | sed 's/,/, /g') };"; } > "$SRC/index.ts"
 FPS=$(python3 -c "import json;print(json.load(open('$VD/project/timeline.json'))['fps'])")
 FRAME=$(python3 -c "print(int(float('$2')*$FPS))")
+# ready-made models (library/models) that the shots name, e.g. "models/kenney/car-kit/taxi.glb": copy them into the video's assets
+# (an .obj brings its .mtl, a .gltf brings the .bin/.png files it names, a Kenney kit model brings its kit's Textures folder)
+for m in $(grep -ohE 'models/(kenney|quaternius|kaykit|polypizza)/[A-Za-z0-9_./-]+\.(glb|gltf|obj)' "$VD"/project/custom/*.tsx 2>/dev/null | sort -u); do
+  src="$ROOT/library/$m"; [ -f "$src" ] || { echo "missing model $m (run: python3 tools/model_library.py fetch)"; continue; }
+  mkdir -p "$VD/assets/$(dirname "$m")"; cp "$src" "$VD/assets/$m"
+  case "$m" in *.obj) [ -f "${src%.obj}.mtl" ] && cp "${src%.obj}.mtl" "$VD/assets/${m%.obj}.mtl";;
+    *.gltf) for u in $(grep -oE '"uri" *: *"[^"]+"' "$src" | sed -E 's/.*"([^"]+)"$/\1/' | grep -v '^data:'); do [ -f "$(dirname "$src")/$u" ] && cp "$(dirname "$src")/$u" "$VD/assets/$(dirname "$m")/"; done;; esac
+  [ -d "$(dirname "$src")/Textures" ] && cp -R "$(dirname "$src")/Textures" "$VD/assets/$(dirname "$m")/"
+done
 cd "$ROOT/templates/remotion"
 npx remotion still src/index.ts Main "$OUT" --props="$VD/project/timeline.json" --public-dir="$VD/assets" --frame="$FRAME" --gl=angle --log=error
 echo "$OUT"

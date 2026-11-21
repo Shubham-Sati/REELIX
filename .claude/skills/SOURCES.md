@@ -44,3 +44,8 @@ Notes: 3d-generalist also covers Blender/67js and asset kitbashing; REELIX uses 
 |---|---|---|---|
 | ffmpeg-color-grading-chromakey | github.com/josiahsiegel/claude-plugin-marketplace (5a1b112), plugins/ffmpeg-effects/skills/ffmpeg-color-grading-chromakey | MIT | colour guide for the animator and reviewer (grade and match AI motion clips); REELIX's tools/grade.py does the automatic per-clip matching |
 Checked and not used: travisjneuman video-production (shot matching only named, no steps), awesome-omni-skill color-grade (DaVinci/Premiere LUTs, licence unclear), kajisho5 color-grading-skill (needs another tool, very new).
+
+## Checked 2026-11-21 (Lego animals), nothing added
+Looked for a skill that builds many different animals in code for our React Three Fiber / WebGL engine.
+Checked and not used: img2threejs (Apache-2.0, but its creature generator is not in the repo at 0c0c49b and it is an image-matching pipeline), linegel threejs-procedural-creatures (WebGPU/TSL, no licence), markkampstra/fp-survival modeling-3d (no licence, blocky box recipes), jaybmcv/3d-workflow-skill, Priyanshu-dev525/LowPolySkill, IAmTheParsifal/Low-Poly-Modeling-Skill, jasonkneen threejs-primitive-reconstructor (no animal guidance, Blender only or no licence).
+Instead the method (body plan + spec + silhouette check) was built as code: docs/experiments/2026-11-21-lego-animals.

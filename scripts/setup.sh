@@ -49,6 +49,14 @@ case ":$PATH:" in *":$HOME/.local/bin:"*) ;; *) grep -q '.local/bin' "$HOME/.zsh
   printf "  ${Y}note${N}  added ~/.local/bin to PATH in ~/.zshrc: open a new terminal after setup\n";; esac
 C=templates/remotion/src/custom; mkdir -p $C; [ -f $C/index.ts ] || echo 'export const custom: Record<string, React.FC<any>> = {};' > $C/index.ts
 ok "reelix command"; tools/make_sfx.sh >/dev/null && ok "sound-effect library (library/sfx)"
+python3 tools/sfx_library.py fetch >/dev/null && ok "recorded sound effects (169 Kenney CC0 sounds, library/sfx/kenney)" \
+  || printf "  ${Y}warn${N}  recorded sounds did not download: run python3 tools/sfx_library.py fetch again\n"
+# 3D model library for the Lego look: 1,572 free CC0 models (12 Kenney kits, Quaternius packs incl. animated animals, KayKit, poly.pizza insects),
+# ~240 MB, kept out of git (library/models/sources.json says where each comes from)
+python3 tools/model_library.py fetch >/dev/null && ok "3D model library (library/models, $(grep -c . library/models/catalog.txt) lines in the catalog)" \
+  || printf "  ${Y}warn${N}  3D model library did not download fully: run python3 tools/model_library.py fetch again (finished kits are kept)\n"
+python3 tools/asset_library.py fetch >/dev/null && ok "2D and Chalkboard assets (icons, maps, Open Peeps in library/)" \
+  || printf "  ${Y}warn${N}  2D assets did not download fully: run python3 tools/asset_library.py fetch again\n"
 
 if [ -n "$EXISTING" ]; then
   step "4/5  Use models from $EXISTING"

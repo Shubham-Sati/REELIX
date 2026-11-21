@@ -3,7 +3,7 @@
 
 Reads <video_dir>/assets/clips/raw/*.mp4 (Wan output) and <video_dir>/assets/clips/grade.json:
   {"width": 1080, "height": 1920, "fps": 30,
-   "clips": [{"name": "s1_0", "scene": 1, "duration": 3.4, "keepLight": false}, ...]}
+   "clips": [{"name": "s1_0", "scene": 1, "duration": 3.4, "keepLight": false, "speed": [[0, 1.6], [1.2, 1.0]]}, ...]}
 Writes <video_dir>/assets/clips/<name>.mp4 (finished clips, skipped if they exist).
 
 Rules (agreed with the user):
@@ -12,8 +12,9 @@ Rules (agreed with the user):
   2. Clips of the same scene are nudged toward that scene's middle brightness/contrast/colour strength; the nudge is
      limited (small AI differences only). Shots marked keepLight (a story light change) are not matched.
   3. Then the approved "balanced" grade: deep blacks kept, harsh highlights and over-strong colour toned down.
-  4. AI-upscale (Real-ESRGAN 3x, config "upscale"), scale to the video size, retime to the shot length (+ the cross-fade),
-     30 fps by repeating frames (no blending, no blur: docs/experiments/2026-11-15-wan-sharpness).
+  4. AI-upscale (Real-ESRGAN 3x, config "upscale"), then the shot's SPEED PLAN (AI motion V4: hurry, ramps, normal;
+     tools/speed_ramp.py, light motion blur above 1.3x), then scale to the video size, fit the shot length and 30 fps
+     by repeating frames (no blending, no blur: docs/experiments/2026-11-15-wan-sharpness).
 """
 import json, os, shutil, statistics, subprocess, sys, tempfile
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -62,6 +63,24 @@ def upscale(name):
         shutil.rmtree(tmp, ignore_errors=True)
 
 
+RAMP = os.path.join(C, "ramp")
+
+
+def retime(name, keys, fps):
+    """Play the clip at its speed plan (AI motion V4) -> clips/ramp/<name>.mp4 (cached). Plain 1.0x plans are skipped."""
+    src = upscale(name)
+    if not keys or (len(keys) == 1 and abs(float(keys[0][1]) - 1.0) < 0.01): return src
+    out = os.path.join(RAMP, name + ".mp4")
+    if os.path.exists(out): return out
+    py = path(CFG.get("videoWan", {}).get("python", "")) or sys.executable
+    os.makedirs(RAMP, exist_ok=True)
+    try:
+        subprocess.run([py, os.path.join(os.path.dirname(os.path.abspath(__file__)), "speed_ramp.py"), src, out, json.dumps(keys), str(fps)], check=True)
+        print(f"speed plan {name} {keys}", flush=True); return out
+    except Exception as e:
+        print(f"speed plan failed for {name} ({e}), playing at normal speed", flush=True); return src
+
+
 clips = [c for c in spec["clips"] if os.path.exists(os.path.join(RAW, c["name"] + ".mp4"))]
 stats = {c["name"]: measure(os.path.join(RAW, c["name"] + ".mp4")) for c in clips}
 by_scene = {}
@@ -79,15 +98,20 @@ for c in clips:
         ct = clamp(t["spread"] / m["spread"], 0.9, 1.1)
         b = clamp((t["y"] - m["y"]) / 255.0, -0.06, 0.06)
         sa = clamp(t["sat"] / m["sat"], 0.88, 1.12)
-    report[c["name"]] = {"measured": {k: round(v, 1) for k, v in m.items()}, "brightness": round(b, 3), "contrast": round(ct, 3), "saturation": round(sa, 3), "keepLight": bool(c.get("keepLight"))}
+    report[c["name"]] = {"measured": {k: round(v, 1) for k, v in m.items()}, "brightness": round(b, 3), "contrast": round(ct, 3), "saturation": round(sa, 3), "keepLight": bool(c.get("keepLight")), "speed": c.get("speed")}
     if os.path.exists(out): continue
-    src_dur = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", os.path.join(RAW, c["name"] + ".mp4")], capture_output=True, text=True).stdout or 3.4)
+    timed = retime(c["name"], c.get("speed"), spec.get("fps", 30))
+    src_dur = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", timed], capture_output=True, text=True).stdout or 3.4)
     need = c["duration"] + FADE
-    speed = need / src_dur   # >1 = slow down to fill the shot; capped so motion never looks syrupy
+    # fit the shot: >1 slows down to fill it. A shot with its own speed plan is only nudged (max 1.05): the plan already
+    # decided its pace, and tpad holds the last frame for any remainder. Plain shots may be slowed up to 1.6x.
+    planned = bool(c.get("speed")) and not (len(c["speed"]) == 1 and abs(float(c["speed"][0][1]) - 1.0) < 0.01)
+    cap = 1.05 if planned else 1.6
+    speed = min(need / src_dur, cap)
     vf = (f"eq=brightness={b:.3f}:contrast={ct:.3f}:saturation={sa:.3f},{BALANCED},"
           f"scale={spec['width']}:{spec['height']}:flags=lanczos:force_original_aspect_ratio=increase,crop={spec['width']}:{spec['height']},"
-          f"setpts={min(speed, 1.6):.4f}*PTS,fps={spec.get('fps', 30)},tpad=stop_mode=clone:stop_duration={max(0.0, need - src_dur * min(speed, 1.6)) + 0.1:.2f}")
-    subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", upscale(c["name"]), "-vf", vf, "-t", f"{need:.3f}", "-an",
+          f"setpts={speed:.4f}*PTS,fps={spec.get('fps', 30)},tpad=stop_mode=clone:stop_duration={max(0.0, need - src_dur * speed) + 0.1:.2f}")
+    subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", timed, "-vf", vf, "-t", f"{need:.3f}", "-an",
                     "-c:v", "libx264", "-crf", "17", "-pix_fmt", "yuv420p", out], check=True)
     print(f"graded {c['name']}", flush=True)
 json.dump(report, open(os.path.join(C, "grade-report.json"), "w"), indent=1)

@@ -37,21 +37,34 @@ const SceneView: React.FC<{ s: Scene; fps: number; isFirst: boolean; isLast: boo
   );
 };
 
-/** Small kinetic label that slides in at the top of a scene (e.g. "FRANCE · 1782"). */
-const Label: React.FC<{ text: string; accent: string }> = ({ text, accent }) => {
-  const f = useCurrentFrame(); const { fps } = useVideoConfig();
+/** Text never goes over the animation: labels live in the TOP band, captions in the BOTTOM band, the middle is the shot's.
+ *  Top band: video 16:9 = top ~15% (y < 165), short 9:16 = top ~17% (y 150-330, under the Shorts top buttons).
+ *  Row 1: the scene label (first shot of a scene, accent chip, e.g. "FRANCE · 1782").
+ *  Row 2: the shot's own label from the storyboard (dark chip, e.g. "≈ 600 MILLION YEARS"), fading in just after the cut. */
+const TopTags: React.FC<{ label?: string; note?: string; accent: string }> = ({ label, note, accent }) => {
+  const f = useCurrentFrame(); const { fps, width, height } = useVideoConfig();
+  const wide = width > height;
   const k = spring({ frame: f - 6, fps, config: { damping: 14 } });
+  const n = spring({ frame: f - 10, fps, config: { damping: 16 } });
+  const L = wide ? { top: 28, size: 34, pad: "10px 24px", gap: 10, note: 38 } : { top: 150, size: 46, pad: "14px 30px", gap: 14, note: 50 };
+  if (!label && !note) return null;
   return (
-    <div style={{ position: "absolute", top: 230, left: 0, right: 0, display: "flex", justifyContent: "center" }}>
-      <div style={{ fontFamily, fontWeight: 800, fontSize: 46, letterSpacing: 6, color: "#111", background: accent, padding: "14px 30px", borderRadius: 14,
-        transform: `translateY(${(1 - k) * -60}px) scale(${0.8 + 0.2 * k})`, opacity: k, boxShadow: "0 10px 30px rgba(0,0,0,.35)" }}>{text.toUpperCase()}</div>
+    <div style={{ position: "absolute", top: L.top, left: 40, right: 40, display: "flex", flexDirection: "column", alignItems: "center", gap: L.gap, pointerEvents: "none" }}>
+      {label ? <div style={{ fontFamily, fontWeight: 800, fontSize: L.size, letterSpacing: wide ? 5 : 6, color: "#111", background: accent, padding: L.pad, borderRadius: 14,
+        transform: `translateY(${(1 - k) * -40}px) scale(${0.8 + 0.2 * k})`, opacity: k, boxShadow: "0 10px 30px rgba(0,0,0,.35)" }}>{label.toUpperCase()}</div> : null}
+      {note ? <div style={{ fontFamily, fontWeight: 800, fontSize: L.note, letterSpacing: 2, color: "#fff", background: "rgba(24,22,30,0.82)", padding: L.pad, borderRadius: 16,
+        border: `3px solid ${accent}`, opacity: n, transform: `translateY(${(1 - n) * -14}px)`, boxShadow: "0 6px 24px rgba(0,0,0,.35)", maxWidth: "100%", textAlign: "center" }}>{note}</div> : null}
     </div>
   );
 };
 
-/** Word-by-word captions: groups of up to 3 words, the spoken word pops in the accent colour. */
+/** Word-by-word captions: groups of up to 3 words, the spoken word pops in the accent colour.
+ *  They sit in the bottom band the shots keep free, never in the middle over the action:
+ *  video 16:9 = bottom ~18% (smaller subtitle-sized words), short 9:16 = bottom ~28%, above the Shorts buttons and title. */
 const Captions: React.FC<{ words: Word[]; accent: string }> = ({ words, accent }) => {
-  const f = useCurrentFrame(); const { fps } = useVideoConfig(); const t = f / fps;
+  const f = useCurrentFrame(); const { fps, width, height } = useVideoConfig(); const t = f / fps;
+  const wide = width > height;
+  const C = wide ? { bottom: 56, size: 60, stroke: 7, gap: "2px 22px", side: 160 } : { bottom: 340, size: 84, stroke: 9, gap: "4px 30px", side: 60 };
   const groups: Word[][] = [];
   for (const w of words) {
     const g = groups[groups.length - 1];
@@ -60,13 +73,13 @@ const Captions: React.FC<{ words: Word[]; accent: string }> = ({ words, accent }
   const g = groups.find((g, i) => t >= g[0].start - 0.05 && t < (groups[i + 1]?.[0].start ?? g[g.length - 1].end + 0.6));
   if (!g) return null;
   return (
-    <div style={{ position: "absolute", bottom: 430, left: 60, right: 60, display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "4px 34px" }}>
+    <div style={{ position: "absolute", bottom: C.bottom, left: C.side, right: C.side, display: "flex", flexWrap: "wrap", justifyContent: "center", gap: C.gap }}>
       {g.map((w, i) => {
         const on = t >= w.start && t < w.end + 0.08;
         const k = spring({ frame: f - Math.round(w.start * fps), fps, config: { damping: 12, stiffness: 180 } });
-        return <span key={i} style={{ fontFamily, fontWeight: 900, fontSize: 92, lineHeight: 1.15, color: on ? accent : "#fff",
+        return <span key={i} style={{ fontFamily, fontWeight: 900, fontSize: C.size, lineHeight: 1.15, color: on ? accent : "#fff",
           transform: `scale(${on ? 1 + 0.03 * k : 1})`, transformOrigin: "center bottom", display: "inline-block",
-          WebkitTextStroke: "10px #000", paintOrder: "stroke fill", textShadow: "0 8px 24px rgba(0,0,0,.6)" }}>{w.text.toUpperCase()}</span>;
+          WebkitTextStroke: `${C.stroke}px #000`, paintOrder: "stroke fill", textShadow: "0 8px 24px rgba(0,0,0,.6)" }}>{w.text.toUpperCase()}</span>;
       })}
     </div>
   );
@@ -80,12 +93,12 @@ export const Main: React.FC<Timeline> = (t) => {
       {t.scenes.map((s, i) => (
         <Sequence key={i} from={Math.round(s.start * fps)} durationInFrames={Math.round((s.duration + FADE) * fps)}>
           <SceneView s={s} fps={fps} accent={t.accent} lines={t.lines} isFirst={i === 0} isLast={i === t.scenes.length - 1} />
-          {s.label && s.engine !== "kinetic" ? <Label text={s.label} accent={t.accent} /> : null}
+          {s.engine !== "kinetic" ? <TopTags label={s.label} note={s.note} accent={t.accent} /> : null}
         </Sequence>
       ))}
       {/* cinematic vignette */}
       <AbsoluteFill style={{ background: "radial-gradient(ellipse at center, rgba(0,0,0,0) 55%, rgba(0,0,0,.55) 100%)" }} />
-      <Captions words={t.captions} accent={t.accent} />
+      {t.showCaptions ? <Captions words={t.captions} accent={t.accent} /> : null}
       {/* progress bar */}
       <div style={{ position: "absolute", top: 0, left: 0, height: 10, width: `${(f / durationInFrames) * 100}%`, background: t.accent }} />
       {(t.sfx || []).map((x, i) => (

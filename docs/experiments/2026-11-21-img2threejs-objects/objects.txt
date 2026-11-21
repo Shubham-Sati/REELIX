@@ -1,0 +1,17 @@
+# name | height m | length m   (same sizes as the kit experiment, for a fair side-by-side)
+rocks|0.7|1.6
+mountain|8|12
+pine|5|2.6
+palm|5.5|4
+tree|4.5|3.6
+nest|0.45|0.9
+cottage|5|5
+townhouse|7|4
+hut|3.5|4
+car|1.5|4.2
+bus|3|9
+train|3.8|8
+bicycle|1.05|1.75
+motorbike|1.1|2
+sailboat|5|4.5
+plane|3|8

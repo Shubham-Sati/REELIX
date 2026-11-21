@@ -1,0 +1,37 @@
+Quaternius models, CC0 1.0, downloaded 21 Nov 2026 (poly.pizza and quaternius.com)
+name | title | author | licence | size | page
+mountain | Mountain | Quaternius | CC0 1.0 | 16 KB | https://poly.pizza/m/7HYR2s9JVi
+mountain-group | Mountain Group | Quaternius | CC0 1.0 | 57 KB | https://poly.pizza/m/a52gSEEq8X
+rocks | Rocks | Quaternius | CC0 1.0 | 5 KB | https://poly.pizza/m/OQvi8PIZ40
+pine | Pine | Quaternius | CC0 1.0 | 2096 KB | https://poly.pizza/m/igSu0cPoBz
+palm | Palm Tree | Quaternius | CC0 1.0 | 113 KB | https://poly.pizza/m/DsrrAYmucG
+tree | Tree | Quaternius | CC0 1.0 | 2480 KB | https://poly.pizza/m/qZtx0AHhcy
+house | House | Quaternius | CC0 1.0 | 1043 KB | https://poly.pizza/m/roqiHdrpgc
+townhouse | Town House | Quaternius | CC0 1.0 | 1892 KB | https://poly.pizza/m/imVkxz7oZD
+hut | Hut | Quaternius | CC0 1.0 | 35 KB | https://poly.pizza/m/4MJWbyd6vw
+car | Car | Quaternius | CC0 1.0 | 170 KB | https://poly.pizza/m/unqqkULtRU
+train-front | Locomotive Front | Quaternius | CC0 1.0 | 801 KB | https://poly.pizza/m/WY84FHug9s
+train-carriage | Locomotive Passenger Carriage | Quaternius | CC0 1.0 | 172 KB | https://poly.pizza/m/woQPFlzPHM
+sailboat | Sail Boat | Quaternius | CC0 1.0 | 56 KB | https://poly.pizza/m/BgSZXwmm7k
+boat | Boat | Quaternius | CC0 1.0 | 13 KB | https://poly.pizza/m/5UEl54KsuC
+bus | Bus (Public Transport Pack, OBJ) | Quaternius | CC0 | from the pack's Google Drive
+schoolbus | SchoolBus | Quaternius | CC0 | same
+bicycle | Bicycle | Quaternius | CC0 | same
+taxi, train | Taxi, Train | Quaternius | CC0 | same
+v-birch | Birch Trees | Quaternius | CC0 1.0 | 4096 KB | https://poly.pizza/m/R7qMWzb7nk
+v-dead | Dead Trees | Quaternius | CC0 1.0 | 2679 KB | https://poly.pizza/m/F5I0Q7TwO5
+v-trees | Trees | Quaternius | CC0 1.0 | 3328 KB | https://poly.pizza/m/etFGNvsiFv
+v-pines | Pine Trees | Quaternius | CC0 1.0 | 97 KB | https://poly.pizza/m/oYtDty0fR6
+v-palms | Palm Trees | Quaternius | CC0 1.0 | 1094 KB | https://poly.pizza/m/VYslw9DEi6
+v-fantasy-house | Fantasy House | Quaternius | CC0 1.0 | 400 KB | https://poly.pizza/m/BH2XHWUNmF
+v-house2 | House | Quaternius | CC0 1.0 | 153 KB | https://poly.pizza/m/RSwoYSLblu
+v-townhouse2 | Town House | Quaternius | CC0 1.0 | 743 KB | https://poly.pizza/m/sDQJBImZuw
+v-huts | Huts | Quaternius | CC0 1.0 | 90 KB | https://poly.pizza/m/j9uMWazOBh
+v-police | Police Car | Quaternius | CC0 1.0 | 176 KB | https://poly.pizza/m/BwwnUrWGmV
+v-sports | Sports Car | Quaternius | CC0 1.0 | 170 KB | https://poly.pizza/m/1mkmFkAz5v
+v-suv | SUV | Quaternius | CC0 1.0 | 177 KB | https://poly.pizza/m/xsMtZhBkxL
+v-cargo-train | Cargo Train Front | Quaternius | CC0 1.0 | 482 KB | https://poly.pizza/m/CdAKX30G6x
+v-sail-ship | Sail Ship | Quaternius | CC0 1.0 | 209 KB | https://poly.pizza/m/cIzO4MBPqI
+v-ship | Ship | Quaternius | CC0 1.0 | 906 KB | https://poly.pizza/m/mEQj2wZ3GC
+v-mountain2 | Mountain | Quaternius | CC0 1.0 | 46 KB | https://poly.pizza/m/XY4ej3Zg3I
+v-rock | Rock | Quaternius | CC0 1.0 | 29 KB | https://poly.pizza/m/RtLRqYjfMs

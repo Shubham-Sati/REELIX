@@ -6,6 +6,7 @@ export type Motion = "zoom-in" | "zoom-out" | "pan-left" | "pan-right" | "pan-up
 export type Engine = "image" | "parallax" | "kinetic" | "custom" | "clip";
 export type Scene = {
   image: string; start: number; duration: number; motion: Motion; label?: string;
+  note?: string;               // the shot's own label (storyboard shot "label"), drawn in the top band under the scene label
   engine?: Engine;
   fg?: string;                 // parallax: cut-out subject PNG (transparent)
   text?: string; sub?: string; // kinetic: headline + small line
@@ -19,6 +20,7 @@ export type FontName = "Montserrat" | "Anton" | "BebasNeue" | "Fraunces" | "Cave
 export type Timeline = {
   width: number; height: number; fps: number; title: string; accent: string; font?: FontName;
   scenes: Scene[]; voice: string; music: string | null; musicVolume?: number; captions: Word[]; durationSec: number;
+  showCaptions?: boolean;   // draw the word captions on the video (brief.json captions; off unless asked for)
   sfx?: Sfx[];
   lines?: { speaker: string; start: number; end: number; text?: string }[];   // spoken lines (3D figures move their mouths on their own lines)
 };

@@ -1,0 +1,5 @@
+file '/Users/shubhamsati/All Content/Claude/REELIX/docs/experiments/2026-11-19-aimotion-v4-speed/clips/one/1-street-sprint.mp4'
+file '/Users/shubhamsati/All Content/Claude/REELIX/docs/experiments/2026-11-19-aimotion-v4-speed/clips/one/2-face-closeup.mp4'
+file '/Users/shubhamsati/All Content/Claude/REELIX/docs/experiments/2026-11-19-aimotion-v4-speed/clips/one/3-school-gate.mp4'
+file '/Users/shubhamsati/All Content/Claude/REELIX/docs/experiments/2026-11-19-aimotion-v4-speed/clips/one/4-corridor-slowdown.mp4'
+file '/Users/shubhamsati/All Content/Claude/REELIX/docs/experiments/2026-11-19-aimotion-v4-speed/clips/one/5-enter-class.mp4'
