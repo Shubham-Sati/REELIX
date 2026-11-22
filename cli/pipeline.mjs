@@ -7,11 +7,17 @@ import { spawn, spawnSync } from "node:child_process";
 import pc from "picocolors";
 import { ROOT, J, readJson, findClaude, fmtDur, slug, agentModels, LIMIT_RE, limitReset } from "./common.mjs";
 import { panel, draw } from "./ui.mjs";
+import { sparseTags } from "./tags.mjs";
 import { tidyMemory } from "./memory.mjs";
 
 const VD = path.resolve(process.argv[2] || "");
 if (!fs.existsSync(path.join(VD, "brief.json"))) { console.error("usage: node cli/pipeline.mjs <video-folder with brief.json>"); process.exit(1); }
 const B = readJson(path.join(VD, "brief.json"));
+// Phase 2 switch (todos/optimise_time_and_usage.md Phase 2, docs/experiments/2026-11-22-parallel-phase2): only when the video's
+// brief.json says "parallel": true. Then: music and sound effects run during the 3D build (2.3; music only with 5 GB RAM free) and the
+// log shows shots built and when each shot appeared (2.5). Tested and reverted on 22 Nov: parallel 3D parts (2.1) and one file per
+// place (2.2) were slower and used 30% more tokens (code kept in the experiment's code-parallel/). Normal videos run exactly as before.
+const PAR = B.parallel === true;
 // Keep the Mac awake until this run ends, however it was started (terminal, the ideas list, the FE-Reelix app).
 // caffeinate -w <our pid> stops by itself the moment this pipeline exits, also after a crash or Ctrl-C. A closed lid still sleeps.
 if (process.platform === "darwin" && fs.existsSync("/usr/bin/caffeinate")) {
@@ -39,6 +45,8 @@ function sh(cmd, args, logName, onLine, stdinFile) {
  *  on a usage/rate limit or overload it re-runs the same job on the next model. */
 async function agent(name, task, logName) {
   if (!CLAUDE) throw new Error("Claude Code CLI not found. Install it or open the Claude desktop app once.");
+  // Experiment copies (brief.json "experiment"): the same story was made before in another videos/ folder; the test measures making it again.
+  if (B.experiment) task += ` EXPERIMENT (a timing test, ${B.experiment}): never open, read or copy files from any other folder in videos/ (an earlier video with the same topic exists; make everything yourself), and do not write to .claude/agent-memory (lessons from tests must not go into memory).`;
   const tools = "Read Write Edit Glob Grep Bash WebSearch WebFetch";
   const lp = path.join(LOG, logName);
   const models = agentModels(name);
@@ -68,6 +76,33 @@ async function agent(name, task, logName) {
     await new Promise((r) => setTimeout(r, reset.ms + 120000));   // 2 minutes after the reset, to be safe
     if (running) { running.detail = was; running.paused = false; running.waitUntil = 0; running.t0 = Date.now(); }   // the step's own clock starts again
   }
+}
+
+/* ---------------------------------------------------------------- Phase 2 switch (PAR): 2.3 + 2.5 */
+/** Free RAM in GB the Mac can hand out now (vm_stat: free + inactive + speculative + purgeable pages). null if it cannot be read. */
+function freeGB() {
+  if (process.env.REELIX_TEST_FREE_GB) return Number(process.env.REELIX_TEST_FREE_GB);   // only for testing the guard (pretend this much is free)
+  try {
+    const out = spawnSync("vm_stat", { encoding: "utf8" }).stdout || ""; const page = Number(/page size of (\d+)/.exec(out)?.[1] || 16384);
+    const pg = (k) => Number(new RegExp(`Pages ${k}:\\s+(\\d+)`).exec(out)?.[1] || 0);
+    return ((pg("free") + pg("inactive") + pg("speculative") + pg("purgeable")) * page) / 1e9;
+  } catch { return null; }
+}
+// RAM guard for 2.3 (the user, 22 Nov: "our pipeline should not force only parallel as it will make laptop hang"). Measured 22 Nov 2026:
+// the set-builder's picture checks need ~1.5 GB at their peak (+ Claude ~0.15 GB) -> 2 GB, and 3 GB always stay free for macOS and the
+// user's apps. Music runs next to the 3D build only when at least 5 GB are free; otherwise it runs first, as in a normal video.
+const NEXT_TO_3D_GB = 3 + 2;
+const roomForMusic = () => { const f = freeGB(); return f != null && f >= NEXT_TO_3D_GB; };
+
+/** 2.5: when each shot file first appeared (logs/shot-times.json) and "shots built" for the progress line. */
+const shotSeen = {};
+function watchShots(it) {
+  const dir = V("project", "custom"); if (!fs.existsSync(dir)) return;
+  const total = shots().filter((s) => s.engine !== "kinetic").length;
+  for (const f of fs.readdirSync(dir)) if (/^S\d+_\d+\.tsx$/.test(f) && !shotSeen[f]) shotSeen[f] = new Date().toISOString();
+  const n = Object.keys(shotSeen).length;
+  if (n) { fs.writeFileSync(V("logs", "shot-times.json"), JSON.stringify({ about: "when each 3D shot file first appeared (Phase 2 experiment, 2.5)", total, shots: shotSeen }, null, 1));
+    it.count = `${n}/${total} shots built`; it.frac = Math.max(it.frac || 0, Math.min(0.95, n / total)); }
 }
 
 /* ---------------------------------------------------------------- stages */
@@ -392,6 +427,9 @@ function buildTimeline() {
   const lib = readJson(J("library", "sfx", "index.json"), []); fs.mkdirSync(V("assets", "sfx"), { recursive: true });
   const sfx = (readJson(V("assets", "sfx.json"), []) || []).map((x) => { const e = lib.find((l) => l.id === x.id); if (!e) return null;
     fs.mkdirSync(path.dirname(V("assets", e.file)), { recursive: true }); fs.copyFileSync(J("library", e.file), V("assets", e.file)); return { file: e.file, start: Math.max(0, +x.start), volume: x.volume ?? 0.4 }; }).filter(Boolean);
+  // top-band tags only on the hook and special moments (cli/tags.mjs; the user, 22 Nov 2026: not on most of the video)
+  const tagged = sparseTags(scenes, S.scenes.flatMap((sc) => sc.shots), B.format === "video");
+  scenes.splice(0, scenes.length, ...tagged);
   const tl = { font: S.font || "Montserrat", sfx, lines: (L.lines || []).map((l) => ({ speaker: l.speaker, start: l.start, end: l.end })), width: B.width, height: B.height, fps: B.fps, title: B.title, accent: S.accent || "#FFB703", scenes, voice: "voice.wav",
     music: fs.existsSync(V("assets", "music.wav")) ? "music.wav" : null, musicVolume: 0.18, captions: cap, showCaptions: B.captions === true, durationSec: +total.toFixed(2) };
   fs.writeFileSync(V("project", "timeline.json"), JSON.stringify(tl, null, 1));
@@ -404,15 +442,32 @@ const estOf = (i) => { if (i.state !== "waiting" || !i.guess) return i.est; try 
 const remaining = () => items.reduce((s, i) => s + (i.state === "waiting" ? estOf(i) : i.state === "running" ? (i.paused ? i.est * (1 - (i.frac || 0)) + Math.max(0, (i.waitUntil - Date.now()) / 1000) : Math.max(0, i.est - (Date.now() - i.t0) / 1000)) : 0), 0);   // a paused step: its work is still to do, plus the wait
 const pct = () => { const tot = items.reduce((s, i) => s + i.est, 0); return Math.round((items.reduce((s, i) => s + (["done", "skipped"].includes(i.state) ? i.est : i.state === "running" ? (i.paused ? i.frac || 0 : Math.min(0.95, Math.max(i.frac || 0, (Date.now() - i.t0) / 1000 / i.est))) * i.est : 0), 0) / tot) * 100); };   // a paused step does not move
 function tick(force = false) {
-  for (const i of items) if (i.state === "running" && !i.paused) { i.left = Math.max(0, i.est - (Date.now() - i.t0) / 1000); if (!i.frac || i.id !== "voice") i.frac = Math.max(i.frac || 0, Math.min(0.95, (Date.now() - i.t0) / 1000 / i.est)); }
+  for (const i of items) if (i.state === "running" && !i.paused) { i.left = Math.max(0, i.est - (Date.now() - i.t0) / 1000); if (PAR && i.id === "build3d") { watchShots(i); continue; } if (!i.frac || i.id !== "voice") i.frac = Math.max(i.frac || 0, Math.min(0.95, (Date.now() - i.t0) / 1000 / i.est)); }
   if (process.stdout.isTTY) draw(panel(head, STEPS, items, remaining(), note));
-  else if (force || Date.now() - lastLog > 60000) { lastLog = Date.now(); const r = items.find((i) => i.state === "running"); console.log(`[${new Date().toTimeString().slice(0, 8)}] ${pct()}% · ~${fmtDur(remaining())} left · ${r ? r.label + (r.detail ? ` (${r.detail})` : "") : "—"}`); }
+  else if (force || Date.now() - lastLog > 60000) { lastLog = Date.now();
+    // PAR: every running step, the main one (last started) first, joined with " ‖ " (FE-Reelix shows them all as running); a count "(n/m ...)" last
+    const rs = items.filter((i) => i.state === "running"); const r = PAR ? rs[rs.length - 1] : rs[0];
+    const lab = (i) => i.label + (i.detail || i.count ? ` (${[i.detail, i.count].filter(Boolean).join(" · ")})` : "");
+    const others = PAR ? rs.filter((i) => i !== r).map(lab) : [];
+    console.log(`[${new Date().toTimeString().slice(0, 8)}] ${pct()}% · ~${fmtDur(remaining())} left · ${r ? [lab(r), ...others].join(" ‖ ") : "—"}`); }
 }
 const timer = setInterval(tick, 1000);
 const t0 = Date.now();
+const background = [];   // PAR (2.3): music and sound effects run next to the 3D build
+const runBg = async (it) => {
+  it.state = "running"; it.t0 = Date.now(); tick(true);
+  try { await it.run(it); it.state = "done"; it.frac = 1; }
+  catch (e) { it.state = "skipped"; note = pc.yellow(`${it.label} skipped: ${e.message}`); }   // music and sfx are optional
+  tick(true);
+};
 for (const it of items) {
+  // PAR: the 3D build wrote an early timeline (shot times) before music.wav and sfx.json existed: wait for them, then write it again
+  if (PAR && it.id === "timeline" && background.length) { await Promise.all(background); background.length = 0; buildTimeline(); }
   if (it.out && fs.existsSync(V(it.out))) { it.state = "done"; continue; }
   if (it.when && !it.when()) { it.state = "skipped"; continue; }
+  if (it.id === "music" && B.music === false) { it.state = "skipped"; continue; }   // music switched off (brief.json "music": false; reelix --no-music; FE-Reelix Music Off)
+  if (PAR && (it.id === "sfx" || (it.id === "music" && roomForMusic()))) { background.push(runBg(it)); continue; }
+  if (PAR && it.id === "music") note = pc.yellow(`only ${freeGB()?.toFixed(1)} GB RAM free: music runs first, before the 3D build`);
   it.state = "running"; it.t0 = Date.now(); tick(true);
   try { await it.run(it); it.state = "done"; it.frac = 1; }
   catch (e) {

@@ -7,3 +7,4 @@
 - Storyboard has no shot times; only scene cuts are known (first line start of each scene in lines.json). Anchor whooshes there and kinetic-text hits at the shot's start (a hit at t=0.05 before the first word works).
 - Ambience files (fire, crowd, wind) are ~3 s long: one per scene, starting more than 0.2 s from any whoosh or hit.
 - Density that worked: 10 effects in a 25 s short and 12 in a 29 s short (3 whoosh, 2 hit, riser, heartbeat, fire/wind/wind/crowd ambience) stayed under the voice, not cluttered. The riser fits the line before the final scene's cut.
+- Long 5-min video (v: village-to-city): 56 effects, mostly whoosh-soft 0.35 at every line-group cut (0.25 s early), whoosh 0.4 on scene cuts, riser before the big scene turn, crowd/wind/fire/engine ambiences; skipped whoosh where riser/jingle already sat within 0.2 s.

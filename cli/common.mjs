@@ -50,19 +50,19 @@ export function lengthFor(format, input) {
 }
 /** Create videos/<date>-<slug>/brief.json. Returns the folder.
  *  length: see lengthFor() above (a preset, or for a video its own length). captions: draw word captions on the video (default off). */
-export function newVideo(name, about, format, style, look = "painted", length = "standard", captions = false) {
+export function newVideo(name, about, format, style, look = "painted", length = "standard", captions = false, music = true) {
   const F = readJson(J("config", "formats.json"));
   const dir = J("videos", `${today()}-${slug(name)}`);
   fs.mkdirSync(path.join(dir, "logs"), { recursive: true });
   const f = F[format];
   const len = lengthFor(format, length) || lengthFor(format);   // a length that is not understood falls back to the default one
   const brief = { name: slug(name), title: name.replace(/-/g, " "), about, format, style, styleLabel: F.styles[style].label,
-    width: f.width, height: f.height, fps: f.fps, imageW: f.imageW, imageH: f.imageH, targetSec: len.sec, length: len.key, lengthLabel: len.label, captions: captions === true,
+    width: f.width, height: f.height, fps: f.fps, imageW: f.imageW, imageH: f.imageH, targetSec: len.sec, length: len.key, lengthLabel: len.label, captions: captions === true, music: music !== false,
     imageStyle: F.styles[style].imageStyle, look, lookLabel: readJson(J("config", "looks.json"))[look]?.label || look,
     lookStyle: readJson(J("config", "looks.json"))[look]?.styleLock || "", pictures: readJson(J("config", "looks.json"))[look]?.pictures !== false,
     imageModel: readJson(J("config", "looks.json"))[look]?.imageModel || "schnell", wan: !!readJson(J("config", "looks.json"))[look]?.wan, created: new Date().toISOString() };
   fs.writeFileSync(path.join(dir, "brief.json"), JSON.stringify(brief, null, 1));
-  fs.writeFileSync(path.join(dir, "brief.md"), `# ${brief.title}\n\n${about}\n\n- Format: ${format} (${f.width}x${f.height})\n- Style: ${brief.styleLabel}\n- Look: ${brief.lookLabel}\n- Target length: ~${brief.targetSec}s (${len.label.toLowerCase()}, length \"${len.key}\")\n- Captions on the video: ${brief.captions ? "on" : "off"}\n`);
+  fs.writeFileSync(path.join(dir, "brief.md"), `# ${brief.title}\n\n${about}\n\n- Format: ${format} (${f.width}x${f.height})\n- Style: ${brief.styleLabel}\n- Look: ${brief.lookLabel}\n- Target length: ~${brief.targetSec}s (${len.label.toLowerCase()}, length \"${len.key}\")\n- Captions on the video: ${brief.captions ? "on" : "off"}\n- Background music: ${brief.music ? "on" : "off"}\n`);
   return dir;
 }
 /** Models to try for an agent, in order (.claude/models.json): the first, then fallbacks on a limit or overload. */

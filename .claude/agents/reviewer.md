@@ -22,7 +22,8 @@ Check (read `.claude/skills/long-form-continuity-bible/SKILL.md` for what must n
    - **explainer**: DID I UNDERSTAND IT? Watch it as someone who did not know the topic. For each shot ask: what is this showing,
      and can I point at the thing the voice just named? A shot whose "point" is missing, tiny, hidden or off to the side = P1.
      Could you repeat the main idea afterwards in one sentence? If not, say which step is missing or out of order (P0).
-     Terms and numbers spoken should be on screen as a label while they are said (missing = P2). Busy frames that hide the
+     Top-band tags are rare on purpose (only the opening and special moments: a key number, date, term or turning point; see
+     cli/tags.mjs): never ask for more labels. A key number with no tag is fine when the shot shows it; tags on most shots = P2. Busy frames that hide the
      subject = P2.
    - **animated**: DID I FEEL IT? Is there a story beat in every shot, does the acting read, does the payoff land?
 Write `<video>/review.json`:

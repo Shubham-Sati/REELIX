@@ -69,7 +69,7 @@ templates/remotion/*.png
 templates/remotion/*.jpg
 
 # ---- Private working notes ----
-todos.md
+todos/*
 
 # ---- 3D model library: the model files come from setup (python3 tools/model_library.py fetch); only the lists are in git ----
 library/models/*
