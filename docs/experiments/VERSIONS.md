@@ -10,6 +10,7 @@
 | **Lego V3** | Human proportions (lathe body, knees, elbows, egg head), real-looking animals, rigid things kept sharp, apron as cloth, hips-lean fix, glowing fire, molten glass | `2026-11-19-lego-smooth` (files `*-V2-human.*`, `*-V3-fire-*`); crowd test `2026-11-19-lego-crowd-test` | Experiment only |
 | **Lego V4** | Life in motion: breathing, blinking, 8 expressions, head-first turns, anticipation, jumps, weight shift, fingers, collar and cuffs, contact shadows, character sheet | `2026-11-19-lego-v4-life`; full Short `2026-11-19-balloon-v4` (adds knee fix + sit pose) | Experiment only (approved: expressions and motion) |
 | **Lego V5** | Body rework: hair fitted to the head, one continuous arm and leg (no joint circles), solid chubby hands, clean coat front; V4 expressions and motion kept | `2026-11-19-lego-v5`; shared kit `library/templates/toy3d-kit.tsx` | **In pipeline** (default today) |
+| **Lego V5 + soft look** | Calm colours like the rock salt video: every colour softened (90% strength, darks lifted a little, skin untouched), lighter sky with soft haze; set-builder/storyboard rules for light skies, 3-4 colours, light grey cities, one subject per frame | `2026-11-22-soft-look` (Option A); shared kit SOFT block (old kit kept in its `kit/` folder) | **In pipeline** (from 22 Nov 2026) |
 
 ## 3D animated (AI motion) look (`aimotion`)
 | Version | What it added | Where | Status |

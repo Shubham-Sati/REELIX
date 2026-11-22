@@ -17,3 +17,5 @@ Lessons from earlier videos. Add 1-3 short, specific lessons after each video; k
 - (one-bus-40-cars, 60 s) Hooks scored 47-53 until "Nobody tells you why you [lose X] when [digit] [thing] do 1 [Name]'s job" (71): "Nobody tells you why" lifts CURIOSITY, "you lose" lifts STAKES. Never put an unsourced number in the hook just for score.
 - Disputed numbers (tram 345 vs 562 passengers): say the safe floor ("over three hundred") that every source supports. NACTO, citynews, busnews, LA/Atlanta PDFs refuse WebFetch.
 - Briefs that say "only person ever" overclaim; sources say "only one known/documented". Write "known to" in title and script.
+- (village-to-city, 300 s fiction brief) Fiction briefs: say "this family is made up" early, weave real sourced stats via narrator; invented dialogue is fine for fictional people only. Use floors for restated stats (Nasscom 5.43 vs 5.67 M -> "more than five million").
+- pib.gov.in, deccanherald, business-standard, un.org, tomtom.com, vikaspedia refuse WebFetch; phys.org, CNBC, ThePrint, drishtiias, thenewsminute, hansindia, newsonair open.

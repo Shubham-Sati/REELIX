@@ -26,11 +26,16 @@ Characters (per video; read `.claude/skills/long-form-continuity-bible/SKILL.md`
 - Every person or animal who appears in more than one shot is a character. List them in "characters" and in each shot's "cast" (empty list when nobody is in frame).
 - Pick ONE anchor shot per character: the shot where they are clearest (front or three-quarter view, face fully visible, medium shot, nobody overlapping them). This shot is drawn FIRST and the character is cut out of it as the reference for every other shot. One shot can anchor several characters when they stand apart, side by side; "position" is their place counting from the left (1 = leftmost) and "of" is how many people are in that shot. Write the anchor shot's prompt so faces are clear and people do not overlap.
 - If no planned shot shows a character clearly, change one shot so it does. Never add extra shots just for references.
+TAGS (the user, 22 Nov 2026: a title chip over almost every shot "does not look good"): the top-band chips (scene "label", shot
+  "label") are RARE. Give a shot a "label" only for the opening shot (the hook) or a special moment: the key number, date or term
+  being taught, or the story's turning point, and mark that shot "special": true. About 3-4 per minute at most, never on two shots
+  in a row; most shots have no label. In a 16:9 video the scene labels are chapter titles and stay. The timeline keeps only these
+  (cli/tags.mjs), so labels on ordinary shots are dropped anyway.
 Style (brief.json "style") decides what a shot IS:
 - **explainer**: every shot shows ONE thing the line is about, big and clear in the middle of the frame, and the viewer must be
   able to say what it is. For each shot also write "claim" (the one sentence this shot proves) and "point" (the thing on screen
   the line names: the flame, the arrow, the part that moves). Use the scene "label" for the term or number being taught
-  (SILICA, 1700 degC) and keep it on screen while that word is spoken. Prefer plain, uncluttered frames: one subject, simple
+  (SILICA, 1700 degC) and keep it on screen while that word is spoken (it is one of the rare tags, see TAGS). Prefer plain, uncluttered frames: one subject, simple
   background, no crowds or scenery that competes. Compare things side by side when the line compares them. A shot with nothing
   to point at is a wasted shot.
 - **animated**: every shot is a story beat: who is there, what changes, how it feels. Scenery, mood and acting matter.
@@ -61,3 +66,4 @@ Looks (brief.json "look"): use brief.lookStyle as the base of "styleLine" word f
 - every shot has "engine": "custom" (or "kinetic" for 1-2 big text moments); "imagePrompt" is "" and there are no anchors.
 - instead write for each shot: "set" (where: e.g. kitchen with fireplace, town square, sky over rooftops), "cast", "action" (what each character DOES on screen, timed to the line: walks in from the left, points at the fire, looks up, waves; something must move in every shot), "camera" (push-in, slow pan, low angle looking up...).
 - "characters" still lock each look (age cues, height, build, hair, facial hair, clothes and colours) so the 3D figures match it.
+- soft look (approved 2026-11-22): "styleLine" names a calm palette of 3-4 soft main colours plus light skies (night or city = soft blue-grey dusk, city buildings light grey, never navy), and "clean uncluttered framing with one clear subject in the middle". Plan sets with few background objects.

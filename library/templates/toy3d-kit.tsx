@@ -7,6 +7,9 @@
 //  - One <Stage> per shot (ThreeCanvas inside). Keep figures and the action in the middle band, in BOTH formats:
 //    16:9 top ~15% labels, bottom ~18% captions; 9:16 top ~17% labels, bottom ~28% captions. Text is never drawn over
 //    the animation: the engine draws the scene label and the storyboard shot "label" in the top band (no label code here).
+//  - Soft look (approved 2026-11-22, docs/experiments/2026-11-22-soft-look): every colour is softened by itself (SOFT below: 90% colour
+//    strength, darks lifted a little; skin, near-white and near-black untouched) and the Stage sky is lightened with a soft haze, so
+//    sets look calm like the rock salt video. Shots need no code for it; use light skies, 3-4 main colours and few background objects.
 //  - A character's look comes ONLY from its spec (characters/cast.json): same spec in every shot = same person.
 //  - Shape rule: soft things are smooth (Ball, Pill, Lathe, Box with round 0.3-0.5); rigid things (tables, walls, glass,
 //    machines) are Box with the default tiny bevel. Never flat shading. tools/smooth3d.py runs before every render.
@@ -34,6 +37,39 @@ import { ThreeCanvas } from "@remotion/three";
 import * as THREE from "three";
 import { useThree } from "@react-three/fiber";
 import { RoundedBoxGeometry } from "three/examples/jsm/geometries/RoundedBoxGeometry.js";
+
+/* ------------------------------------------------------------------ soft look (approved 2026-11-22, Option A of docs/experiments/2026-11-22-soft-look)
+   Every colour given as a string (props, clothes, sets, backgrounds, fog) and every colour baked into a library model is softened once:
+   colour strength x sat, mid and dark tones lifted a little toward liftTo. Near-white (lights, milk) and near-black (hair, eyes) stay,
+   and skin colours are never changed (Toy registers its spec.skin), so people keep their identity. sky = how far the Stage background
+   moves toward a pale version of itself; haze = default fog [near, far] in metres when a shot passes none.
+   Set SOFT.on = false in a video's _kit.tsx copy for the old, stronger colours. */
+export const SOFT = { on: true, sat: 0.9, lift: 0.08, liftTo: 0.75, keepAbove: 0.85, keepBelow: 0.14, sky: 0.35, haze: [30, 95] as [number, number] };
+const SOFT_KEEP = new Set<string>();
+/** Never soften this colour (skin). */
+export const keepColour = (c?: string) => { if (c) SOFT_KEEP.add(c.toLowerCase()); };
+const _hsl = { h: 0, s: 0, l: 0 };
+export function softenColor(c: THREE.Color) {
+  if (!SOFT.on) return c;
+  c.getHSL(_hsl, THREE.SRGBColorSpace);
+  const l = _hsl.l > SOFT.keepAbove || _hsl.l < SOFT.keepBelow ? _hsl.l : _hsl.l + (SOFT.liftTo - _hsl.l) * SOFT.lift;
+  return c.setHSL(_hsl.h, _hsl.s * SOFT.sat, l, THREE.SRGBColorSpace);
+}
+const _setStyle = THREE.Color.prototype.setStyle;
+if (!(THREE.Color.prototype as any).__soft) {   // patch once, even when several kit copies are bundled
+  (THREE.Color.prototype as any).__soft = true;
+  THREE.Color.prototype.setStyle = function (this: THREE.Color, style: string, cs?: any) {
+    _setStyle.call(this, style, cs);
+    return SOFT_KEEP.has(String(style).toLowerCase()) ? this : softenColor(this);
+  } as any;
+}
+/** The Stage sky: SOFT.sky of the way toward a pale version of the same hue (navy night -> soft slate dusk). */
+const softSky = (bg: string) => {
+  if (!SOFT.on || !SOFT.sky) return bg;
+  const c = new THREE.Color(); _setStyle.call(c, bg); c.getHSL(_hsl, THREE.SRGBColorSpace);
+  const pale = new THREE.Color().setHSL(_hsl.h, Math.min(_hsl.s, 0.45) * 0.6, 0.92, THREE.SRGBColorSpace);
+  return "#" + c.lerp(pale, SOFT.sky).getHexString();
+};
 
 /* ------------------------------------------------------------------ time + motion helpers */
 /** Seconds since this shot started. */
@@ -64,13 +100,15 @@ export type Cam = { pos: [number, number, number]; look?: [number, number, numbe
 export const Stage: React.FC<{ camera: Cam; bg?: string; children: React.ReactNode; fog?: [string, number, number] }> = ({ camera, bg = "#f2dcc0", children, fog }) => {
   const { width, height } = useVideoConfig();
   const look = camera.look || [0, 1, 0];
+  const sky = softSky(bg);   // soft look: lighter sky, and a soft haze when the shot sets none
+  const haze: [string, number, number] | undefined = fog ? [fog[0].toLowerCase() === bg.toLowerCase() ? sky : fog[0], fog[1], fog[2]] : SOFT.on ? [sky, SOFT.haze[0], SOFT.haze[1]] : undefined;
   return (
-    <AbsoluteFill style={{ background: bg }}>
+    <AbsoluteFill style={{ background: sky }}>
       <ThreeCanvas width={width} height={height} shadows={{ type: THREE.PCFSoftShadowMap }} camera={{ fov: camera.fov || 38, position: camera.pos }}
         onCreated={({ camera: c }) => { c.lookAt(...look); }}>
         <CamSync pos={camera.pos} look={look} fov={camera.fov || 38} />
-        <color attach="background" args={[bg]} />
-        {fog ? <fog attach="fog" args={fog} /> : null}
+        <color attach="background" args={[sky]} />
+        {haze ? <fog attach="fog" args={haze} /> : null}
         {/* soft studio light: warm sky fill, key light with soft shadows, cool rim light from behind for round edges */}
         <hemisphereLight args={["#fff6e8", "#9a7a60", 1.25]} />
         <directionalLight position={[4, 8, 6]} intensity={1.7} castShadow shadow-mapSize-width={2048} shadow-mapSize-height={2048} shadow-radius={6} shadow-bias={-0.0004}
@@ -125,9 +163,11 @@ export type ToySpec = {
 export type Expr = "neutral" | "joy" | "laugh" | "sad" | "cry" | "angry" | "surprised" | "fear";
 export type Pose = {
   x?: number; z?: number; rotY?: number;     // where they stand and which way they face (radians, 0 = toward camera)
-  armL?: number; armR?: number;              // arm raise: 0 down, 1 straight forward, 1.6 up
-  armLSide?: number; armRSide?: number;      // arm out to the side 0..1
-  elbowL?: number; elbowR?: number;          // extra elbow bend (radians)
+  armL?: number; armR?: number;              // arm raise in RADIANS: 0 down, 0.8 half forward, 1.57 straight forward, 2.4 up-forward, 3.0 straight up
+  armLSide?: number; armRSide?: number;      // arm out to the side: 0 down at the side, 1 = about 55 deg out, 1.7 = straight out; negative swings it in front of the body
+  elbowL?: number; elbowR?: number;          // elbow bend in radians (0 straight, 1.57 right angle, at most 2.4); a forearm never folds back past straight up (it looks broken)
+  reachL?: Reach; reachR?: Reach;            // put the palm ON a spot and let the kit solve the arm (natural low elbow): "cheek" "mouth" "eyes" "chin" "ear" "head" "chest" "wave" "point", or [x, y, z] in the Toy's own frame (m, +z front, y from the feet). Use it whenever a hand touches the face or body.
+  reachK?: number;                           // 0..1 blend from the arm angles to the reach (animate it with kf / kfA); default 1
   head?: number; tilt?: number;              // head turn (radians), nod/tilt
   mouth?: number;                            // 0 closed .. 1 open (use talk())
   walk?: number;                             // walk phase in seconds (0 = standing)
@@ -246,7 +286,81 @@ export const ContactShadow: React.FC<{ r?: number; k?: number; p?: [number, numb
 
 /** A toy person with human proportions and life: breathing, blinking, expressions, weight shift, knees that bend,
  *  fingers, collar, cuffs and a swinging coat hem. Same spec = same character in every shot. */
+/* ------------------------------------------------------------------ arms (fix 2026-11-22, docs/experiments/2026-11-22-arm-fix)
+   Before, the help said "1.6 = arm up" while the angle is in radians (1.6 is only straight forward), so hands-to-face poses used too
+   little raise and too much elbow, and the forearm folded back over the shoulder like a broken arm. Now: correct help, reach targets
+   solved by search (like Cyclist's grips), and a guard that opens any elbow whose forearm would point back past straight up. */
+export type Reach = "cheek" | "cheeks" | "mouth" | "eyes" | "chin" | "ear" | "head" | "chest" | "wave" | "point" | V3;   // no "hip": the arm has no twist joint, so hands on hips with elbows out cannot be posed
+/** Palm and elbow of one arm in the Toy's own frame (no lean, no x/z/rotY) for raise r, side o, elbow e (same maths as the drawn arm). */
+function armFK(B: ReturnType<typeof toyBody>, side: 1 | -1, r: number, o: number, e: number) {
+  const q = new THREE.Quaternion().setFromEuler(new THREE.Euler(-r, 0, side * (0.06 + o * 0.9)));
+  const S = new THREE.Vector3(side * B.shoulderX, B.shoulderY, 0), E = new THREE.Vector3(0, -0.27 * B.h, 0);
+  const W = new THREE.Vector3(0, -0.22 * B.h - 0.03, 0.004).applyAxisAngle(new THREE.Vector3(1, 0, 0), -0.12 - r * 0.05 - e).add(E);
+  return { hand: W.applyQuaternion(q).add(S), elbow: E.clone().applyQuaternion(q).add(S) };
+}
+function reachPoint(B: ReturnType<typeof toyBody>, spec: ToySpec, s: 1 | -1, r: Reach): THREE.Vector3 {
+  if (Array.isArray(r)) return new THREE.Vector3(r[0], r[1], r[2]);
+  const R = spec.child ? 0.165 : 0.155, Y = B.legH + B.bodyH + B.headS * 0.62, fz = R * 0.95 + 0.035;   // fz: a palm in front of the face
+  switch (r) {
+    case "cheek": case "cheeks": return new THREE.Vector3(s * R * 0.8, Y - R * 0.5, fz * 0.75);
+    case "mouth": return new THREE.Vector3(s * R * 0.12, Y - R * 0.42, fz);
+    case "eyes": return new THREE.Vector3(s * R * 0.32, Y + R * 0.08, fz);
+    case "chin": return new THREE.Vector3(s * R * 0.1, Y - R * 0.9, fz * 0.75);
+    case "ear": return new THREE.Vector3(s * (R + 0.04), Y, 0.02);
+    case "head": return new THREE.Vector3(s * R * 0.45, Y + R * 0.92, 0.02);
+    case "chest": return new THREE.Vector3(s * 0.07, B.shoulderY - 0.14 * B.h, B.chest * B.depth + 0.09);
+    case "wave": return new THREE.Vector3(s * (B.shoulderX + 0.16), Y + R * 0.5, 0.1);
+    case "point": return new THREE.Vector3(s * B.shoulderX * 0.85, B.shoulderY + 0.02, 0.55 * B.h);
+  }
+  return new THREE.Vector3();
+}
+/** Where the elbow should go for some targets (hand on chest: elbow low and forward so the
+    forearm crosses in front of the body). */
+function elbowHint(B: ReturnType<typeof toyBody>, s: 1 | -1, r: Reach, T: THREE.Vector3): THREE.Vector3 | null {
+  if (r === "chest") return new THREE.Vector3(s * (B.shoulderX + 0.05), B.shoulderY - 0.25 * B.h, 0.13);
+  return null;
+}
+/** How far a point is inside the torso (0 = outside): the torso as an upright ellipse, chest wide, depth squashed. */
+function insideTorso(B: ReturnType<typeof toyBody>, p: THREE.Vector3) {
+  if (p.y < B.legH || p.y > B.shoulderY + 0.02) return 0;
+  const u = Math.min(1, Math.max(0, (p.y - B.legH) / (B.shoulderY - B.legH))), w = u < 0.45 ? B.waist + (B.hip - B.waist) * (1 - u / 0.45) * 0.5 : B.waist + (B.chest - B.waist) * Math.min(1, (u - 0.45) / 0.35);
+  const rx = w + 0.01, rz = w * B.depth + 0.01, k = (p.x / rx) ** 2 + (p.z / rz) ** 2;   // narrow at the waist, wide at the chest
+  return Math.max(0, 1 - k);
+}
+const reachCache = new Map<string, [number, number, number]>();
+/** Arm angles [raise, side, elbow] that put the palm on the target with a natural arm: elbow low, never behind the body or inside it. */
+export function solveReach(spec: ToySpec, side: 1 | -1, target: Reach): [number, number, number] {
+  const B = toyBody(spec), T = reachPoint(B, spec, side, target), H = Array.isArray(target) ? null : elbowHint(B, side, target, T);
+  const key = `${B.h}|${B.b}|${spec.child ? 1 : 0}|${side}|${T.x.toFixed(3)},${T.y.toFixed(3)},${T.z.toFixed(3)}`;
+  const hit = reachCache.get(key); if (hit) return hit;
+  let best: [number, number, number] = [0, 0, 0], bd = 1e9;
+  const test = (r: number, o: number, e: number) => {
+    const { hand, elbow } = armFK(B, side, r, o, e);
+    if (hand.y > elbow.y && hand.z < elbow.z - 0.01) return;                     // folded back: never
+    const d = hand.distanceToSquared(T)
+      + 0.01 * Math.max(0, elbow.y - B.shoulderY) ** 2                           // elbow above the shoulder only when it must be
+      + 0.05 * Math.max(0, -0.03 - elbow.z) ** 2                                 // elbow behind the body
+      + (elbow.z < 0.14 ? 0.03 * Math.max(0, B.shoulderX * 0.8 - side * elbow.x) ** 2 : 0)   // elbow inside the chest
+      + 0.0004 * (o * o + 0.3 * r * r + 0.2 * e * e)                             // the simplest arm that gets there
+      + (H ? 0.8 * elbow.distanceToSquared(H) : 0)                               // elbow where this target wants it
+      + 0.2 * [0.25, 0.5, 0.7].reduce((a, u) => a + insideTorso(B, elbow.clone().lerp(hand, u)), 0) ** 2;   // forearm never through the body
+    if (d < bd) { bd = d; best = [r, o, e]; } };
+  for (let r = -0.3; r <= 3.1; r += 0.1) for (let o = -0.7; o <= 1.9; o += 0.1) for (let e = 0; e <= 2.4; e += 0.1) test(r, o, e);
+  const [r0, o0, e0] = best;
+  for (let r = r0 - 0.1; r <= r0 + 0.1; r += 0.025) for (let o = o0 - 0.1; o <= o0 + 0.1; o += 0.025) for (let e = Math.max(0, e0 - 0.1); e <= Math.min(2.4, e0 + 0.1); e += 0.025) test(r, o, e);
+  reachCache.set(key, best); return best;
+}
+/** Final [raise, side, elbow] of one arm: the reach (blended by reachK) or the given angles, with a folded-back forearm opened up. */
+export function resolveArm(spec: ToySpec, pose: Pose, side: 1 | -1): [number, number, number] {
+  let r = (side === 1 ? pose.armR : pose.armL) || 0, o = (side === 1 ? pose.armRSide : pose.armLSide) || 0, e = (side === 1 ? pose.elbowR : pose.elbowL) || 0;
+  const reach = side === 1 ? pose.reachR : pose.reachL;
+  if (reach) { const k = Math.max(0, Math.min(1, pose.reachK ?? 1)), [rr, ro, re] = solveReach(spec, side, reach); r += (rr - r) * k; o += (ro - o) * k; e += (re - e) * k; }
+  const B = toyBody(spec); e = Math.min(2.4, Math.max(0, e));
+  for (let i = 0; i < 60 && e > 0; i++) { const { hand, elbow } = armFK(B, side, r, o, e); if (!(hand.y > elbow.y && hand.z < elbow.z - 0.01)) break; e = Math.max(0, e - 0.05); }
+  return [r, o, e];
+}
 export const Toy: React.FC<{ spec: ToySpec; pose?: Pose }> = ({ spec, pose = {} }) => {
+  keepColour(spec.skin);   // soft look never changes skin
   const t = useShotTime(), seed = nameSeed(spec.name), live = !pose.still;
   const B = toyBody(spec), { h, legH, bodyH, hip, waist, chest, sh, depth } = B;
   const step = pose.walk ? Math.sin(pose.walk * 7) : 0;
@@ -311,7 +425,7 @@ export const Toy: React.FC<{ spec: ToySpec; pose?: Pose }> = ({ spec, pose = {} 
         </group></group>
         <mesh position={[0, y(1.0) + 0.012, 0]} rotation={[Math.PI / 2, 0, 0]} scale={[1, depth + 0.12, 1]}><torusGeometry args={[0.062, 0.016, 16, 48]} />{mat(spec.shirt || "#efe6d2")}</mesh>{/* collar */}
         <Limb r1={0.048} r2={0.055} len={0.09} y0={y(1.0) + 0.07} c={spec.skin} />
-        {arm(1, pose.armR, pose.armRSide, pose.elbowR)}{arm(-1, pose.armL, pose.armLSide, pose.elbowL)}
+        {arm(1, ...resolveArm(spec, pose, 1))}{arm(-1, ...resolveArm(spec, pose, -1))}
         <group position={[0, legH + bodyH + B.headS * 0.62 + breath * 0.004, 0]} rotation={[(pose.tilt || 0) + (live ? 0.02 * Math.sin(t * 0.9 + seed * 4) : 0), (pose.head || 0), -roll * 0.5]}>
           <Ball r={hr} s={[0.9, 1.06, 0.95]} c={spec.skin} />
           <Ball r={hr * 0.78} p={[0, -0.05, 0.02]} s={[0.92, 0.8, 0.95]} c={spec.skin} />
@@ -554,17 +668,16 @@ export const Seated: React.FC<{ spec: ToySpec; pose?: Pose; seatY?: number; stoo
   </group>;
 };
 type V3 = [number, number, number];
-const armEuler = (pose: Pose, side: 1 | -1) => {
+const armEuler = (pose: Pose, side: 1 | -1, raise: number, out: number) => {
   const step = pose.walk ? Math.sin(pose.walk * 7) : 0;
-  const raise = side === 1 ? pose.armR || 0 : pose.armL || 0, out = side === 1 ? pose.armRSide || 0 : pose.armLSide || 0;
   return new THREE.Euler(-raise - (pose.walk ? -step * side * 0.5 : 0), 0, side * (0.06 + out * 0.9));
 };
 /** Children placed in a Toy's hand (origin = the palm). side 1 = right hand (armR). Props stay glued to the hand. */
 export const AtHand: React.FC<{ spec: ToySpec; pose: Pose; side: 1 | -1; children: React.ReactNode }> = ({ spec, pose, side, children }) => {
   const B = toyBody(spec), h = B.h, lean = (pose.lean || 0) + (pose.crouch || 0) * 0.35;
-  const eb = -0.12 - (side === 1 ? pose.armR || 0 : pose.armL || 0) * 0.05 - (side === 1 ? pose.elbowR || 0 : pose.elbowL || 0) - (pose.walk ? 0.25 : 0);
+  const [ar, ao, ae] = resolveArm(spec, pose, side), eb = -0.12 - ar * 0.05 - ae - (pose.walk ? 0.25 : 0);
   return <group position={[pose.x || 0, pose.y || 0, pose.z || 0]} rotation={[0, pose.rotY || 0, 0]}><group position={leanPos(B.legH, lean)} rotation={[lean, 0, 0]}>
-    <group position={[side * B.shoulderX, B.shoulderY, 0]} rotation={armEuler(pose, side)}><group position={[0, -0.27 * h, 0]} rotation={[eb, 0, 0]}>
+    <group position={[side * B.shoulderX, B.shoulderY, 0]} rotation={armEuler(pose, side, ar, ao)}><group position={[0, -0.27 * h, 0]} rotation={[eb, 0, 0]}>
       <group position={[0, -0.22 * h - 0.03, 0.004]}>{children}</group></group></group></group></group>;
 };
 /** Children placed on a Toy's head (origin = head centre, +z = face). */
@@ -576,10 +689,10 @@ export const AtHead: React.FC<{ spec: ToySpec; pose: Pose; children: React.React
 /** World position of a Toy's hand (for ropes, sticks and props that point from the hand to somewhere). */
 export function handWorld(spec: ToySpec, pose: Pose, side: 1 | -1): V3 {
   const B = toyBody(spec), h = B.h, lean = (pose.lean || 0) + (pose.crouch || 0) * 0.35;
-  const eb = -0.12 - (side === 1 ? pose.armR || 0 : pose.armL || 0) * 0.05 - (side === 1 ? pose.elbowR || 0 : pose.elbowL || 0) - (pose.walk ? 0.25 : 0);
+  const [ar, ao, ae] = resolveArm(spec, pose, side), eb = -0.12 - ar * 0.05 - ae - (pose.walk ? 0.25 : 0);
   const m = new THREE.Matrix4().compose(new THREE.Vector3(pose.x || 0, pose.y || 0, pose.z || 0), new THREE.Quaternion().setFromEuler(new THREE.Euler(0, pose.rotY || 0, 0)), new THREE.Vector3(1, 1, 1));
   m.multiply(new THREE.Matrix4().compose(new THREE.Vector3(...leanPos(B.legH, lean)), new THREE.Quaternion().setFromEuler(new THREE.Euler(lean, 0, 0)), new THREE.Vector3(1, 1, 1)));
-  m.multiply(new THREE.Matrix4().compose(new THREE.Vector3(side * B.shoulderX, B.shoulderY, 0), new THREE.Quaternion().setFromEuler(armEuler(pose, side)), new THREE.Vector3(1, 1, 1)));
+  m.multiply(new THREE.Matrix4().compose(new THREE.Vector3(side * B.shoulderX, B.shoulderY, 0), new THREE.Quaternion().setFromEuler(armEuler(pose, side, ar, ao)), new THREE.Vector3(1, 1, 1)));
   m.multiply(new THREE.Matrix4().compose(new THREE.Vector3(0, -0.27 * h, 0), new THREE.Quaternion().setFromEuler(new THREE.Euler(eb, 0, 0)), new THREE.Vector3(1, 1, 1)));
   const v = new THREE.Vector3(0, -0.22 * h - 0.03, 0.004).applyMatrix4(m); return [v.x, v.y, v.z];
 }
@@ -998,7 +1111,7 @@ export const KitModel: React.FC<{ file: string; h: number; p?: [number, number, 
       if (!m.isMesh) return;
       m.castShadow = true; m.receiveShadow = true; m.frustumCulled = false;
       if (smooth && !m.isSkinnedMesh) { const g = m.geometry.clone(); g.deleteAttribute("normal"); m.geometry = mergeVertices(g, 1e-4); m.geometry.computeVertexNormals(); }
-      satin(m, (s) => color ? new THREE.Color(color) : body ? new THREE.Color(partColour(s.name || "", body)) : LEAF[(s.name || "").toLowerCase()] ? new THREE.Color(LEAF[(s.name || "").toLowerCase()]) : s.color ? s.color.clone() : new THREE.Color("#cccccc"), !(body || color));
+      satin(m, (s) => color ? new THREE.Color(color) : body ? new THREE.Color(partColour(s.name || "", body)) : LEAF[(s.name || "").toLowerCase()] ? new THREE.Color(LEAF[(s.name || "").toLowerCase()]) : s.color ? softenColor(s.color.clone()) : new THREE.Color("#cccccc"), !(body || color));
     });
     return fitModel(o, h);
   }, [scene, h, smooth, body, color]);
@@ -1020,7 +1133,7 @@ export const AnimatedModel: React.FC<{ file: string; h: number; clip: string; t:
     if (!gltf) return null;
     const o = skeletonClone(gltf.scene);
     o.traverse((m: any) => { if (!m.isMesh) return; m.castShadow = true; m.receiveShadow = true; m.frustumCulled = false;
-      satin(m, (s) => color ? new THREE.Color(color) : s.color ? s.color.clone() : new THREE.Color("#cccccc"), !color); });
+      satin(m, (s) => color ? new THREE.Color(color) : s.color ? softenColor(s.color.clone()) : new THREE.Color("#cccccc"), !color); });
     const mixer = new THREE.AnimationMixer(o);
     const a = gltf.animations.find((x: any) => x.name === clip) || gltf.animations.find((x: any) => x.name.toLowerCase().includes(clip.toLowerCase())) || gltf.animations[0];
     if (!a) console.warn("AnimatedModel", file, "has no motion", clip);

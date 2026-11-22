@@ -4,22 +4,23 @@
   "animal": 13,
   "bicycle": 1,
   "boat": 46,
-  "building": 2,
-  "bus": 3,
-  "car": 22,
+  "building": 3,
+  "bus": 4,
+  "car": 24,
   "castle": 66,
-  "farm": 26,
+  "farm": 27,
   "food": 220,
-  "furniture": 181,
+  "furniture": 182,
   "ground": 72,
   "house": 91,
   "industry": 14,
   "insect": 10,
   "landform": 60,
+  "money": 1,
   "part": 20,
   "person": 5,
   "plant": 85,
-  "prop": 89,
+  "prop": 90,
   "rock": 91,
   "space": 160,
   "street": 89,
@@ -13336,6 +13337,14 @@
    "l": 0.01
   },
   {
+   "id": "props/auto-rickshaw",
+   "file": "library/props/auto-rickshaw.tsx",
+   "category": "car",
+   "source": "built for REELIX",
+   "h": 1.75,
+   "code": true
+  },
+  {
    "id": "props/bus-stop",
    "file": "library/props/bus-stop.tsx",
    "category": "street",
@@ -13360,6 +13369,22 @@
    "code": true
   },
   {
+   "id": "props/coin-jar",
+   "file": "library/props/coin-jar.tsx",
+   "category": "money",
+   "source": "built for REELIX",
+   "h": 0.3,
+   "code": true
+  },
+  {
+   "id": "props/family-car",
+   "file": "library/props/family-car.tsx",
+   "category": "car",
+   "source": "built for REELIX",
+   "h": 1.72,
+   "code": true
+  },
+  {
    "id": "props/farm-truck",
    "file": "library/props/farm-truck.tsx",
    "category": "truck",
@@ -13373,6 +13398,14 @@
    "category": "house",
    "source": "built for REELIX",
    "h": 3.4,
+   "code": true
+  },
+  {
+   "id": "props/field-tent",
+   "file": "library/props/field-tent.tsx",
+   "category": "prop",
+   "source": "built for REELIX",
+   "h": 2.2,
    "code": true
   },
   {
@@ -13408,11 +13441,35 @@
    "code": true
   },
   {
+   "id": "props/red-barn",
+   "file": "library/props/red-barn.tsx",
+   "category": "farm",
+   "source": "built for REELIX",
+   "h": 5.2,
+   "code": true
+  },
+  {
+   "id": "props/shop-front",
+   "file": "library/props/shop-front.tsx",
+   "category": "building",
+   "source": "built for REELIX",
+   "h": 3.4,
+   "code": true
+  },
+  {
    "id": "props/stopwatch",
    "file": "library/props/stopwatch.tsx",
    "category": "tool",
    "source": "built for REELIX",
    "h": 2.6,
+   "code": true
+  },
+  {
+   "id": "props/tin-trunk",
+   "file": "library/props/tin-trunk.tsx",
+   "category": "furniture",
+   "source": "built for REELIX",
+   "h": 0.48,
    "code": true
   },
   {
@@ -13437,6 +13494,14 @@
    "category": "tram",
    "source": "built for REELIX",
    "h": 5.4,
+   "code": true
+  },
+  {
+   "id": "props/village-bus",
+   "file": "library/props/village-bus.tsx",
+   "category": "bus",
+   "source": "built for REELIX",
+   "h": 3.1,
    "code": true
   }
  ]

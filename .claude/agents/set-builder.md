@@ -28,5 +28,16 @@ Style (brief.json "style"):
   two objects side by side for a comparison, a simple scale or gauge that fills. Keep the camera still or slow: the viewer is
   reading the frame. No crowds, no background business, no dramatic angles.
 - **animated**: build a scene: characters acting, a set with life in it, cinematic camera moves.
+ARMS (fix 2026-11-22): arm angles are radians (armR 1.57 = straight forward, 3.0 = straight up; armRSide 1.7 = straight out;
+  elbowR at most 2.4). For ANY hand that touches the face or body (hands to cheeks, wipe eyes, hand over mouth, push up glasses, scratch
+  head, hand on chest, wave, point) use reachR / reachL ("cheek" "mouth" "eyes" "chin" "ear" "head" "chest" "wave" "point",
+  or [x, y, z] in the Toy's frame; there is no hands-on-hips pose: the arm cannot twist) and blend it in with reachK: kfA(t, [[t0, 0], [t1, 1]]); the kit solves a natural arm. Never
+  fake it with a big elbow on a raised arm. In CHECK, a forearm folded back over the shoulder is a broken arm: fix it.
+SOFT LOOK (approved 2026-11-22): the kit softens every colour and lightens the Stage sky with a haze by itself (SOFT in the kit; never
+  turn it off unless the brief asks for vivid colours). Help it: light skies (pale blue, cream, soft dawn; a night or city sky is a soft
+  blue-grey dusk, never navy or near-black); 3-4 main colours per set taken from the storyboard palette; city buildings light grey or pale
+  blue-grey with warm windows, never navy or dark blocks; one clear subject per frame: few background objects, nothing big and bright in the
+  foreground, crowds and repeats kept sparse and in 2-3 colours; let far things fade into the haze (fog from about 20-30 m) instead of
+  filling the frame to the horizon.
 Rules: frame-driven only (useShotTime, kf); deterministic (rng(seed), never Math.random); smooth Lego V5 look from brief.lookStyle (never flatShading or raw boxGeometry: use Box/Ball/Pill/RoundGeo; tools/smooth3d.py also smooths everything before render); no text inside the 3D scene and no text overlay in the shot (labels and captions are added by the engine, in the top and bottom bands; keep the cast and action in the middle band of the frame); one file per shot plus the kit.
 Memory: before you start, read `.claude/agent-memory/set-builder/MEMORY.md` and any topic file it points to.
